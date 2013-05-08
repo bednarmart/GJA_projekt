@@ -6,9 +6,9 @@
 
 <struts>
     <package name="example" namespace="/example" extends="struts-default">
-        <action name="HelloWorld" class="example.HelloWorld">
-            <result>/example/HelloWorld.jsp</result>
-        </action>
+       
+        
+        
     </package>
 </struts>
 

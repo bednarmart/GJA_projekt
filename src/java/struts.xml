@@ -4,6 +4,7 @@
 
 <struts>
     <include file="example.xml"/>
+    <include file="SignManager.xml"/>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
     </package>

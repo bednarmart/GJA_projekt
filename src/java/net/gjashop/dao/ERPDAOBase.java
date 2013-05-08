@@ -60,7 +60,7 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	}
 
 	private Configuration getConfiguration() {
-                Configuration configuration = new Configuration();
+                Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
 		/* kaput
                 Configuration configuration = new Configuration();
 		configuration = configuration.addAnnotatedClass(Category.class);
