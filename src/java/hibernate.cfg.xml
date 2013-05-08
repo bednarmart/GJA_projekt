@@ -2,11 +2,24 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
+      
+    <property name="connection.driver_class">
+            com.mysql.jdbc.Driver
+    </property>
+    <property name="connection.pool_size">1</property>  
+      
+   <!-- <property name="hibernate.current_session_context_class">thread</property> -->
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/GJAshop?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">koloa</property>
+    
+    <property name="dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property> 
+    <property name="show_sql">true</property>
+     <property name="hbm2ddl.auto">update</property>
     
     <mapping package="net.gjashop.entities"></mapping>
     <mapping class="net.gjashop.entities.Category"></mapping>
@@ -19,6 +32,7 @@
     <mapping class="net.gjashop.entities.Delivery"></mapping>
     <mapping class="net.gjashop.entities.Contact"></mapping>
     <mapping class="net.gjashop.entities.Address"></mapping>
+    <mapping class="net.gjashop.entities.User"></mapping>
     <mapping class="net.gjashop.entities.ContactBinding"></mapping>
     <mapping class="net.gjashop.entities.AddressBinding"></mapping>
 		
