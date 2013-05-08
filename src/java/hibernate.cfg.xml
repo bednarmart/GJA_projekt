@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/GJAshop?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">koloa</property>
+    
+    <mapping package="net.gjashop.entities"></mapping>
+    <mapping class="net.gjashop.entities.Category"></mapping>
+    <mapping class="net.gjashop.entities.Segment"></mapping>
+    <mapping class="net.gjashop.entities.Sign"></mapping>
+    <mapping class="net.gjashop.entities.ClientOrder"></mapping>
+    <mapping class="net.gjashop.entities.Product"></mapping>
+    <mapping class="net.gjashop.entities.Rating"></mapping>
+    <mapping class="net.gjashop.entities.PaymentType"></mapping>
+    <mapping class="net.gjashop.entities.Delivery"></mapping>
+    <mapping class="net.gjashop.entities.Contact"></mapping>
+    <mapping class="net.gjashop.entities.Address"></mapping>
+    <mapping class="net.gjashop.entities.ContactBinding"></mapping>
+    <mapping class="net.gjashop.entities.AddressBinding"></mapping>
+		
+  </session-factory>
+</hibernate-configuration>
