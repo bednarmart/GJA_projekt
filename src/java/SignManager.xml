@@ -10,7 +10,7 @@
         value="false" />
     <constant name="struts.devMode" value="false" />
  
-    <package name="entity" extends="struts-default" namespace="/net/gjashop/actions">
+    <package name="net.gjashop.actions" extends="struts-default" namespace="/example" >
          <action name="add"
             class="net.gjashop.actions.SignAction" method="add">
             <result name="success" type="chain">index</result>

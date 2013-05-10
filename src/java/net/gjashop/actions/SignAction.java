@@ -9,7 +9,9 @@ import net.gjashop.custom.OperationProvider;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
+import net.gjashop.custom.HibernateUtil;
 import net.gjashop.entities.Sign;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -22,37 +24,42 @@ public class SignAction extends ActionSupport{
     private List<Sign> signList;
     private Long id;
     
-    private OperationProvider operationProviderBase;
+    private OperationProvider dbProvider  = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
+    
  
     public SignAction() {
-        operationProviderBase = new OperationProvider(new Configuration().configure().buildSessionFactory().openSession());
+        
     }
  
     public String execute() {
-        this.signList = operationProviderBase.getAllSigns();
+        
+        this.signList = dbProvider.getAllSigns();
         System.out.println("execute called");
         return SUCCESS;
     }
     
     
     public String add() {
-        System.out.println(getSign());
-        try {
-            operationProviderBase.createSign(getSign().getName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        this.signList = operationProviderBase.getAllSigns();
+        dbProvider.getSession().beginTransaction();           
+        dbProvider.createSign(this.sign.getName());
+        dbProvider.getSession().beginTransaction().commit();
+            
+        this.signList = dbProvider.getAllSigns();
+        
         return SUCCESS;
     }
     
     public String delete() {
-        operationProviderBase.delete(operationProviderBase.getSign((int) getId()));
+        //operationProviderBase.delete(operationProviderBase.getSign((int) getId()));
         return SUCCESS;
     }
  
     public Sign getSign() {
         return sign;
+    }
+    
+    public void setSign(Sign sign){
+        this.sign = sign;
     }
  
     public List<Sign> getSignList() {
@@ -61,6 +68,9 @@ public class SignAction extends ActionSupport{
     
     public long getId() {
         return id;
+    }
+     public void setId(Long id) {
+        this.id = id;
     }
 
 }
