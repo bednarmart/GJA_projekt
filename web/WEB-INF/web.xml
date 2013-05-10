@@ -14,6 +14,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>example/SignManager.jsp</welcome-file>
+        <welcome-file>shop/Shopping.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

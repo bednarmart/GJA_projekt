@@ -24,33 +24,28 @@ public class SignAction extends ActionSupport{
     private List<Sign> signList;
     private Long id;
     
-    private OperationProvider operationProviderBase;
+    private OperationProvider dbProvider  = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
+    
  
     public SignAction() {
         
     }
  
     public String execute() {
-        operationProviderBase = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
-        this.signList = operationProviderBase.getAllSigns();
+        
+        this.signList = dbProvider.getAllSigns();
         System.out.println("execute called");
         return SUCCESS;
     }
     
     
     public String add() {
-        operationProviderBase = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
-        System.out.println(this.sign.getName());
-        try {
+        dbProvider.getSession().beginTransaction();           
+        dbProvider.createSign(this.sign.getName());
+        dbProvider.getSession().beginTransaction().commit();
             
-            
-            
-            //operationProviderBase.createSign(this.sign.getName());
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //this.signList = operationProviderBase.getAllSigns();
+        this.signList = dbProvider.getAllSigns();
+        
         return SUCCESS;
     }
     
