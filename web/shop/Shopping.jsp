@@ -13,16 +13,16 @@
             <span><h2>Oblečení</h2></span>
             <span class="head_menu">
                 <s:if test="#session.user.login == 'true'">
-                    <a href="<%= request.getContextPath()%>/showProfile.action">${session.user.name}</a>
+                    <a href="<%= request.getContextPath()%>/user/showProfile.action">${session.user.name}</a>
                 </s:if>
                 <s:else>
                     <s:url id="url" action="Login">
-                        <a href="<%= request.getContextPath()%>/showLogin.action">Přihlásit</a>
+                        <a href="<%= request.getContextPath()%>/user/showLogin.action">Přihlásit</a>
                     </s:url>
                 </s:else>
             </span>
             <span class="head_menu">
-                <a href="<%= request.getContextPath()%>/showCart.action">Košík</a>
+                <a href="<%= request.getContextPath()%>/shop/showCart.action">Košík</a>
             </span>
         </div>
 
@@ -51,7 +51,7 @@
                                 <div>
                                     <span>cena${product.price}</span>
                                     <span>
-                                        <s:url action="addToCart.action" var="urlTag" >
+                                        <s:url action="/shop/addToCart.action" var="urlTag" >
                                             <s:param name="id">${product.id}</s:param>
                                         </s:url>
                                         <s:a href="%{urlTag}">Koupit</s:a>

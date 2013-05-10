@@ -12,12 +12,6 @@
         <action name="addToCart" class="net.gjashop.actions.ShoppingAction">
             <result>/shop/Cart.jsp</result>
         </action>
-        <action name="showLogin" class="net.gjashop.actions.UserAction">
-            <result>/user/Login.jsp</result>
-        </action>
-        <action name="showProfile" class="net.gjashop.actions.UserAction">
-            <result>/user/Profile.jsp</result>
-        </action>
     </package>
 </struts>
 

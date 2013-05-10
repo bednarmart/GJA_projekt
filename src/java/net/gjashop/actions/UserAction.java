@@ -13,6 +13,10 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String showLogin() {
+        System.out.println("show_login");
+        return SUCCESS;
+    }
     // TODO: modely - contact, address
     
     

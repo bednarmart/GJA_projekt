@@ -6,6 +6,21 @@
 
 <struts>
     <package name="user" namespace="/user" extends="struts-default">
+        <action name="showLogin" class="net.gjashop.actions.UserAction">
+            <result>/user/Login.jsp</result>
+        </action>
+        <action name="showProfile" class="net.gjashop.actions.UserAction">
+            <result>/user/Profile.jsp</result>
+        </action>
+        <action name="doLogin" class="net.gjashop.actions.UserAction">
+            <result>/user/Profile.jsp</result>
+        </action>
+        <action name="showLostPassword" class="net.gjashop.actions.UserAction">
+            <result>/user/LostPassword.jsp</result>
+        </action>
+        <action name="showRegistration" class="net.gjashop.actions.UserAction">
+            <result>/user/LostRegistration.jsp</result>
+        </action>       
     </package>
 </struts>
 
