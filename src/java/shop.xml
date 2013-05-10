@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="shop" namespace="/shop" extends="struts-default">
+        <action name="showCart" class="net.gjashop.actions.ShoppingAction">
+            <result>/shop/Cart.jsp</result>
+        </action>
+        <action name="addToCart" class="net.gjashop.actions.ShoppingAction">
+            <result>/shop/Cart.jsp</result>
+        </action>
+        <action name="showLogin" class="net.gjashop.actions.UserAction">
+            <result>/user/Login.jsp</result>
+        </action>
+        <action name="showProfile" class="net.gjashop.actions.UserAction">
+            <result>/user/Profile.jsp</result>
+        </action>
+    </package>
+</struts>
+
