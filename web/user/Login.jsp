@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>Prodej oblečení</title>
-		<link rel="stylesheet" type="text/css" href="css/login.css" />
+        <link rel="stylesheet" type="text/css" href="css/login.css" />
     </head>
 
     <body>
@@ -20,7 +20,7 @@
                 <a href="<%= request.getContextPath()%>/user/showLostPassword.action">Zapomenuté heslo</a><a href="/user/showRegistration.action">Registrace</a>
             </fieldset>
             <s:actionerror /><s:fielderror />
-        </form>
+        </s:form>
     </body>
 </html>
 
