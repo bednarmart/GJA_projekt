@@ -5,3 +5,8 @@
 *.war
 *.ear
 /build/
+/nbproject/private/
+src/java/hibernate.cfg.xml
+nbproject/ant-deploy.xml
+nbproject/project.properties
+src/java/hibernate.cfg.xml
