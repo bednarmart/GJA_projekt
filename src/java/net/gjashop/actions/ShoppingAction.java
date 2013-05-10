@@ -57,4 +57,3 @@ public class ShoppingAction extends ActionSupport {
     }
 }
 
-
