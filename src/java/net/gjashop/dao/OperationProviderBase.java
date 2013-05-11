@@ -11,6 +11,7 @@ import net.gjashop.entities.ContactBinding;
 import net.gjashop.entities.Delivery;
 import net.gjashop.entities.OrderBinding;
 import net.gjashop.entities.PaymentType;
+import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Rating;
 import net.gjashop.entities.Segment;
@@ -37,6 +38,7 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	private ClientOrderDAO clientOrderDAO = new ClientOrderDAO();
 	private OrderBindingDAO orderBindingDAO = new OrderBindingDAO();
 	private ProductDAO productDAO = new ProductDAO();
+	private PictureDAO pictureDAO = new PictureDAO();
 	private UserDAO userDAO = new UserDAO();
 	private RatingDAO ratingDAO = new RatingDAO();
 	private DeliveryDAO deliveryDAO = new DeliveryDAO();
@@ -105,8 +107,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** 
 	 * Creates an instance of type Segment using all read-only and all non-null properties.
 	 */
-	public Segment createSegment(java.lang.String name) {
-		return segmentDAO.create(session, name);
+	public Segment createSegment(Category category, java.lang.String name) {
+		return segmentDAO.create(session, category, name);
 	}
 	
 	/**
@@ -117,6 +119,12 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 		return entity;
 	}
 	
+	/** Returns the Segments with the given category. */
+	public List<Segment> getSegmentsByCategory(Category category) {
+		List<Segment> entities = segmentDAO.getByCategory(session, category);
+		return entities;
+	}
+		
 	/**
 	 * Returns all entities of type Segment.
 	 */
@@ -130,6 +138,13 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	 */
 	public List<Segment> searchSegments(String _searchString, int _maxResults) {
 		return segmentDAO.search(session, _searchString, _maxResults);
+	}
+	
+	/**
+	 * Searches for entities of type Segment.
+	 */
+	public List<Segment> searchSegmentWithCategory(Category category, String _searchString, int _maxResults) {
+		return segmentDAO.searchWithCategory(session, category, _searchString, _maxResults);
 	}
 	
 	/**
@@ -316,8 +331,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** 
 	 * Creates an instance of type OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding createOrderBinding(ClientOrder order, Product product, double price, int count) {
-		return orderBindingDAO.create(session, order, product, price, count);
+	public OrderBinding createOrderBinding(ClientOrder order, Product product, User user, double price, int count) {
+		return orderBindingDAO.create(session, order, product, user, price, count);
 	}
 	
 	/**
@@ -337,6 +352,12 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** Returns the OrderBindings with the given product. */
 	public List<OrderBinding> getOrderBindingsByProduct(Product product) {
 		List<OrderBinding> entities = orderBindingDAO.getByProduct(session, product);
+		return entities;
+	}
+		
+	/** Returns the OrderBindings with the given user. */
+	public List<OrderBinding> getOrderBindingsByUser(User user) {
+		List<OrderBinding> entities = orderBindingDAO.getByUser(session, user);
 		return entities;
 	}
 		
@@ -370,6 +391,13 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	}
 	
 	/**
+	 * Searches for entities of type OrderBinding.
+	 */
+	public List<OrderBinding> searchOrderBindingWithUser(User user, String _searchString, int _maxResults) {
+		return orderBindingDAO.searchWithUser(session, user, _searchString, _maxResults);
+	}
+	
+	/**
 	 * Deletes a OrderBinding.
 	 */
 	public void delete(OrderBinding entity) {
@@ -386,8 +414,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** 
 	 * Creates an instance of type Product using all read-only and all non-null properties.
 	 */
-	public Product createProduct(java.lang.String name, Segment segment, Sign sign, int sex, double price, int count) {
-		return productDAO.create(session, name, segment, sign, sex, price, count);
+	public Product createProduct(java.lang.String name, Segment segment, Sign sign, double price, int count) {
+		return productDAO.create(session, name, segment, sign, price, count);
 	}
 	
 	/**
@@ -451,6 +479,63 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	 */
 	public int countProducts() {
 		return productDAO.count(session);
+	}
+	
+	/** 
+	 * Creates an instance of type Picture using all read-only and all non-null properties.
+	 */
+	public Picture createPicture(Product product, java.lang.String path) {
+		return pictureDAO.create(session, product, path);
+	}
+	
+	/**
+	 * Returns the Picture with the given id.
+	 */
+	public Picture getPicture(int id) {
+		Picture entity = pictureDAO.get(session, id);
+		return entity;
+	}
+	
+	/** Returns the Pictures with the given product. */
+	public List<Picture> getPicturesByProduct(Product product) {
+		List<Picture> entities = pictureDAO.getByProduct(session, product);
+		return entities;
+	}
+		
+	/**
+	 * Returns all entities of type Picture.
+	 */
+	public List<Picture> getAllPictures() {
+		final List<Picture> entities = pictureDAO.getAll(session);
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Picture.
+	 */
+	public List<Picture> searchPictures(String _searchString, int _maxResults) {
+		return pictureDAO.search(session, _searchString, _maxResults);
+	}
+	
+	/**
+	 * Searches for entities of type Picture.
+	 */
+	public List<Picture> searchPictureWithProduct(Product product, String _searchString, int _maxResults) {
+		return pictureDAO.searchWithProduct(session, product, _searchString, _maxResults);
+	}
+	
+	/**
+	 * Deletes a Picture.
+	 */
+	public void delete(Picture entity) {
+		pictureDAO.delete(session, entity);
+	}
+	
+		/**
+	 * Counts the number of Picture entities.
+	 */
+	public int countPictures() {
+		return pictureDAO.count(session);
 	}
 	
 	/** 

@@ -44,6 +44,10 @@ public class OrderBinding {
 	@JoinColumn(name="product", nullable=false)
 	private Product product;
 	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="user", nullable=false)
+	private User user;
+	
 	@Column(name="price")
 	private double price;
 	
@@ -60,10 +64,11 @@ public class OrderBinding {
 	/**
 	 * Constructor using all read-only and all non-nullable properties.
 	 */
-	public OrderBinding(ClientOrder order, Product product, double price, int count) {
+	public OrderBinding(ClientOrder order, Product product, User user, double price, int count) {
 		super();
 		this.order = order;
 		this.product = product;
+		this.user = user;
 		this.price = price;
 		this.count = count;
 	}
@@ -111,6 +116,20 @@ public class OrderBinding {
 	 */
 	public void setProduct(Product newValue) {
 		this.product = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'user'.
+	 */
+	public User getUser() {
+		return user;
+	}
+	
+	/**
+	 * Sets the value of property 'user'.
+	 */
+	public void setUser(User newValue) {
+		this.user = newValue;
 	}
 	
 	/**

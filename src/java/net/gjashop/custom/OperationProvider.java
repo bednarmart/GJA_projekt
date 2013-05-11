@@ -1,7 +1,6 @@
 package net.gjashop.custom;
 
 import net.gjashop.dao.OperationProviderBase;
-import org.hibernate.cfg.Configuration;
 
 import org.hibernate.classic.Session;
 
@@ -9,7 +8,8 @@ import org.hibernate.classic.Session;
 // will be preserved.
 public class OperationProvider extends OperationProviderBase implements IDBOperations {
 
-	public OperationProvider(Session session) {        
+	public OperationProvider(Session session) {
 		super(session);
 	}
+
 }

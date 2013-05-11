@@ -11,6 +11,7 @@ import net.gjashop.entities.ContactBinding;
 import net.gjashop.entities.Delivery;
 import net.gjashop.entities.OrderBinding;
 import net.gjashop.entities.PaymentType;
+import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Rating;
 import net.gjashop.entities.Segment;
@@ -53,13 +54,18 @@ public interface IDBOperationsBase {
 	/**
 	 * Creates a new Segment using all read-only and all non-null properties.
 	 */
-	public Segment createSegment(java.lang.String name);
+	public Segment createSegment(Category category, java.lang.String name);
 	
 	/**
 	 * Returns the Segment with the given id.
 	 */
 	public Segment getSegment(int id);
 		
+	/**
+	 * Returns the Segments with the given category.
+	 */
+	public List<Segment> getSegmentsByCategory(Category category);
+	
 	/**
 	 * Returns all entities of type Segment.
 	 */
@@ -69,6 +75,11 @@ public interface IDBOperationsBase {
 	 * Searches for entities of type Segment.
 	 */
 	public List<Segment> searchSegments(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type Segment.
+	 */
+	public List<Segment> searchSegmentWithCategory(final Category category, String _searchString, int _maxResults);
 	
 	/**
 	 * Deletes a Segment.
@@ -193,7 +204,7 @@ public interface IDBOperationsBase {
 	/**
 	 * Creates a new OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding createOrderBinding(ClientOrder order, Product product, double price, int count);
+	public OrderBinding createOrderBinding(ClientOrder order, Product product, User user, double price, int count);
 	
 	/**
 	 * Returns the OrderBinding with the given id.
@@ -209,6 +220,11 @@ public interface IDBOperationsBase {
 	 * Returns the OrderBindings with the given product.
 	 */
 	public List<OrderBinding> getOrderBindingsByProduct(Product product);
+	
+	/**
+	 * Returns the OrderBindings with the given user.
+	 */
+	public List<OrderBinding> getOrderBindingsByUser(User user);
 	
 	/**
 	 * Returns all entities of type OrderBinding.
@@ -231,6 +247,11 @@ public interface IDBOperationsBase {
 	public List<OrderBinding> searchOrderBindingWithProduct(final Product product, String _searchString, int _maxResults);
 	
 	/**
+	 * Searches for entities of type OrderBinding.
+	 */
+	public List<OrderBinding> searchOrderBindingWithUser(final User user, String _searchString, int _maxResults);
+	
+	/**
 	 * Deletes a OrderBinding.
 	 */
 	public void delete(OrderBinding entity);
@@ -243,7 +264,7 @@ public interface IDBOperationsBase {
 	/**
 	 * Creates a new Product using all read-only and all non-null properties.
 	 */
-	public Product createProduct(java.lang.String name, Segment segment, Sign sign, int sex, double price, int count);
+	public Product createProduct(java.lang.String name, Segment segment, Sign sign, double price, int count);
 	
 	/**
 	 * Returns the Product with the given id.
@@ -289,6 +310,46 @@ public interface IDBOperationsBase {
 	 * Counts the number of Product entities.
 	 */
 	public int countProducts();
+	
+	/**
+	 * Creates a new Picture using all read-only and all non-null properties.
+	 */
+	public Picture createPicture(Product product, java.lang.String path);
+	
+	/**
+	 * Returns the Picture with the given id.
+	 */
+	public Picture getPicture(int id);
+		
+	/**
+	 * Returns the Pictures with the given product.
+	 */
+	public List<Picture> getPicturesByProduct(Product product);
+	
+	/**
+	 * Returns all entities of type Picture.
+	 */
+	public List<Picture> getAllPictures();
+		
+	/**
+	 * Searches for entities of type Picture.
+	 */
+	public List<Picture> searchPictures(String _searchString, int _maxResults);
+	
+	/**
+	 * Searches for entities of type Picture.
+	 */
+	public List<Picture> searchPictureWithProduct(final Product product, String _searchString, int _maxResults);
+	
+	/**
+	 * Deletes a Picture.
+	 */
+	public void delete(Picture entity);
+	
+	/**
+	 * Counts the number of Picture entities.
+	 */
+	public int countPictures();
 	
 	/**
 	 * Creates a new User using all read-only and all non-null properties.

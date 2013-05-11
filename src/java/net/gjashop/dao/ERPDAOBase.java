@@ -16,6 +16,7 @@ import net.gjashop.entities.ContactBinding;
 import net.gjashop.entities.Delivery;
 import net.gjashop.entities.OrderBinding;
 import net.gjashop.entities.PaymentType;
+import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Rating;
 import net.gjashop.entities.Segment;
@@ -31,7 +32,6 @@ import org.hibernate.classic.Session;
 import org.hibernate.stat.Statistics;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
-//import org.hibernate.cfg.AnnotationConfiguration;
 
 // this class is generated. any change will be overridden.
 public abstract class ERPDAOBase implements IDBOperationsBase {
@@ -60,15 +60,14 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	}
 
 	private Configuration getConfiguration() {
-                Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-		/* kaput
-                Configuration configuration = new Configuration();
-		configuration = configuration.addAnnotatedClass(Category.class);
+		Configuration configuration = new Configuration();
+		/*configuration = configuration.addAnnotatedClass(Category.class);
 		configuration = configuration.addAnnotatedClass(Segment.class);
 		configuration = configuration.addAnnotatedClass(Sign.class);
 		configuration = configuration.addAnnotatedClass(ClientOrder.class);
 		configuration = configuration.addAnnotatedClass(OrderBinding.class);
 		configuration = configuration.addAnnotatedClass(Product.class);
+		configuration = configuration.addAnnotatedClass(Picture.class);
 		configuration = configuration.addAnnotatedClass(User.class);
 		configuration = configuration.addAnnotatedClass(Rating.class);
 		configuration = configuration.addAnnotatedClass(Delivery.class);
@@ -76,12 +75,11 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 		configuration = configuration.addAnnotatedClass(Contact.class);
 		configuration = configuration.addAnnotatedClass(ContactBinding.class);
 		configuration = configuration.addAnnotatedClass(Address.class);
-		configuration = configuration.addAnnotatedClass(AddressBinding.class);
-                */
+		configuration = configuration.addAnnotatedClass(AddressBinding.class);*/
 		if (contextClass != null) {
 			Properties properties = new Properties();
 			try {
-				properties.load(contextClass.getResourceAsStream("hibernate.properties"));
+	 			properties.load(contextClass.getResourceAsStream("hibernate.properties"));
 			} catch(IOException ioe) {
 				throw new RuntimeException("Can't find hibernate.properties next to context class.");
 			}
@@ -263,12 +261,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Creates a new Segment using all read-only and all non-null properties.
 	 */
-	public Segment createSegment(final java.lang.String name) {
+	public Segment createSegment(final Category category, final java.lang.String name) {
 		final Segment[] entity = new Segment[1];
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entity[0] = operations.createSegment(name);
+				entity[0] = operations.createSegment(category, name);
 			}
 		});
 		return entity[0];
@@ -286,6 +284,20 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 			}
 		});
 		return entity[0];
+	}
+	
+	/**
+	 * Returns the Segments with the given category.
+	 */
+	public List<Segment> getSegmentsByCategory(final Category category) {
+		final List<Segment> entities = new ArrayList<Segment>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.getSegmentsByCategory(category));
+			}
+		});
+		return entities;
 	}
 	
 	/**
@@ -311,6 +323,20 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 			
 			public void execute(IDBOperations operations) {
 				entities.addAll(operations.searchSegments(_searchString, _maxResults));
+			}
+		});
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Segment.
+	 */
+	public List<Segment> searchSegmentWithCategory(final Category category, final String _searchString, final int _maxResults) {
+		final List<Segment> entities = new ArrayList<Segment>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.searchSegmentWithCategory(category, _searchString, _maxResults));
 			}
 		});
 		return entities;
@@ -645,12 +671,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Creates a new OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding createOrderBinding(final ClientOrder order, final Product product, final double price, final int count) {
+	public OrderBinding createOrderBinding(final ClientOrder order, final Product product, final User user, final double price, final int count) {
 		final OrderBinding[] entity = new OrderBinding[1];
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entity[0] = operations.createOrderBinding(order, product, price, count);
+				entity[0] = operations.createOrderBinding(order, product, user, price, count);
 			}
 		});
 		return entity[0];
@@ -693,6 +719,20 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 			
 			public void execute(IDBOperations operations) {
 				entities.addAll(operations.getOrderBindingsByProduct(product));
+			}
+		});
+		return entities;
+	}
+	
+	/**
+	 * Returns the OrderBindings with the given user.
+	 */
+	public List<OrderBinding> getOrderBindingsByUser(final User user) {
+		final List<OrderBinding> entities = new ArrayList<OrderBinding>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.getOrderBindingsByUser(user));
 			}
 		});
 		return entities;
@@ -755,6 +795,20 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	}
 	
 	/**
+	 * Searches for entities of type OrderBinding.
+	 */
+	public List<OrderBinding> searchOrderBindingWithUser(final User user, final String _searchString, final int _maxResults) {
+		final List<OrderBinding> entities = new ArrayList<OrderBinding>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.searchOrderBindingWithUser(user, _searchString, _maxResults));
+			}
+		});
+		return entities;
+	}
+	
+	/**
 	 * Deletes a OrderBinding.
 	 */
 	public void delete(final OrderBinding entity) {
@@ -783,12 +837,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Creates a new Product using all read-only and all non-null properties.
 	 */
-	public Product createProduct(final java.lang.String name, final Segment segment, final Sign sign, final int sex, final double price, final int count) {
+	public Product createProduct(final java.lang.String name, final Segment segment, final Sign sign, final double price, final int count) {
 		final Product[] entity = new Product[1];
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entity[0] = operations.createProduct(name, segment, sign, sex, price, count);
+				entity[0] = operations.createProduct(name, segment, sign, price, count);
 			}
 		});
 		return entity[0];
@@ -913,6 +967,116 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 			
 			public void execute(IDBOperations operations) {
 				count[0] = operations.countProducts();
+			}
+		});
+		return count[0];
+	}
+	
+	/**
+	 * Creates a new Picture using all read-only and all non-null properties.
+	 */
+	public Picture createPicture(final Product product, final java.lang.String path) {
+		final Picture[] entity = new Picture[1];
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entity[0] = operations.createPicture(product, path);
+			}
+		});
+		return entity[0];
+	}
+	
+	/**
+	 * Returns the Picture with the given id.
+	 */
+	public Picture getPicture(final int id) {
+		final Picture[] entity = new Picture[1];
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entity[0] = operations.getPicture(id);
+			}
+		});
+		return entity[0];
+	}
+	
+	/**
+	 * Returns the Pictures with the given product.
+	 */
+	public List<Picture> getPicturesByProduct(final Product product) {
+		final List<Picture> entities = new ArrayList<Picture>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.getPicturesByProduct(product));
+			}
+		});
+		return entities;
+	}
+	
+	/**
+	 * Returns all entities of type Picture.
+	 */
+	public List<Picture> getAllPictures() {
+		final List<Picture> entities = new ArrayList<Picture>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.getAllPictures());
+			}
+		});
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Picture.
+	 */
+	public List<Picture> searchPictures(final String _searchString, final int _maxResults) {
+		final List<Picture> entities = new ArrayList<Picture>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.searchPictures(_searchString, _maxResults));
+			}
+		});
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type Picture.
+	 */
+	public List<Picture> searchPictureWithProduct(final Product product, final String _searchString, final int _maxResults) {
+		final List<Picture> entities = new ArrayList<Picture>();
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				entities.addAll(operations.searchPictureWithProduct(product, _searchString, _maxResults));
+			}
+		});
+		return entities;
+	}
+	
+	/**
+	 * Deletes a Picture.
+	 */
+	public void delete(final Picture entity) {
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				operations.delete(entity);
+			}
+		});
+	}
+	
+	/**
+	 * Counts the number of Picture entities.
+	 */
+	public int countPictures() {
+		final int[] count = new int[1];
+		executeInTransaction(new ICommand() {
+			
+			public void execute(IDBOperations operations) {
+				count[0] = operations.countPictures();
 			}
 		});
 		return count[0];

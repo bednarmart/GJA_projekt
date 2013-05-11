@@ -50,6 +50,12 @@ public class Product {
 	@Column(name="sex")
 	private int sex;
 	
+	@Column(name="size")
+	private java.lang.String size;
+	
+	@Column(name="color")
+	private java.lang.String color;
+	
 	@Column(name="price")
 	private double price;
 	
@@ -66,12 +72,11 @@ public class Product {
 	/**
 	 * Constructor using all read-only and all non-nullable properties.
 	 */
-	public Product(java.lang.String name, Segment segment, Sign sign, int sex, double price, int count) {
+	public Product(java.lang.String name, Segment segment, Sign sign, double price, int count) {
 		super();
 		this.name = name;
 		this.segment = segment;
 		this.sign = sign;
-		this.sex = sex;
 		this.price = price;
 		this.count = count;
 	}
@@ -147,6 +152,34 @@ public class Product {
 	 */
 	public void setSex(int newValue) {
 		this.sex = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'size'.
+	 */
+	public java.lang.String getSize() {
+		return size;
+	}
+	
+	/**
+	 * Sets the value of property 'size'.
+	 */
+	public void setSize(java.lang.String newValue) {
+		this.size = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'color'.
+	 */
+	public java.lang.String getColor() {
+		return color;
+	}
+	
+	/**
+	 * Sets the value of property 'color'.
+	 */
+	public void setColor(java.lang.String newValue) {
+		this.color = newValue;
 	}
 	
 	/**

@@ -14,49 +14,49 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name = "segment"
+@Table(name = "picture"
 )
 /*
- * This class is generated from the entity 'Segment' defined in the HEDL model.
+ * This class is generated from the entity 'Picture' defined in the HEDL model.
  * Note: Any change made to this class will be overridden.
  */
-public class Segment {
+public class Picture {
 	
-	@GenericGenerator(name="SegmentIdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
+	@GenericGenerator(name="PictureIdGenerator", strategy="org.hibernate.id.MultipleHiLoPerTableGenerator",
 	  parameters = {
 	    @Parameter(name="table", value="IdentityGenerator"),
 	    @Parameter(name="primary_key_column", value="sequence_name"),
-	    @Parameter(name="primary_key_value", value="Segment"),
+	    @Parameter(name="primary_key_value", value="Picture"),
 	    @Parameter(name="value_column", value="next_hi_value"),
 	    @Parameter(name="primary_key_length", value="100"),
 	    @Parameter(name="max_lo", value="1000")
 	  }
 	)
 	@Id 
-	@GeneratedValue(strategy=GenerationType.TABLE, generator="SegmentIdGenerator")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="PictureIdGenerator")
 	private int id;
 
 	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="category", nullable=false)
-	private Category category;
+	@JoinColumn(name="product", nullable=false)
+	private Product product;
 	
-	@Column(name="name")
-	private java.lang.String name;
+	@Column(name="path")
+	private java.lang.String path;
 	
 	/**
 	 * Default constructor. Only used by Hibernate.
 	 */
-	public Segment() {
+	public Picture() {
 		super();
 	}
 
 	/**
 	 * Constructor using all read-only and all non-nullable properties.
 	 */
-	public Segment(Category category, java.lang.String name) {
+	public Picture(Product product, java.lang.String path) {
 		super();
-		this.category = category;
-		this.name = name;
+		this.product = product;
+		this.path = path;
 	}
 	
 	/**
@@ -77,31 +77,31 @@ public class Segment {
 	}
 
 	/**
-	 * Returns the value of property 'category'.
+	 * Returns the value of property 'product'.
 	 */
-	public Category getCategory() {
-		return category;
+	public Product getProduct() {
+		return product;
 	}
 	
 	/**
-	 * Sets the value of property 'category'.
+	 * Sets the value of property 'product'.
 	 */
-	public void setCategory(Category newValue) {
-		this.category = newValue;
+	public void setProduct(Product newValue) {
+		this.product = newValue;
 	}
 	
 	/**
-	 * Returns the value of property 'name'.
+	 * Returns the value of property 'path'.
 	 */
-	public java.lang.String getName() {
-		return name;
+	public java.lang.String getPath() {
+		return path;
 	}
 	
 	/**
-	 * Sets the value of property 'name'.
+	 * Sets the value of property 'path'.
 	 */
-	public void setName(java.lang.String newValue) {
-		this.name = newValue;
+	public void setPath(java.lang.String newValue) {
+		this.path = newValue;
 	}
 	
 }

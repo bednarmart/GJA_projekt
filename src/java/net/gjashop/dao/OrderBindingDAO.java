@@ -5,6 +5,7 @@ import java.util.List;
 import net.gjashop.entities.ClientOrder;
 import net.gjashop.entities.OrderBinding;
 import net.gjashop.entities.Product;
+import net.gjashop.entities.User;
 
 import org.hibernate.Criteria;
 import org.hibernate.classic.Session;
@@ -22,14 +23,15 @@ public class OrderBindingDAO {
 	public final static String FIELD__ID = getField(OrderBinding.class, "id");
 	public final static String FIELD__ORDER = getField(OrderBinding.class, "order");
 	public final static String FIELD__PRODUCT = getField(OrderBinding.class, "product");
+	public final static String FIELD__USER = getField(OrderBinding.class, "user");
 	public final static String FIELD__PRICE = getField(OrderBinding.class, "price");
 	public final static String FIELD__COUNT = getField(OrderBinding.class, "count");
 	
 	/**
 	 * Creates a OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding create(Session session, ClientOrder order, Product product, double price, int count) {
-		OrderBinding newEntity = new OrderBinding(order, product, price, count);
+	public OrderBinding create(Session session, ClientOrder order, Product product, User user, double price, int count) {
+		OrderBinding newEntity = new OrderBinding(order, product, user, price, count);
 		session.save(newEntity);
 		return newEntity;
 	}
@@ -59,6 +61,17 @@ public class OrderBindingDAO {
 	public List<OrderBinding> getByProduct(Session session, Product product) {
 		Criteria criteria = session.createCriteria(OrderBinding.class);
 		criteria = criteria.add(Restrictions.eq(FIELD__PRODUCT, product));
+		@SuppressWarnings("unchecked")
+		List<OrderBinding> list = (List<OrderBinding>) criteria.list();
+		return list;
+	}
+	
+	/**
+	 * Returns the OrderBindings with the given user.
+	 */
+	public List<OrderBinding> getByUser(Session session, User user) {
+		Criteria criteria = session.createCriteria(OrderBinding.class);
+		criteria = criteria.add(Restrictions.eq(FIELD__USER, user));
 		@SuppressWarnings("unchecked")
 		List<OrderBinding> list = (List<OrderBinding>) criteria.list();
 		return list;
@@ -109,6 +122,21 @@ public class OrderBindingDAO {
 		Criteria criteria = _session.createCriteria(OrderBinding.class);
 		// restrict by the value of the unique property
 		criteria = criteria.add(Restrictions.eq(FIELD__PRODUCT, product));
+		Disjunction disjunction = Restrictions.disjunction();
+		criteria = criteria.add(disjunction);
+		criteria = criteria.setMaxResults(_maxResults);
+		@SuppressWarnings("unchecked")
+		List<OrderBinding> entities = (List<OrderBinding>) criteria.list();
+		return entities;
+	}
+	
+	/**
+	 * Searches for entities of type OrderBinding.
+	 */
+	public List<OrderBinding> searchWithUser(Session _session, User user, String _searchString, int _maxResults) {
+		Criteria criteria = _session.createCriteria(OrderBinding.class);
+		// restrict by the value of the unique property
+		criteria = criteria.add(Restrictions.eq(FIELD__USER, user));
 		Disjunction disjunction = Restrictions.disjunction();
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
