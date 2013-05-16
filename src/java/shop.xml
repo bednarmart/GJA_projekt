@@ -13,7 +13,7 @@
         <action name="addToCart" class="net.gjashop.actions.ShoppingAction">
             <result>/shop/Cart.jsp</result>
         </action>
-        <action name="moje" class="net.gjashop.actions.ShoppingAction" >
+        <action name="loadCategory" class="net.gjashop.actions.ShoppingAction" >
             <result name="success">/shop/Categories.jsp</result>
         </action>
     </package>
