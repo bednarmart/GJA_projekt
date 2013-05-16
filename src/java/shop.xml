@@ -16,6 +16,9 @@
         <action name="loadCategory" class="net.gjashop.actions.ShoppingAction" >
             <result name="success">/shop/Categories.jsp</result>
         </action>
+        <action name="productDetail" class="net.gjashop.actions.ShoppingAction"  method="productDetail">
+            <result name="success">/shop/productDetail.jsp</result>
+        </action>
     </package>
 </struts>
 

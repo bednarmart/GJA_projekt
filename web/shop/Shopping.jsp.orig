@@ -30,19 +30,36 @@
             </div>
 
 
+<<<<<<< HEAD
 <%-- pokus o AJAX              
+=======
+            <%--    
+>>>>>>> 705cd3eef4d29fc9711a9a8fd13a7684aa6d39b0
             <div id="info"> 
                 <s:url id="ajax" value="/shop/ajax.action" />
                 <s:a theme="ajax" href="%{ajax}" loadingText="Načítám kategorie. Prosím, čekejte" executeScripts="true" errorText="Omlouváme se, kategorie nelze načíst." formId="formRequests" targets="category">test</s:a>
-            </div>--%>
+<<<<<<< HEAD
+            </div>
 --%>
+=======
+            </div>--%>
+>>>>>>> 705cd3eef4d29fc9711a9a8fd13a7684aa6d39b0
 
             <%-- Tělo --%>
             <div id="body">
                 <%-- Kategorie, podkategorie --%>
+<<<<<<< HEAD
                 <s:action name="loadCategory" executeResult="true" />
+=======
+
+
+<%--                <div id="category"> --%>
+                    <%-- AJAX: onload, onclick kategorie --%>
+<%--                </div> --%>
 
     <s:action name="loadCategory" executeResult="true" />
+>>>>>>> 705cd3eef4d29fc9711a9a8fd13a7684aa6d39b0
+
                 <%-- Obsah nabídky --%>
                 <span id="content">
                     <%-- AJAX: onload, onclick podkategorie --%>

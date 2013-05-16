@@ -6,7 +6,7 @@
 
 <struts>
     <package name="user" namespace="/user" extends="struts-default">
-        <action name="showLogin" class="net.gjashop.actions.UserAction">
+        <action name="showLogin" class="net.gjashop.actions.UserAction"  >
             <result>/user/Login.jsp</result>
         </action>
         <action name="showProfile" class="net.gjashop.actions.UserAction">

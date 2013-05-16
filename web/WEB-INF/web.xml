@@ -15,5 +15,6 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>shop/Shopping.jsp</welcome-file>
+<!--        <welcome-file>example/SignManager.jsp</welcome-file> -->
     </welcome-file-list>
 </web-app>
