@@ -5,7 +5,9 @@
 <struts>
     <include file="shop.xml"/>
     <include file="user.xml"/>
+   
     <include file="example.xml"/>
+    <include file="Product.xml"/>
     <include file="SignManager.xml"/>
     <!-- Configuration for the default package. -->
     <package name="default" namespace="/" extends="struts-default">

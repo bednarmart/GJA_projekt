@@ -19,6 +19,10 @@
         <action name="productDetail" class="net.gjashop.actions.ShoppingAction"  method="productDetail">
             <result name="success">/shop/productDetail.jsp</result>
         </action>
+        
+        <action name="loadProductTable" class="net.gjashop.actions.ProductAction" method="loadProductTable">
+             <result name="success">ProductsTable.jsp</result>
+        </action>
     </package>
 </struts>
 

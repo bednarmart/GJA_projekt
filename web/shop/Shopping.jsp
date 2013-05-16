@@ -54,7 +54,7 @@
                         Breadcrumb (UCMS)
                     </div>
     
-<s:action name="productDetail" executeResult="true" />
+        <s:action name="loadProductTable" executeResult="true"  />
 
                 </span>
             </div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <constant name="struts.enable.DynamicMethodInvocation"
+        value="false" />
+    <constant name="struts.devMode" value="false" />
+ 
+    <package name="product" extends="struts-default" namespace="/" >
+          
+        <action name="loadProduct"  class="net.gjashop.actions.ProductAction" >
+            <result name="success">ProductSmall.jsp</result>
+        </action>
+        <action name="index"
+            class="net.gjashop.actions.SignAction">
+            <result name="success">Product.jsp</result>
+        </action>
+        
+        <action name="loadProduct" class="net.gjashop.actions.ProductAction" >
+            <result name="success">ProductSmall.jsp</result>
+        </action> 
+        
+        
+    </package>
+
+</struts>
