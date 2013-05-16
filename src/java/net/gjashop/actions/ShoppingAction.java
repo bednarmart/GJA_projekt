@@ -6,6 +6,7 @@ import java.util.List;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
 import net.gjashop.entities.Category;
+import net.gjashop.entities.Product;
 import net.gjashop.entities.Segment;
 
 /**
@@ -24,8 +25,11 @@ public class ShoppingAction extends ActionSupport {
 //    private String categoriList;
     private Long cat;
     private Long subcat;
+    private Long selectedProduct;
     
+    private Product product;
     
+    private List<Segment> selectedSubcat;
     
     @Override
     public String execute() throws Exception {
@@ -38,13 +42,25 @@ public class ShoppingAction extends ActionSupport {
         this.categoriList.add("neco1");
         this.categoriList.add("neco2");*/
         
-//        this.categoriList = "necicko";
-        this.name = "juhuuuuuuuuu";
+        // zmacknuta kategorie
+        if (cat != null){
+            this.subCategoriList = dbProvider.getSegmentsByCategory(dbProvider.getCategory(cat.intValue()));
+            System.out.println("velikost: " + subCategoriList.size());
+        }
+
         this.categoriList = dbProvider.getAllCategorys();
-        this.subCategoriList = dbProvider.getAllSegments();
+//        this.subCategoriList = dbProvider.getAllSegments();
         return SUCCESS;
     }
 
+    
+    public String productDetail (){
+        this.selectedProduct = Long.valueOf(1);
+        product = dbProvider.getProduct(this.selectedProduct.intValue());
+        System.out.println("productDetail called" + product.getName());
+        return SUCCESS;
+    }
+    
     public String getname (){
         System.out.println("getname called" );
         return name;
