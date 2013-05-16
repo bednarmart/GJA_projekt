@@ -30,22 +30,17 @@
             </div>
 
 
-              
+<%-- pokus o AJAX              
             <div id="info"> 
-                <s:url id="ajax" value="/ajax.action" />
+                <s:url id="ajax" value="/shop/ajax.action" />
                 <s:a theme="ajax" href="%{ajax}" loadingText="Načítám kategorie. Prosím, čekejte" executeScripts="true" errorText="Omlouváme se, kategorie nelze načíst." formId="formRequests" targets="category">test</s:a>
             </div>
+--%>
 
             <%-- Tělo --%>
             <div id="body">
                 <%-- Kategorie, podkategorie --%>
-
-
-                <div id="category">
-                    <%-- AJAX: onload, onclick kategorie --%>
-                </div>
-
-    <%--<s:action name="loadCategory" executeResult="true" />--%>
+                <s:action name="loadCategory" executeResult="true" />
 
                 <%-- Obsah nabídky --%>
                 <span id="content">

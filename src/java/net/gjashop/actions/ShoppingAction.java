@@ -31,8 +31,8 @@ public class ShoppingAction extends ActionSupport {
     public String execute() throws Exception {
         // vykonání příkazů, které se mají stát po zavolání
         System.out.println("execute called get all Category" );
-        System.out.println(this.cat );
-        System.out.println(this.subcat );
+        System.out.println("cat:" + this.cat );
+        System.out.println("subcat:" + this.subcat );
 /*        this.categoriList = new ArrayList<String>();
         this.categoriList.add("neco0");
         this.categoriList.add("neco1");
