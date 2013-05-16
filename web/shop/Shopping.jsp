@@ -30,22 +30,22 @@
             </div>
 
 
-              
+            <%--    
             <div id="info"> 
                 <s:url id="ajax" value="/ajax.action" />
                 <s:a theme="ajax" href="%{ajax}" loadingText="Načítám kategorie. Prosím, čekejte" executeScripts="true" errorText="Omlouváme se, kategorie nelze načíst." formId="formRequests" targets="category">test</s:a>
-            </div>
+            </div>--%>
 
             <%-- Tělo --%>
             <div id="body">
                 <%-- Kategorie, podkategorie --%>
 
 
-                <div id="category">
+<%--                <div id="category"> --%>
                     <%-- AJAX: onload, onclick kategorie --%>
-                </div>
+<%--                </div> --%>
 
-    <%--<s:action name="loadCategory" executeResult="true" />--%>
+    <s:action name="loadCategory" executeResult="true" />
 
                 <%-- Obsah nabídky --%>
                 <span id="content">
@@ -53,102 +53,9 @@
                     <div id="breadcrumb">
                         Breadcrumb (UCMS)
                     </div>
-    <%-- Nejaky ukazkovy produkty --%>                    
-         <div id="products_row">
-                                <%-- produkt --%>
-                                <span id="product"> 
-                                    <div>Název produktu${product.name}</div>
-                                    <div>Popis${product.description}</div>
-                                    <div>Obrázek${product.name}</div>
-                                    <div>
-                                        <span>cena${product.price}</span>
-                                        <span>
-    <%--                                        <s:url action="/shop/addToCart.action" var="urlTag" >
-                                                <s:param name="id">${product.id}</s:param>
-                                            </s:url>
-                                            <s:a href="%{urlTag}">Koupit</s:a>
-    --%>                                       
-                                        </span>
-                                    </div>
-                                </span>
-                                <%-- produkt --%>
-                                <span id="product"> 
-                                    <div>Název produktu${product.name}</div>
-                                    <div>Popis${product.description}</div>
-                                    <div>Obrázek${product.name}</div>
-                                    <div>
-                                        <span>cena${product.price}</span>
-                                        <span>
-    <%--                                        <s:url action="/shop/addToCart.action" var="urlTag" >
-                                                <s:param name="id">${product.id}</s:param>
-                                            </s:url>
-                                            <s:a href="%{urlTag}">Koupit</s:a>
-    --%>                                       
-                                        </span>
-                                    </div>
-                                </span>
-                                <%-- produkt --%>
-                                <span id="product"> 
-                                    <div>Název produktu${product.name}</div>
-                                    <div>Popis${product.description}</div>
-                                    <div>Obrázek${product.name}</div>
-                                    <div>
-                                        <span>cena${product.price}</span>
-                                        <span>
-    <%--                                        <s:url action="/shop/addToCart.action" var="urlTag" >
-                                                <s:param name="id">${product.id}</s:param>
-                                            </s:url>
-                                            <s:a href="%{urlTag}">Koupit</s:a>
-    --%>                                       
-                                        </span>
-                                    </div>
-                                </span>                                    
-         </div>           
-        <div id="products_row">
-                                <%-- produkt --%>
-                                <span id="product"> 
-                                    <div>Název produktu${product.name}</div>
-                                    <div>Popis${product.description}</div>
-                                    <div>Obrázek${product.name}</div>
-                                    <div>
-                                        <span>cena${product.price}</span>
-                                        <span>
-    <%--                                        <s:url action="/shop/addToCart.action" var="urlTag" >
-                                                <s:param name="id">${product.id}</s:param>
-                                            </s:url>
-                                            <s:a href="%{urlTag}">Koupit</s:a>
-    --%>                                       
-                                        </span>
-                                    </div>
-                                </span>
-        </div>
-    <%-- konec natvrdo vloženejch zbozi --%>                
+    
+<s:action name="productDetail" executeResult="true" />
 
-
-                    <%-- Produkty --%>
-                    <%-- cyklus nad listem produktů po 3 produktech na řádku --%>
-    <%--                <s:iterator value="products" id="products_row">
-                        <div id="products_row">
-                            <s:iterator value="products_row" id="product">--%>
-                                <%-- produkt --%>
-    <%--                            <span id="product"> 
-                                    <div>Název produktu${product.name}</div>
-                                    <div>Popis${product.description}</div>
-                                    <div>Obrázek${product.name}</div>
-                                    <div>
-                                        <span>cena${product.price}</span>
-                                        <span>
-                                            <s:url action="/shop/addToCart.action" var="urlTag" >
-                                                <s:param name="id">${product.id}</s:param>
-                                            </s:url>
-                                            <s:a href="%{urlTag}">Koupit</s:a>
-
-                                        </span>
-                                    </div>
-                                </span>
-                            </s:iterator>
-                        </div>
-                    </s:iterator>--%>
                 </span>
             </div>
 
