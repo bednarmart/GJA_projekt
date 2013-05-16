@@ -41,7 +41,7 @@
                     <%-- AJAX: onload, onclick kategorie --%>
                 </div>
 
-    <%--<s:action name="moje" executeResult="true" />--%>
+    <s:action name="moje" executeResult="true" /><%----%>
 
                 <%-- Obsah nabídky --%>
                 <span id="content">
