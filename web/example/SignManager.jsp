@@ -13,11 +13,9 @@
         <title>Sign manager</title>
     </head>
  
- 
 <h1>Sign Manager</h1>
 
- 
-<s:form action="add" method="post">
+<s:form  action="add" method="post">
     <s:textfield name="sign.name" label="Name"/>
     <s:submit value="Add sign" align="center"/>
 </s:form> 
@@ -29,7 +27,7 @@
     <th>Delete</th>
 </tr>
 
-<s:iterator value="signList" var="contact">
+<s:iterator value="signList"  var="contact">
     <tr>
         <td><s:property value="name"/></td>
         
