@@ -9,7 +9,8 @@
     <constant name="struts.enable.DynamicMethodInvocation"
         value="false" />
     <constant name="struts.devMode" value="false" />
- 
+  
+    
     <package name="net.gjashop.actions" extends="struts-default" namespace="/example" >
          <action name="add"
             class="net.gjashop.actions.SignAction" method="add">
