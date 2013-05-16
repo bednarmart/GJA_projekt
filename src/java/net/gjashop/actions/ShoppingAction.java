@@ -1,8 +1,10 @@
 package net.gjashop.actions;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import net.gjashop.custom.CartItem;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
 import net.gjashop.entities.Category;
@@ -28,6 +30,9 @@ public class ShoppingAction extends ActionSupport {
     private Long selectedProduct;
     
     private Product product;
+    private List<CartItem> cart = null;
+    private int iProduct;
+    private int productCount;
     
     
     @Override
@@ -109,13 +114,6 @@ public class ShoppingAction extends ActionSupport {
         return this.subcat;
     }
     
-    // TODO: modely - user, cart
-    
-    
-    // TODO: gettery, settery
-    
-    
-    
     public ShoppingAction(){
         System.out.println("ShoppingAction called"); 
         System.out.println(this.cat );
@@ -126,24 +124,74 @@ public class ShoppingAction extends ActionSupport {
                 System.out.println("getProducts called");  
         return SUCCESS;
     }
+
     public String showProducts(){
                 System.out.println("showProducts called");  
             return SUCCESS;
     }
-    public String addToCart(){
-                System.out.println("addToCart called");  
+    
+    public String showCart() {
+        Map session = ActionContext.getContext().getSession();
+        cart = (List<CartItem>) session.get("cart");
+        
         return SUCCESS;
     }
+    
+    public String addToCart() {
+        System.out.println("addToCart called");  
+        boolean added = false;
+        Map session = ActionContext.getContext().getSession();
+        cart = (List<CartItem>) session.get("cart");
+        
+        product = dbProvider.getProduct(iProduct);
+        for (CartItem item : cart) {
+            if (item.getProduct().getId() == iProduct) {
+                item.setCount(item.getCount() + 1);
+                added = true;
+            }
+        }
+        if (! added) {
+            cart.add(new CartItem(product, 1));
+        }
+        
+        session.put("cart", cart);
+        return SUCCESS;
+    }
+
+    public String removeFromCart() {
+        System.out.println("removeFromCart called");  
+        Map session = ActionContext.getContext().getSession();
+        cart = (List<CartItem>) session.get("cart");
+
+        for (CartItem item : cart) {
+            if (item.getProduct().getId() == iProduct) {
+                cart.remove(item);
+            }
+        }
+        
+        session.remove("cart");
+        return SUCCESS;
+    }     
+    
     public String updateInCart(){
-                System.out.println("updateInCart called");  
-            return SUCCESS;
+        System.out.println("updateInCart called");  
+        Map session = ActionContext.getContext().getSession();
+        cart = (List<CartItem>) session.get("cart");
+        
+        for (CartItem item : cart) {
+            if (item.getProduct().getId() == iProduct) {
+                item.setCount(productCount);
+            }
+        }
+
+        return SUCCESS;
     }
-    public String removeFromCart(){
-                System.out.println("removeFromCart called");  
-         return SUCCESS;
-    }
+
     public String emptyCart(){
-                System.out.println("emptyCart called");  
+         System.out.println("emptyCart called");  
+         Map session = ActionContext.getContext().getSession();
+         session.remove("cart");
+
          return SUCCESS;
     }
     public String createOrder(){
@@ -161,6 +209,14 @@ public class ShoppingAction extends ActionSupport {
     public String addRating(){
                 System.out.println("addRating called");  
              return SUCCESS;
+    }
+
+    public void setiProduct(int iProduct) {
+        this.iProduct = iProduct;
+    }
+
+    public void setProductCount(int productCount) {
+        this.productCount = productCount;
     }
 }
 

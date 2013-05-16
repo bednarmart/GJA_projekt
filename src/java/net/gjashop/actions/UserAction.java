@@ -72,6 +72,7 @@ public class UserAction extends ActionSupport {
         Map session = ActionContext.getContext().getSession();
         session.remove("login");
         session.remove("user");
+        session.remove("cart");
         return SUCCESS;
     }
     
