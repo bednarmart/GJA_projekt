@@ -187,7 +187,7 @@ public class ShoppingAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String emptyCart(){
+    public String eraseCart(){
          System.out.println("emptyCart called");  
          Map session = ActionContext.getContext().getSession();
          session.remove("cart");
