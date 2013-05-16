@@ -17,6 +17,7 @@
                 <span class="head_menu">
                     <s:if test="#session.login == 'true'">
                         <a href="<%= request.getContextPath()%>/user/showProfile.action">${session.user.name}</a>
+                        <a href="<%= request.getContextPath()%>/user/logout.action">Odhlásit</a>
                     </s:if>
                     <s:else>
                         <s:url id="url" action="Login">

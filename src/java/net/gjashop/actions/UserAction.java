@@ -67,6 +67,14 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String logout() {
+        System.out.println("logout");
+        Map session = ActionContext.getContext().getSession();
+        session.remove("login");
+        session.remove("user");
+        return SUCCESS;
+    }
+    
     private boolean isInvalid(String value) {
         return (value == null || value.length() == 0);
     }

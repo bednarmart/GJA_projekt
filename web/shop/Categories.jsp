@@ -13,7 +13,7 @@
                 <ul class="sub_sidebar_list">  
                     <%-- vypis podkategorii--%>  
                     <s:iterator value="subCategoriList" var="subCatCot" >
-                        <li><a href="<%= request.getContextPath()%>/shop/category?subcat=${subCatCot.id}">${subCatCot.name}</a></li>
+                        <li><a href="<%= request.getContextPath()%>/shop/category?cat=${catCot.id}&subcat=${subCatCot.id}">${subCatCot.name}</a></li>
                     </s:iterator>     
                 </ul>
             </s:if>

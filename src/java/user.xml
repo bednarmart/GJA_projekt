@@ -9,6 +9,9 @@
         <action name="showLogin" class="net.gjashop.actions.UserAction"  >
             <result>/user/Login.jsp</result>
         </action>
+        <action name="logout" class="net.gjashop.actions.UserAction"  method="logout">
+            <result>/shop/Shopping.jsp</result>
+        </action>
         <action name="showProfile" class="net.gjashop.actions.UserAction">
             <result>/user/Profile.jsp</result>
         </action>
