@@ -32,6 +32,10 @@ public class ShoppingAction extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        return SUCCESS;
+    }
+    
+    public String showCategory() {
         // vykonání příkazů, které se mají stát po zavolání
         System.out.println("execute called get all Category" );
         System.out.println("cat:" + this.cat );

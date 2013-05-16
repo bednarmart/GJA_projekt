@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>Prodej oblečení</title>
-        <link rel="stylesheet" type="text/css" href="shop/css/shopping.css" />
+        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/shop/css/shopping.css" />
         <script type="text/javascript" src="<%= request.getContextPath()%>/script/shop.js"></script>
     </head>
 
@@ -15,7 +15,7 @@
             <div id="head">
                 <span><h2>Oblečení</h2></span>
                 <span class="head_menu">
-                    <s:if test="#session.user.login == 'true'">
+                    <s:if test="#session.login == 'true'">
                         <a href="<%= request.getContextPath()%>/user/showProfile.action">${session.user.name}</a>
                     </s:if>
                     <s:else>
@@ -30,19 +30,18 @@
             </div>
 
 
-<%-- pokus o AJAX              
-            <div id="info"> 
-                <s:url id="ajax" value="/shop/ajax.action" />
-                <s:a theme="ajax" href="%{ajax}" loadingText="Načítám kategorie. Prosím, čekejte" executeScripts="true" errorText="Omlouváme se, kategorie nelze načíst." formId="formRequests" targets="category">test</s:a>
-            </div>--%>
---%>
+        <%-- pokus o AJAX              
+                    <div id="info"> 
+                        <s:url id="ajax" value="/shop/ajax.action" />
+                        <s:a theme="ajax" href="%{ajax}" loadingText="Načítám kategorie. Prosím, čekejte" executeScripts="true" errorText="Omlouváme se, kategorie nelze načíst." formId="formRequests" targets="category">test</s:a>
+                    </div>
+        --%>
+
 
             <%-- Tělo --%>
             <div id="body">
                 <%-- Kategorie, podkategorie --%>
-                <s:action name="loadCategory" executeResult="true" />
-
-    <s:action name="loadCategory" executeResult="true" />
+                <s:action name="loadCategory" namespace="/shop" executeResult="true" />
                 <%-- Obsah nabídky --%>
                 <span id="content">
                     <%-- AJAX: onload, onclick podkategorie --%>
@@ -50,7 +49,7 @@
                         Breadcrumb (UCMS)
                     </div>
     
-<s:action name="productDetail" executeResult="true" />
+    <s:action name="productDetail" executeResult="true" />
 
                 </span>
             </div>

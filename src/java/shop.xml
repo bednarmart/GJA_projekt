@@ -7,13 +7,16 @@
 <struts>
 
     <package name="shop" namespace="/shop" extends="struts-default">
+        <action name="category" class="net.gjashop.actions.ShoppingAction" method="showCategory">
+            <result>/shop/Shopping.jsp</result>
+        </action>
         <action name="showCart" class="net.gjashop.actions.ShoppingAction">
             <result>/shop/Cart.jsp</result>
         </action>
         <action name="addToCart" class="net.gjashop.actions.ShoppingAction">
             <result>/shop/Cart.jsp</result>
         </action>
-        <action name="loadCategory" class="net.gjashop.actions.ShoppingAction" >
+        <action name="loadCategory" class="net.gjashop.actions.ShoppingAction" method="showCategory">
             <result name="success">/shop/Categories.jsp</result>
         </action>
         <action name="productDetail" class="net.gjashop.actions.ShoppingAction"  method="productDetail">

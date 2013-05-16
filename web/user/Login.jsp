@@ -12,11 +12,11 @@
         <s:form id="login" action="doLogin" method="POST" theme="simple" >
             <h1>Přihlášení</h1>
             <fieldset id="inputs">
-                <input id="username" type="text" placeholder="Login" autofocus required>   
-                <input id="password" type="password" placeholder="Heslo" required>
+                <input id="username" name="login" type="text" placeholder="Login" autofocus required>   
+                <input id="password" name="pass" type="password" placeholder="Heslo" required>
             </fieldset>
             <fieldset id="actions">
-                <input type="submit" id="submit" value="Přihlásit">
+                <s:submit id="submit" value="Přihlásit"/>
                 <a href="<%= request.getContextPath()%>/user/showLostPassword.action">Zapomenuté heslo</a><a href="/user/showRegistration.action">Registrace</a>
             </fieldset>
             <s:actionerror /><s:fielderror />

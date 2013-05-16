@@ -12,8 +12,10 @@
         <action name="showProfile" class="net.gjashop.actions.UserAction">
             <result>/user/Profile.jsp</result>
         </action>
-        <action name="doLogin" class="net.gjashop.actions.UserAction">
-            <result>/user/Profile.jsp</result>
+        <action name="doLogin" class="net.gjashop.actions.UserAction" method="doLogin">
+            <result name="input">/user/Login.jsp</result>
+            <result name="error">/user/Login.jsp</result>
+            <result name="success">/shop/Shopping.jsp</result>
         </action>
         <action name="showLostPassword" class="net.gjashop.actions.UserAction">
             <result>/user/LostPassword.jsp</result>
