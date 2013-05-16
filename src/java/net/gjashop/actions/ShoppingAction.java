@@ -29,7 +29,6 @@ public class ShoppingAction extends ActionSupport {
     
     private Product product;
     
-    private List<Segment> selectedSubcat;
     
     @Override
     public String execute() throws Exception {
