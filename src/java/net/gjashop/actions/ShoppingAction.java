@@ -6,6 +6,7 @@ import java.util.List;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
 import net.gjashop.entities.Category;
+import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Segment;
 
@@ -29,6 +30,7 @@ public class ShoppingAction extends ActionSupport {
     
     private Product product;
     
+    private String image;
     
     @Override
     public String execute() throws Exception {
@@ -41,11 +43,20 @@ public class ShoppingAction extends ActionSupport {
         this.categoriList.add("neco1");
         this.categoriList.add("neco2");*/
         
+        if (this.subcat != null){
+            //this.cat = dbProvider.
+            subCategory = dbProvider.getSegment(this.subcat.intValue());    
+            this.cat = Long.valueOf(subCategory.getCategory().getId());
+                    
+        }
+
         // zmacknuta kategorie
         if (cat != null){
             this.subCategoriList = dbProvider.getSegmentsByCategory(dbProvider.getCategory(cat.intValue()));
             System.out.println("velikost: " + subCategoriList.size());
         }
+        
+
 
         this.categoriList = dbProvider.getAllCategorys();
 //        this.subCategoriList = dbProvider.getAllSegments();
@@ -56,13 +67,30 @@ public class ShoppingAction extends ActionSupport {
     public String productDetail (){
         this.selectedProduct = Long.valueOf(1);
         product = dbProvider.getProduct(this.selectedProduct.intValue());
-        System.out.println("productDetail called" + product.getName());
+        System.out.println("productDetail called" + product.getName() );
+        //System.out.println("productDetail called");
+        
+        List<Picture> pic = dbProvider.getPicturesByProduct(this.product);
+           if(pic != null && pic.size()>0)
+           {
+               this.image = pic.get(0).getPath();
+           }
+        
         return SUCCESS;
     }
     
+    public Product getProduct (){
+        return product;
+    }
+
+            
     public String getname (){
         System.out.println("getname called" );
         return name;
+    }
+
+    public String getImage() {
+        return image;
     }
     
     public List<Category> getCategoriList(){

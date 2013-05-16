@@ -10,7 +10,11 @@
  
 <span id="ProductDetail">
 
-    <h2> jmeno </h2>
+    <h3> ${product.name} </h3>
+    <div>
+        <img src="<%= request.getContextPath()%>/pic/dress/evening/alinePrincesOneShoulder.jpg" alt="Jak psát web">
+        <%--<img:image src="C:\NetBeansWork\GJA_projekt\pic\dress\evening\alinePrincesOneShoulder.jpg" resize="true" height="25" refresh="false"/> --%>
+    </div>
        <table>
        <tr><td>
 <%--         <img:image src="%{image}" resize="true" height="25" refresh="false"/> --%>
