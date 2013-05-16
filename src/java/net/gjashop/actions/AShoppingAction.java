@@ -11,7 +11,7 @@ import net.gjashop.entities.Segment;
 /**
  * <code>Správa akcí při nakupování</code>
  */
-public class ShoppingAction extends ActionSupport {
+public class AShoppingAction extends ActionSupport {
     private OperationProvider dbProvider = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
 
     private String name;
@@ -27,7 +27,6 @@ public class ShoppingAction extends ActionSupport {
     
     
     
-    @Override
     public String execute() throws Exception {
         // vykonání příkazů, které se mají stát po zavolání
         System.out.println("execute called get all Category" );
@@ -97,7 +96,7 @@ public class ShoppingAction extends ActionSupport {
     
     
     
-    public ShoppingAction(){
+    public AShoppingAction(){
         System.out.println("ShoppingAction called"); 
         System.out.println(this.cat );
         System.out.println(this.subcat );
