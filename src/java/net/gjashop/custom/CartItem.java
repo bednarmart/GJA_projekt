@@ -34,10 +34,17 @@ public class CartItem {
     }
 
     public void setCount(int count) {
+        System.out.println("CartItem->setCount(Int)");
         this.price = (int) (product.getPrice() * count);
         this.count = count;
     }
 
+    public void setCount(String count) {
+        System.out.println("CartItem->setCount(String)");
+        this.price = (int) (product.getPrice() * Integer.valueOf(count));
+        this.count = Integer.valueOf(count);
+    }    
+    
     public int getPrice() {
         return price;
     }
