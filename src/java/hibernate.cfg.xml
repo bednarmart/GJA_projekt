@@ -27,7 +27,6 @@
     <mapping class="net.gjashop.entities.Sign"></mapping>
     <mapping class="net.gjashop.entities.ClientOrder"></mapping>
     <mapping class="net.gjashop.entities.Product"></mapping>
-    <mapping class="net.gjashop.entities.Rating"></mapping>
     <mapping class="net.gjashop.entities.PaymentType"></mapping>
     <mapping class="net.gjashop.entities.Delivery"></mapping>
     <mapping class="net.gjashop.entities.Contact"></mapping>
@@ -36,7 +35,7 @@
     <mapping class="net.gjashop.entities.Picture"></mapping>
     <mapping class="net.gjashop.entities.ContactBinding"></mapping>
     <mapping class="net.gjashop.entities.AddressBinding"></mapping>
-    
+    <mapping class="net.gjashop.entities.Rating"></mapping>    
 		
   </session-factory>
 </hibernate-configuration>
