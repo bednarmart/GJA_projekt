@@ -69,7 +69,11 @@ public class ShoppingAction extends ActionSupport {
 
     
     public String productDetail (){
+<<<<<<< HEAD
+        this.selectedProduct = 1;
+=======
         this.iProduct = 4;
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
         
         product = dbProvider.getProduct(this.iProduct);
         System.out.println("productDetail called" + product.getName() );
@@ -125,8 +129,18 @@ public class ShoppingAction extends ActionSupport {
         return product.getSign().getName();
     }
     
+<<<<<<< HEAD
+    public String getBLogedIn (){
+        Map session = ActionContext.getContext().getSession();
+        if (session.get("login").toString().equals("true") ){
+            return "true";
+        }
+        else
+            return "false";
+    }
+    
     public String getDeliveryTime (){
-        product = dbProvider.getProduct(this.iProduct);
+        product = dbProvider.getProduct(this.selectedProduct);
         if (product.getCount() == 0){
             
             Random generator = new Random( );
@@ -138,6 +152,8 @@ public class ShoppingAction extends ActionSupport {
         }
     }
     
+=======
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
     public String getEvaluation (){
         product = dbProvider.getProduct(this.iProduct);
         List <Rating> ratings = dbProvider.getRatingsByProduct(product);
@@ -340,6 +356,7 @@ public class ShoppingAction extends ActionSupport {
     public void setProductCount(int productCount) {
         this.productCount = productCount;
     }
+<<<<<<< HEAD
 
 
     public String productFilter (){
@@ -367,8 +384,8 @@ public class ShoppingAction extends ActionSupport {
     public String getSexFilter() {
         return sexFilter;
     }
-    
-     public void setSexFilter(String sexFilter) {
+
+    public void setSexFilter(String sexFilter) {
         this.sexFilter = sexFilter;
     }
 
@@ -383,7 +400,7 @@ public class ShoppingAction extends ActionSupport {
     public List<String> getSignList() {
         signList = new ArrayList();
         signList.add("tri");
-        signList.add("čtyry");
+        signList.add("čtyři");
         return signList;
     }
 
@@ -391,10 +408,40 @@ public class ShoppingAction extends ActionSupport {
         this.signList = signList;
     }
 
+
+    
+=======
+    
+    
+    
+    public String setProduct(Product prodctObject)
+    {
+        this.product       = prodctObject;
+        List<Picture> pic  = dbProvider.getPicturesByProduct(this.product);
+        if(pic != null && pic.size()>0)
+        {
+            this.image   = pic.get(0).getPath();
+        }
+        return SUCCESS;
+    }
+ 
+    
+    public String loadProduct()
+    {
+        return SUCCESS;
+    }
+       
+    public List<Product> getProductList() {
+        return this.productList;
+    }
+    public void setProductList(List<Product> products )
+    {
+        this.productList = products;
+    }
     
     public String loadProductsTable()
     {
-        System.out.println("loadProductsTable called !!!!!!!!!!!!!!!" + sexFilter);  
+       
         if(this.subcat ==null && this.cat == null )
         {
             this.productList = dbProvider.getAllProducts();
@@ -427,5 +474,6 @@ public class ShoppingAction extends ActionSupport {
         
         return SUCCESS;
     }  
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
 }
 

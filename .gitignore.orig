@@ -10,6 +10,10 @@ src/java/hibernate.cfg.xml
 nbproject/ant-deploy.xml
 nbproject/project.properties
 src/java/hibernate.cfg.xml
+<<<<<<< HEAD
 /nbproject/
 .gitignore
 nbproject/project.properties
+=======
+/nbproject/
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
