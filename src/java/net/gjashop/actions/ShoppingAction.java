@@ -394,7 +394,7 @@ public class ShoppingAction extends ActionSupport {
     
     public String loadProductsTable()
     {
-        System.out.println("loadProductsTable called !!!!!!!!!!!!!!!" + sexFilter);  
+        System.out.println("loadProductsTable called !!!!!!!!!!!!!!!");  
         if(this.subcat ==null && this.cat == null )
         {
             this.productList = dbProvider.getAllProducts();
@@ -426,6 +426,12 @@ public class ShoppingAction extends ActionSupport {
         this.productList = dbProvider.getProductsBySegment(dbProvider.getSegment(this.subcat.intValue()));
         
         return SUCCESS;
-    }  
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+    
+    
 }
 
