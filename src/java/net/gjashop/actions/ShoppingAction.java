@@ -2,6 +2,7 @@ package net.gjashop.actions;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import net.gjashop.custom.CartItem;
@@ -32,6 +33,8 @@ public class ShoppingAction extends ActionSupport {
     private Long subcat;
     private int selectedProduct;
     
+    private List<Product> productList;
+    private Long id;
     private Product product;
     private List<CartItem> cart = null;
     private int iProduct;
@@ -40,6 +43,7 @@ public class ShoppingAction extends ActionSupport {
     private int newEvaluation;
     
     private String image;
+    
     
     @Override
     public String execute() throws Exception {
@@ -239,7 +243,11 @@ public class ShoppingAction extends ActionSupport {
     }
     
     public String getProducts(){
-                System.out.println("getProducts called");  
+        List<Picture> pic  = dbProvider.getPicturesByProduct(this.product);
+        if(pic != null && pic.size()>0)
+        {
+            this.image   = pic.get(0).getPath();
+        }        
         return SUCCESS;
     }
 
@@ -341,5 +349,75 @@ public class ShoppingAction extends ActionSupport {
     public void setProductCount(int productCount) {
         this.productCount = productCount;
     }
+    
+    
+    
+    public String setProduct(Product prodctObject)
+    {
+        this.product       = prodctObject;
+        List<Picture> pic  = dbProvider.getPicturesByProduct(this.product);
+        if(pic != null && pic.size()>0)
+        {
+            this.image   = pic.get(0).getPath();
+        }
+        return SUCCESS;
+    }
+ 
+    
+    public String loadProduct()
+    {
+        return SUCCESS;
+    }
+       
+    public List<Product> getProductList() {
+        return this.productList;
+    }
+    public void setProductList(List<Product> products )
+    {
+        this.productList = products;
+    }
+    
+    public long getId() {
+        return id;
+    }
+     public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String loadProductsTable()
+    {
+       
+        if(this.subcat ==null && this.cat == null )
+        {
+            this.productList = dbProvider.getAllProducts();
+             return SUCCESS;
+        }
+    
+        // category set
+        if(this.subcat ==null && this.cat !=null)
+        {
+            this.productList = new ArrayList<Product>();
+ 
+            List<Segment> segList = dbProvider.getSegmentsByCategory(dbProvider.getCategory(this.cat.intValue()));
+          
+           
+            for(Segment seg: segList) {
+                List<Product> tmpProd =  dbProvider.getProductsBySegment(seg);
+                for(Product prod : tmpProd)
+                {
+                    if(!this.productList.contains(prod))
+                    {
+                        this.productList.add(prod);
+                    }
+                }
+            }            
+            return SUCCESS;
+        }
+         
+        // subcategory set
+        this.productList = dbProvider.getProductsBySegment(dbProvider.getSegment(this.subcat.intValue()));
+        
+        return SUCCESS;
+    }  
 }
 
