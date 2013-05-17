@@ -8,6 +8,7 @@ import net.gjashop.custom.CartItem;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
 import net.gjashop.entities.Category;
+import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Segment;
 
@@ -34,6 +35,7 @@ public class ShoppingAction extends ActionSupport {
     private int iProduct;
     private int productCount;
     
+    private String image;
     
     @Override
     public String execute() throws Exception {
@@ -64,11 +66,33 @@ public class ShoppingAction extends ActionSupport {
     
     public String productDetail (){
         this.selectedProduct = Long.valueOf(1);
+        
         product = dbProvider.getProduct(this.selectedProduct.intValue());
-        System.out.println("productDetail called" + product.getName());
+        System.out.println("productDetail called" + product.getName() );
+        //System.out.println("productDetail called");
+        
+        List<Picture> pic = dbProvider.getPicturesByProduct(this.product);
+           if(pic != null && pic.size()>0)
+           {
+               this.image = pic.get(0).getPath();
+           }
+        System.out.println("productDetail called cesta: " + this.image );
         return SUCCESS;
     }
+
+    public Long getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
     
+
     public String getname (){
         System.out.println("getname called" );
         return name;
@@ -138,7 +162,7 @@ public class ShoppingAction extends ActionSupport {
     }
     
     public String addToCart() {
-        System.out.println("addToCart called");  
+        System.out.println("addToCart called: " + iProduct);  
         boolean added = false;
         Map session = ActionContext.getContext().getSession();
         cart = (List<CartItem>) session.get("cart");
@@ -211,9 +235,14 @@ public class ShoppingAction extends ActionSupport {
              return SUCCESS;
     }
 
-    public void setiProduct(int iProduct) {
+    public void setIProduct(int iProduct) {
         this.iProduct = iProduct;
     }
+
+    public int getIProduct() {
+        return iProduct;
+    }
+
 
     public void setProductCount(int productCount) {
         this.productCount = productCount;
