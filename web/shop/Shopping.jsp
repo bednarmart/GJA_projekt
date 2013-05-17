@@ -46,9 +46,8 @@
                 <%-- Obsah nabídky --%>
                 <span id="content">
                     <%-- AJAX: onload, onclick podkategorie --%>
-                    <div id="breadcrumb">
-                        Breadcrumb (UCMS)
-                    </div>
+
+    <s:action name="productFilter" namespace="/shop" executeResult="true" />
     
     <s:action name="productDetail" namespace="/shop" executeResult="true" />
 

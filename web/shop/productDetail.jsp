@@ -39,6 +39,10 @@
            <td> ${product.count} </td>
        </tr>
        <tr>
+           <td> Doba dodání: </td>
+           <td> ${deliveryTime} </td>
+       </tr>
+       <tr>
            <td> Hodnocení: </td>
            <td> ${Evaluation} </td>
        </tr>

@@ -2,8 +2,10 @@ package net.gjashop.actions;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import net.gjashop.custom.CartItem;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
@@ -69,7 +71,7 @@ public class ShoppingAction extends ActionSupport {
 
     
     public String productDetail (){
-        this.selectedProduct = 4;
+        this.selectedProduct = 1;
         
         product = dbProvider.getProduct(this.selectedProduct);
         System.out.println("productDetail called" + product.getName() );
@@ -132,6 +134,19 @@ public class ShoppingAction extends ActionSupport {
         }
         else
             return "false";
+    }
+    
+    public String getDeliveryTime (){
+        product = dbProvider.getProduct(this.selectedProduct);
+        if (product.getCount() == 0){
+            
+            Random generator = new Random( );
+            Integer randomIndex = generator.nextInt( 20 )+2;
+            return randomIndex.toString() + " dnu";
+        }
+        else {
+            return "2 dny";
+        }
     }
     
     public String getEvaluation (){
@@ -341,5 +356,58 @@ public class ShoppingAction extends ActionSupport {
     public void setProductCount(int productCount) {
         this.productCount = productCount;
     }
+
+
+    public String productFilter (){
+        System.out.println("productFilter called");  
+        return SUCCESS;
+    }
+
+    public String doFilter (){
+        System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilter);  
+        return SUCCESS;
+    }
+
+    private String sexFilter;
+    private List<String> sexList;
+    private String signFilter;
+    private List<String> signList;
+    
+    public List<String> getSexList() {
+        sexList = new ArrayList();
+        sexList.add("jedna");
+        sexList.add("dva");
+        return sexList;
+    }
+
+    public String getSexFilter() {
+        return sexFilter;
+    }
+
+    public void setSexFilter(String sexFilter) {
+        this.sexFilter = sexFilter;
+    }
+
+    public String getSignFilter() {
+        return signFilter;
+    }
+
+    public void setSignFilter(String signFilter) {
+        this.signFilter = signFilter;
+    }
+
+    public List<String> getSignList() {
+        signList = new ArrayList();
+        signList.add("tri");
+        signList.add("čtyři");
+        return signList;
+    }
+
+    public void setSignList(List<String> signList) {
+        this.signList = signList;
+    }
+
+
+    
 }
 
