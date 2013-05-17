@@ -53,11 +53,11 @@
                         <s:action name="cartDetail" namespace="/shop" executeResult="true" />
                     </s:if>
                     <s:else>
-                        <s:if test="%{#iProduct>= 0}">
+                        <s:if test="%{iProduct}">
                             <s:action name="productDetail" executeResult="true" />
                         </s:if>
                         <s:else>   
-                            <s:action name="loadProductsTable" executeResult="true" />
+                            <s:action name="loadProductsTable" namespace="/shop" executeResult="true" />
                         </s:else>
                     </s:else>
 

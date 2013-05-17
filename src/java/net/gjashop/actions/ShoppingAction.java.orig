@@ -3,20 +3,17 @@ package net.gjashop.actions;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import net.gjashop.custom.CartItem;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
-import net.gjashop.custom.ProductInTable;
 import net.gjashop.entities.Category;
 import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Rating;
 import net.gjashop.entities.Segment;
-import net.gjashop.entities.Sign;
 import net.gjashop.entities.User;
 
 /**
@@ -34,17 +31,12 @@ public class ShoppingAction extends ActionSupport {
     private Long subcat;
     
     private List<Product> productList;
-    private List<ProductInTable> productInTableList;
-
-   
     private Product product;
     private List<CartItem> cart = null;
-    private boolean cartActive = false;
     private int iProduct;
     private int productCount;
     
     private int newEvaluation;
-    private int cartTotalPrice;
     
     private String image;
     
@@ -77,7 +69,11 @@ public class ShoppingAction extends ActionSupport {
 
     
     public String productDetail (){
-        //this.iProduct = 4;
+<<<<<<< HEAD
+        this.selectedProduct = 1;
+=======
+        this.iProduct = 4;
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
         
         product = dbProvider.getProduct(this.iProduct);
         System.out.println("productDetail called" + product.getName() );
@@ -133,8 +129,18 @@ public class ShoppingAction extends ActionSupport {
         return product.getSign().getName();
     }
     
+<<<<<<< HEAD
+    public String getBLogedIn (){
+        Map session = ActionContext.getContext().getSession();
+        if (session.get("login").toString().equals("true") ){
+            return "true";
+        }
+        else
+            return "false";
+    }
+    
     public String getDeliveryTime (){
-        product = dbProvider.getProduct(this.iProduct);
+        product = dbProvider.getProduct(this.selectedProduct);
         if (product.getCount() == 0){
             
             Random generator = new Random( );
@@ -146,6 +152,8 @@ public class ShoppingAction extends ActionSupport {
         }
     }
     
+=======
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
     public String getEvaluation (){
         product = dbProvider.getProduct(this.iProduct);
         List <Rating> ratings = dbProvider.getRatingsByProduct(product);
@@ -246,38 +254,10 @@ public class ShoppingAction extends ActionSupport {
                 System.out.println("showProducts called");  
             return SUCCESS;
     }
-
-    public String getCartActive() {
-        System.out.println("/////getCartActive called");
-        if (cartActive) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-
-    public int getCartTotalPrice() {
-        return cartTotalPrice;
-    }
-    
-    public String cartDetail() {
-        System.out.println("/////////////cartDetail called");
-        Map session = ActionContext.getContext().getSession();
-        cart = (List<CartItem>) session.get("cart");
-        
-        cartTotalPrice = 0;
-        if (cart != null) {
-            for (CartItem item : cart) {
-                cartTotalPrice += item.getPrice();
-            }
-        }
-        
-        return SUCCESS;
-    }
     
     public String showCart() {
-        System.out.println("/////////////showCart called");
-        cartActive = true;
+        Map session = ActionContext.getContext().getSession();
+        cart = (List<CartItem>) session.get("cart");
         
         return SUCCESS;
     }
@@ -376,6 +356,7 @@ public class ShoppingAction extends ActionSupport {
     public void setProductCount(int productCount) {
         this.productCount = productCount;
     }
+<<<<<<< HEAD
 
 
     public String productFilter (){
@@ -384,70 +365,27 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public String doFilter (){
-        List<Sign> tempSignList= dbProvider.getAllSigns();
-        
-        //signList = new ArrayList();
-        
-        // nacteni filtru značky
-        for (Sign item : tempSignList){
-            if (item.getName().equals(signFilter)){
-                signFilterId = item.getId();   
-            }
-        }
-        
-        // nacteni filtro pohlavi
-        if (sexFilter.equals("Pánské")){
-            sexFilterId = 1;
-        }
-        else{
-            if (sexFilter.equals("Dámské")){
-                sexFilterId = 2;
-            }
-            else{
-                sexFilterId = 0;
-            }
-        }
-        
-        // nacteni filtru skladu
-
-        
-                
-                
-        System.out.println("doFilter called !!!!!!!!!!!!!!!" + signFilterId);
-        System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilterId);
-        System.out.println("doFilter called !!!!!!!!!!!!!!!" + werhauseFilter);
+        System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilter);  
         return SUCCESS;
     }
 
     private String sexFilter;
     private List<String> sexList;
     private String signFilter;
-    private int signFilterId;
-    private int sexFilterId;
     private List<String> signList;
-    private int werhauseFilter;
-
-    public int getWerhauseFilter() {
-        return werhauseFilter;
-    }
-
-    public void setWerhauseFilter(int werhauseFilter) {
-        this.werhauseFilter = werhauseFilter;
-    }
-    
     
     public List<String> getSexList() {
         sexList = new ArrayList();
-        sexList.add("Pánské");
-        sexList.add("Dámské");
+        sexList.add("jedna");
+        sexList.add("dva");
         return sexList;
     }
 
     public String getSexFilter() {
         return sexFilter;
     }
-    
-     public void setSexFilter(String sexFilter) {
+
+    public void setSexFilter(String sexFilter) {
         this.sexFilter = sexFilter;
     }
 
@@ -460,13 +398,9 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public List<String> getSignList() {
-        List<Sign> tempSignList= dbProvider.getAllSigns();
         signList = new ArrayList();
-        
-        for (Sign item : tempSignList){
-            signList.add(item.getName());
-        }
-        Collections.sort(signList);
+        signList.add("tri");
+        signList.add("čtyři");
         return signList;
     }
 
@@ -474,20 +408,43 @@ public class ShoppingAction extends ActionSupport {
         this.signList = signList;
     }
 
+
+    
+=======
+    
+    
+    
+    public String setProduct(Product prodctObject)
+    {
+        this.product       = prodctObject;
+        List<Picture> pic  = dbProvider.getPicturesByProduct(this.product);
+        if(pic != null && pic.size()>0)
+        {
+            this.image   = pic.get(0).getPath();
+        }
+        return SUCCESS;
+    }
+ 
+    
+    public String loadProduct()
+    {
+        return SUCCESS;
+    }
+       
+    public List<Product> getProductList() {
+        return this.productList;
+    }
+    public void setProductList(List<Product> products )
+    {
+        this.productList = products;
+    }
     
     public String loadProductsTable()
     {
-        System.out.println("loadProductsTable called !!!!!!!!!!!!!!!");  
+       
         if(this.subcat ==null && this.cat == null )
         {
             this.productList = dbProvider.getAllProducts();
-            this.productInTableList = new ArrayList<ProductInTable>();
-            for(Product prod : productList){
-               ProductInTable pt = new ProductInTable();
-               pt.setProduct(prod);
-               pt.setImage(this.getImageToProduct(prod));
-               this.productInTableList.add(pt);
-            }
              return SUCCESS;
         }
     
@@ -508,45 +465,15 @@ public class ShoppingAction extends ActionSupport {
                         this.productList.add(prod);
                     }
                 }
-            }
-            this.productInTableList = new ArrayList<ProductInTable>();
-            for(Product prod : productList){
-               ProductInTable pt = new ProductInTable();
-               pt.setProduct(prod);
-               pt.setImage(this.getImageToProduct(prod));
-               this.productInTableList.add(pt);
-            }
+            }            
             return SUCCESS;
         }
          
         // subcategory set
         this.productList = dbProvider.getProductsBySegment(dbProvider.getSegment(this.subcat.intValue()));
-        this.productInTableList = new ArrayList<ProductInTable>();
-            for(Product prod : productList){
-               ProductInTable pt = new ProductInTable();
-               pt.setProduct(prod);
-               pt.setImage(this.getImageToProduct(prod));
-               this.productInTableList.add(pt);
-            }
+        
         return SUCCESS;
-    }
-
-     public List<ProductInTable> getProductInTableList() {
-        return productInTableList;
-    }
-    private String getImageToProduct(Product prod){
-        List<Picture> pic  = dbProvider.getPicturesByProduct(prod);
-        if(pic != null && pic.size()>0)
-        {
-            return pic.get(0).getPath();
-        }
-        return null;
-    }
-
-    public void setProductInTableList(List<ProductInTable> productInTableList) {
-        this.productInTableList = productInTableList;
-    }
-  
-    
+    }  
+>>>>>>> c30041a67eb376a1751231a2a665eabff3d7bb60
 }
 
