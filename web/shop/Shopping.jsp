@@ -50,7 +50,7 @@
                         Breadcrumb (UCMS)
                     </div>
     
-    <s:action name="productDetail" executeResult="true" />
+    <s:action name="productDetail" namespace="/shop" executeResult="true" />
 
                 </span>
             </div>
