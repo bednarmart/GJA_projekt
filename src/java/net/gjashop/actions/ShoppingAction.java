@@ -3,6 +3,7 @@ package net.gjashop.actions;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -14,6 +15,7 @@ import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Rating;
 import net.gjashop.entities.Segment;
+import net.gjashop.entities.Sign;
 import net.gjashop.entities.User;
 
 /**
@@ -348,19 +350,62 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public String doFilter (){
-        System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilter);  
+        List<Sign> tempSignList= dbProvider.getAllSigns();
+        
+        //signList = new ArrayList();
+        
+        // nacteni filtru značky
+        for (Sign item : tempSignList){
+            if (item.getName().equals(signFilter)){
+                signFilterId = item.getId();   
+            }
+        }
+        
+        // nacteni filtro pohlavi
+        if (sexFilter.equals("Pánské")){
+            sexFilterId = 1;
+        }
+        else{
+            if (sexFilter.equals("Dámské")){
+                sexFilterId = 2;
+            }
+            else{
+                sexFilterId = 0;
+            }
+        }
+        
+        // nacteni filtru skladu
+
+        
+                
+                
+        System.out.println("doFilter called !!!!!!!!!!!!!!!" + signFilterId);
+        System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilterId);
+        System.out.println("doFilter called !!!!!!!!!!!!!!!" + werhauseFilter);
         return SUCCESS;
     }
 
     private String sexFilter;
     private List<String> sexList;
     private String signFilter;
+    private int signFilterId;
+    private int sexFilterId;
     private List<String> signList;
+    private int werhauseFilter;
+
+    public int getWerhauseFilter() {
+        return werhauseFilter;
+    }
+
+    public void setWerhauseFilter(int werhauseFilter) {
+        this.werhauseFilter = werhauseFilter;
+    }
+    
     
     public List<String> getSexList() {
         sexList = new ArrayList();
-        sexList.add("jedna");
-        sexList.add("dva");
+        sexList.add("Pánské");
+        sexList.add("Dámské");
         return sexList;
     }
 
@@ -381,9 +426,13 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public List<String> getSignList() {
+        List<Sign> tempSignList= dbProvider.getAllSigns();
         signList = new ArrayList();
-        signList.add("tri");
-        signList.add("čtyry");
+        
+        for (Sign item : tempSignList){
+            signList.add(item.getName());
+        }
+        Collections.sort(signList);
         return signList;
     }
 

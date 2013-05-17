@@ -21,8 +21,10 @@
                 list="signList"
 		name="signFilter" 
                 theme="simple"/>
-
         
+        <input type="radio" name="werhauseFilter" value="1" checked="checked"> Všechny
+        <input type="radio" name="werhauseFilter" value="2"> Pouze skladem
+                          
          <s:submit id="submit" value="Vyfiltruj" theme="simple"/>
     </s:form>            
 </div>        
