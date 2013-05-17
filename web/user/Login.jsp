@@ -17,7 +17,7 @@
             </fieldset>
             <fieldset id="actions">
                 <s:submit id="submit" value="Přihlásit"/>
-                <a href="<%= request.getContextPath()%>/user/showLostPassword.action">Zapomenuté heslo</a><a href="/user/showRegistration.action">Registrace</a>
+                <a href="<%= request.getContextPath()%>/user/showLostPassword.action">Zapomenuté heslo</a><a href="<%= request.getContextPath()%>/user/showRegistration.action">Registrace</a>
             </fieldset>
             <s:actionerror /><s:fielderror />
         </s:form>
