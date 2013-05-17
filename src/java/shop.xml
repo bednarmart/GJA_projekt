@@ -43,7 +43,9 @@
         <action name="loadProductsTable" class="net.gjashop.actions.ShoppingAction"  method="loadProductsTable">
             <result name="success">/shop/ProductsTable.jsp</result>
         </action>
-        
+        <action name="product" class="net.gjashop.actions.ShoppingAction">
+            <result name="success">/shop/Shopping.jsp</result>
+        </action>
         
     </package>
 </struts>

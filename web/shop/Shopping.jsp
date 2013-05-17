@@ -49,7 +49,7 @@
 
     <s:action name="productFilter" namespace="/shop" executeResult="true" />
     
-                    <s:if test="%{#iProduct}>= 0">
+                    <s:if test="%{iProduct}">
                         <s:action name="productDetail" namespace="/shop" executeResult="true" />
                     </s:if>
                     <s:else>   
