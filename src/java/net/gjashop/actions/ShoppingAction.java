@@ -10,6 +10,7 @@ import java.util.Random;
 import net.gjashop.custom.CartItem;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
+import net.gjashop.custom.ProductInTable;
 import net.gjashop.entities.Category;
 import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
@@ -33,6 +34,9 @@ public class ShoppingAction extends ActionSupport {
     private Long subcat;
     
     private List<Product> productList;
+    private List<ProductInTable> productInTableList;
+
+   
     private Product product;
     private List<CartItem> cart = null;
     private int iProduct;
@@ -71,7 +75,7 @@ public class ShoppingAction extends ActionSupport {
 
     
     public String productDetail (){
-        this.iProduct = 4;
+        //this.iProduct = 4;
         
         product = dbProvider.getProduct(this.iProduct);
         System.out.println("productDetail called" + product.getName() );
@@ -447,6 +451,13 @@ public class ShoppingAction extends ActionSupport {
         if(this.subcat ==null && this.cat == null )
         {
             this.productList = dbProvider.getAllProducts();
+            this.productInTableList = new ArrayList<ProductInTable>();
+            for(Product prod : productList){
+               ProductInTable pt = new ProductInTable();
+               pt.setProduct(prod);
+               pt.setImage(this.getImageToProduct(prod));
+               this.productInTableList.add(pt);
+            }
              return SUCCESS;
         }
     
@@ -467,20 +478,45 @@ public class ShoppingAction extends ActionSupport {
                         this.productList.add(prod);
                     }
                 }
-            }            
+            }
+            this.productInTableList = new ArrayList<ProductInTable>();
+            for(Product prod : productList){
+               ProductInTable pt = new ProductInTable();
+               pt.setProduct(prod);
+               pt.setImage(this.getImageToProduct(prod));
+               this.productInTableList.add(pt);
+            }
             return SUCCESS;
         }
          
         // subcategory set
         this.productList = dbProvider.getProductsBySegment(dbProvider.getSegment(this.subcat.intValue()));
-        
+        this.productInTableList = new ArrayList<ProductInTable>();
+            for(Product prod : productList){
+               ProductInTable pt = new ProductInTable();
+               pt.setProduct(prod);
+               pt.setImage(this.getImageToProduct(prod));
+               this.productInTableList.add(pt);
+            }
         return SUCCESS;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+     public List<ProductInTable> getProductInTableList() {
+        return productInTableList;
     }
-    
+    private String getImageToProduct(Product prod){
+        List<Picture> pic  = dbProvider.getPicturesByProduct(prod);
+        if(pic != null && pic.size()>0)
+        {
+            return pic.get(0).getPath();
+        }
+        return null;
+    }
+
+    public void setProductInTableList(List<ProductInTable> productInTableList) {
+        this.productInTableList = productInTableList;
+    }
+  
     
 }
 
