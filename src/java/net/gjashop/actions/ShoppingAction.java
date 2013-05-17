@@ -21,20 +21,15 @@ import net.gjashop.entities.User;
 public class ShoppingAction extends ActionSupport {
     private OperationProvider dbProvider = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
 
-    private String name;
-    
     private static final long serialVersionUID = 9149826260758390091L;
     private List<Category> categoriList;
     private List<Segment> subCategoriList;
-    private Category category;
-    private Segment subCategory; 
-//    private String categoriList;
+
+    //    private String categoriList;
     private Long cat;
     private Long subcat;
-    private int selectedProduct;
     
     private List<Product> productList;
-    private Long id;
     private Product product;
     private List<CartItem> cart = null;
     private int iProduct;
@@ -73,9 +68,9 @@ public class ShoppingAction extends ActionSupport {
 
     
     public String productDetail (){
-        this.selectedProduct = 4;
+        this.iProduct = 4;
         
-        product = dbProvider.getProduct(this.selectedProduct);
+        product = dbProvider.getProduct(this.iProduct);
         System.out.println("productDetail called" + product.getName() );
         //System.out.println("productDetail called");
         
@@ -125,21 +120,12 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public String getSign (){
-        product = dbProvider.getProduct(this.selectedProduct);
+        product = dbProvider.getProduct(this.iProduct);
         return product.getSign().getName();
     }
     
-    public String getBLogedIn (){
-        Map session = ActionContext.getContext().getSession();
-        if (session.get("login").toString().equals("true") ){
-            return "true";
-        }
-        else
-            return "false";
-    }
-    
     public String getEvaluation (){
-        product = dbProvider.getProduct(this.selectedProduct);
+        product = dbProvider.getProduct(this.iProduct);
         List <Rating> ratings = dbProvider.getRatingsByProduct(product);
         
         int ratingSum = 0;
@@ -157,7 +143,7 @@ public class ShoppingAction extends ActionSupport {
     }
     
     public String getProductSex (){
-        product = dbProvider.getProduct(this.selectedProduct);
+        product = dbProvider.getProduct(this.iProduct);
         
         if (product.getSex() == 1){
             return "Muže";
@@ -178,22 +164,12 @@ public class ShoppingAction extends ActionSupport {
         this.newEvaluation = newEvaluation;
     }
 
-    public int getSelectedProduct() {
-        return selectedProduct;
-    }
-
     public String getImage() {
         return image;
     }
 
     public Product getProduct() {
         return product;
-    }
-    
-
-    public String getname (){
-        System.out.println("getname called" );
-        return name;
     }
     
     public List<Category> getCategoriList(){
@@ -211,13 +187,6 @@ public class ShoppingAction extends ActionSupport {
     public String setSubCategoriList(List<Segment> cl){
         this.subCategoriList = cl;
         return SUCCESS;
-    }
-    public String setCategory( Category cat ){
-        this.category = cat;
-        return SUCCESS;
-    }
-    public Category getCategory(){
-       return this.category;
     }
     public void setCat(Long id){
         System.out.println("setCat called"); 
@@ -270,11 +239,15 @@ public class ShoppingAction extends ActionSupport {
         cart = (List<CartItem>) session.get("cart");
         
         product = dbProvider.getProduct(iProduct);
-        for (CartItem item : cart) {
-            if (item.getProduct().getId() == iProduct) {
-                item.setCount(item.getCount() + 1);
-                added = true;
+        if (cart != null) {
+            for (CartItem item : cart) {
+                if (item.getProduct().getId() == iProduct) {
+                    item.setCount(item.getCount() + 1);
+                    added = true;
+                }
             }
+        } else {
+            cart = new ArrayList<CartItem>();
         }
         if (! added) {
             cart.add(new CartItem(product, 1));
@@ -375,13 +348,6 @@ public class ShoppingAction extends ActionSupport {
     public void setProductList(List<Product> products )
     {
         this.productList = products;
-    }
-    
-    public long getId() {
-        return id;
-    }
-     public void setId(Long id) {
-        this.id = id;
     }
     
     public String loadProductsTable()

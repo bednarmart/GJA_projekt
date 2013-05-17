@@ -50,9 +50,9 @@
            <td>  </td>
            <td>     
                <div id="addToCartButton">
-                  <s:if test="%{bLogedIn}">
+                  <s:if test="#session.login == 'true'">
                     <s:form action="addToCart" method="POST">
-                        <s:hidden name="iProduct" value="%{selectedProduct}"  />
+                        <s:hidden name="iProduct" value="%{iProduct}"  />
                         <s:submit id="submit" value="Přidat do košíku"/>
                     </s:form>
                   </s:if>  
@@ -61,26 +61,26 @@
        </tr>       
        </table>
 
-       <s:if test="%{bLogedIn}">
-       <br /> Ohodnoťte produkt: 
-       <table>
-       <tr><td>Nelíbí</td><td>
+       <s:if test="#session.login == 'true'">
+        <br /> Ohodnoťte produkt: 
+        <table>
+        <tr><td>Nelíbí</td><td>
 
-                    <s:form action="evaluateProduct" method="POST">
-                         <input type="radio" name="newEvaluation" value="1">
-                         <input type="radio" name="newEvaluation" value="2">
-                         <input type="radio" name="newEvaluation" value="3">
-                         <input type="radio" name="newEvaluation" value="4">
-                         <input type="radio" name="newEvaluation" value="5" checked="checked">
-                         <s:hidden name="iProduct" value="%{selectedProduct}"  />
-                         <s:submit id="submit" value="Ohodnotit produkt"/>
-                    </s:form>
-               </td><td>
-               Líbí
-           </td>         
-       </tr>
-    </table>
-            </s:if>
+                     <s:form action="evaluateProduct" method="POST">
+                          <input type="radio" name="newEvaluation" value="1">
+                          <input type="radio" name="newEvaluation" value="2">
+                          <input type="radio" name="newEvaluation" value="3">
+                          <input type="radio" name="newEvaluation" value="4">
+                          <input type="radio" name="newEvaluation" value="5" checked="checked">
+                          <s:hidden name="iProduct" value="%{iProduct}"  />
+                          <s:submit id="submit" value="Ohodnotit produkt"/>
+                     </s:form>
+                </td><td>
+                Líbí
+            </td>         
+        </tr>
+        </table>
+       </s:if>
 
     
     </div>

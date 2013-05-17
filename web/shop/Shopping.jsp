@@ -50,7 +50,7 @@
                         Breadcrumb (UCMS)
                     </div>
     
-                    <s:if test="%{#selectedProduct}>= 0">
+                    <s:if test="%{#iProduct}>= 0">
                         <s:action name="productDetail" executeResult="true" />
                     </s:if>
                     <s:else>   
