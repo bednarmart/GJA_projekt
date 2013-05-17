@@ -126,7 +126,7 @@ public class ShoppingAction extends ActionSupport {
     }
     
     public String getDeliveryTime (){
-        product = dbProvider.getProduct(this.selectedProduct);
+        product = dbProvider.getProduct(this.iProduct);
         if (product.getCount() == 0){
             
             Random generator = new Random( );
@@ -367,6 +367,30 @@ public class ShoppingAction extends ActionSupport {
     public String getSexFilter() {
         return sexFilter;
     }
+    
+     public void setSexFilter(String sexFilter) {
+        this.sexFilter = sexFilter;
+    }
+
+    public String getSignFilter() {
+        return signFilter;
+    }
+
+    public void setSignFilter(String signFilter) {
+        this.signFilter = signFilter;
+    }
+
+    public List<String> getSignList() {
+        signList = new ArrayList();
+        signList.add("tri");
+        signList.add("čtyry");
+        return signList;
+    }
+
+    public void setSignList(List<String> signList) {
+        this.signList = signList;
+    }
+
     
     public String loadProductsTable()
     {
