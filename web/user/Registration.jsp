@@ -24,7 +24,8 @@
               <s:textfield name="user.name" label="Jméno" value="" />
               <s:textfield name="user.surname" label="Příjmení" value="" />
               <s:textfield name="user.login" label="Login" value="" />
-              <s:textfield name="user.pass" label="Heslo" value="" />
+              <s:password name="user.pass" type="password" label="Heslo" value=""  />
+              <s:password name="pass2" type="password" label="Heslo znovu" value=""  />
               <s:submit value="Registrace" align="center" />
             </s:form>
     
