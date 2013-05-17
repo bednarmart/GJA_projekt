@@ -10,8 +10,11 @@
         <action name="category" class="net.gjashop.actions.ShoppingAction" method="showCategory">
             <result>/shop/Shopping.jsp</result>
         </action>
+        <action name="cartDetail" class="net.gjashop.actions.ShoppingAction"  method="cartDetail">
+            <result name="success">/shop/Cart.jsp</result>
+        </action>
         <action name="showCart" class="net.gjashop.actions.ShoppingAction" method="showCart">
-            <result>/shop/Cart.jsp</result>
+            <result name="success">/shop/Shopping.jsp</result>
         </action>
         <action name="addToCart" class="net.gjashop.actions.ShoppingAction" method="addToCart">
             <result>/shop/Shopping.jsp</result>

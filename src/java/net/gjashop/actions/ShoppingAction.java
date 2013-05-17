@@ -33,10 +33,12 @@ public class ShoppingAction extends ActionSupport {
     private List<Product> productList;
     private Product product;
     private List<CartItem> cart = null;
+    private boolean cartActive = false;
     private int iProduct;
     private int productCount;
     
     private int newEvaluation;
+    private int cartTotalPrice;
     
     private String image;
     
@@ -238,10 +240,38 @@ public class ShoppingAction extends ActionSupport {
                 System.out.println("showProducts called");  
             return SUCCESS;
     }
+
+    public String getCartActive() {
+        System.out.println("/////getCartActive called");
+        if (cartActive) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    public int getCartTotalPrice() {
+        return cartTotalPrice;
+    }
     
-    public String showCart() {
+    public String cartDetail() {
+        System.out.println("/////////////cartDetail called");
         Map session = ActionContext.getContext().getSession();
         cart = (List<CartItem>) session.get("cart");
+        
+        cartTotalPrice = 0;
+        if (cart != null) {
+            for (CartItem item : cart) {
+                cartTotalPrice += item.getPrice();
+            }
+        }
+        
+        return SUCCESS;
+    }
+    
+    public String showCart() {
+        System.out.println("/////////////showCart called");
+        cartActive = true;
         
         return SUCCESS;
     }

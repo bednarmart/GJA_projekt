@@ -13,10 +13,12 @@ import net.gjashop.entities.Product;
 public class CartItem {
     private Product product;
     private int count;
+    private int price;
 
     public CartItem(Product product, int count) {
         this.product = product;
         this.count = count;
+        this.price = (int) (product.getPrice() * count);
     }
 
     public Product getProduct() {
@@ -32,7 +34,15 @@ public class CartItem {
     }
 
     public void setCount(int count) {
+        this.price = (int) (product.getPrice() * count);
         this.count = count;
     }
-    
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
