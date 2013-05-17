@@ -262,9 +262,11 @@ public class ShoppingAction extends ActionSupport {
         Map session = ActionContext.getContext().getSession();
         cart = (List<CartItem>) session.get("cart");
 
-        for (CartItem item : cart) {
-            if (item.getProduct().getId() == iProduct) {
-                cart.remove(item);
+        if (cart != null) {
+            for (CartItem item : cart) {
+                if (item.getProduct().getId() == iProduct) {
+                    cart.remove(item);
+                }
             }
         }
         
@@ -277,9 +279,11 @@ public class ShoppingAction extends ActionSupport {
         Map session = ActionContext.getContext().getSession();
         cart = (List<CartItem>) session.get("cart");
         
-        for (CartItem item : cart) {
-            if (item.getProduct().getId() == iProduct) {
-                item.setCount(productCount);
+        if (cart != null) {
+            for (CartItem item : cart) {
+                if (item.getProduct().getId() == iProduct) {
+                    item.setCount(productCount);
+                }
             }
         }
 
