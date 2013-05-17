@@ -16,6 +16,9 @@
         <action name="addToCart" class="net.gjashop.actions.ShoppingAction" method="addToCart">
             <result>/shop/Shopping.jsp</result>
         </action>
+        <action name="evaluateProduct" class="net.gjashop.actions.ShoppingAction" method="evaluateProduct">
+            <result>/shop/Shopping.jsp</result>
+        </action>
         <action name="updateInCart" class="net.gjashop.actions.ShoppingAction" method="updateInCart">
             <result>/shop/Cart.jsp</result>
         </action>
