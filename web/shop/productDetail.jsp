@@ -19,34 +19,67 @@
        <table>
        <tr>
            <td> Značka: </td>
-           <td>  </td>
+           <td> ${sign} </td>
        </tr>
        <tr>
            <td> Velikost: </td>
-           <td>  </td>
+           <td> ${product.size} </td>
        </tr>
        <tr>
            <td> Barva: </td>
-           <td>  </td>
+           <td> ${product.color} </td>
+       </tr>
+       <tr>
+       <tr>
+           <td> Určeno pro: </td>
+           <td> ${productSex} </td>
        </tr>
        <tr>
            <td> Počet kusů skladem: </td>
            <td> ${product.count} </td>
        </tr>
        <tr>
+           <td> Hodnocení: </td>
+           <td> ${Evaluation} </td>
+       </tr>
+       <tr>
            <td> <br /><B>Cena: </B></td>
            <td> <br /><B>${product.price} </B> Kč</td>
        </tr>
-        <tr><td> 
-        </td></tr>
+       <tr>
+           <td>  </td>
+           <td>     
+               <div id="addToCartButton">
+                    <s:form action="addToCart" method="POST">
+                        <s:hidden name="iProduct" value="%{selectedProduct}"  />
+                        <s:submit id="submit" value="Přidat do košíku"/>
+                    </s:form>
+               </div>
+           </td>
+       </tr>       
+       </table>
+
+       <s:if test="%{bLogedIn}">
+       <br /> Ohodnoťte produkt: 
+       <table>
+       <tr><td>Nelíbí</td><td>
+
+                    <s:form action="evaluateProduct" method="POST">
+                         <input type="radio" name="newEvaluation" value="1">
+                         <input type="radio" name="newEvaluation" value="2">
+                         <input type="radio" name="newEvaluation" value="3">
+                         <input type="radio" name="newEvaluation" value="4">
+                         <input type="radio" name="newEvaluation" value="5" checked="checked">
+                         <s:hidden name="iProduct" value="%{selectedProduct}"  />
+                         <s:submit id="submit" value="Ohodnotit produkt"/>
+                    </s:form>
+               </td><td>
+               Líbí
+           </td>         
+       </tr>
     </table>
-    
-    <div id="addToCartButton">
-        <s:form action="addToCart" method="POST">
-             <s:hidden name="iProduct" value="%{selectedProduct}"  />
-             <s:submit id="submit" value="Přidat do košíku"/>
-        </s:form>
-    </div>
+            </s:if>
+
     
     </div>
 </span>
