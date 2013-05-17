@@ -10,13 +10,43 @@
  
 <span id="ProductDetail">
 
-    <h2> jmeno </h2>
+    <h3> ${product.name} </h3>
+    <div id="detailImage">
+        <img src="<%= request.getContextPath()%>/shop/${image}" />
+        <%--<img:image src="C:\NetBeansWork\GJA_projekt\pic\dress\evening\alinePrincesOneShoulder.jpg" resize="true" height="25" refresh="false"/> --%>
+    </div>
+    <div id="detailProperties">
        <table>
-       <tr><td>
-<%--         <img:image src="%{image}" resize="true" height="25" refresh="false"/> --%>
-        </td></tr>
+       <tr>
+           <td> Značka: </td>
+           <td>  </td>
+       </tr>
+       <tr>
+           <td> Velikost: </td>
+           <td>  </td>
+       </tr>
+       <tr>
+           <td> Barva: </td>
+           <td>  </td>
+       </tr>
+       <tr>
+           <td> Počet kusů skladem: </td>
+           <td> ${product.count} </td>
+       </tr>
+       <tr>
+           <td> <br /><B>Cena: </B></td>
+           <td> <br /><B>${product.price} </B> Kč</td>
+       </tr>
         <tr><td> 
-          <text >name: </text> <s:property value="name"/>
         </td></tr>
     </table>
+    
+    <div id="addToCartButton">
+        <s:form action="addToCart" method="POST">
+             <s:hidden name="iProduct" value="%{selectedProduct}"  />
+             <s:submit id="submit" value="Přidat do košíku"/>
+        </s:form>
+    </div>
+    
+    </div>
 </span>
