@@ -12,4 +12,4 @@ nbproject/project.properties
 src/java/hibernate.cfg.xml
 /nbproject/
 .gitignore
-nbproject/project.properties
+src/java/hibernate.cfg.xml
