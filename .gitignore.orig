@@ -1,0 +1,23 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/build/
+/nbproject/private/
+src/java/hibernate.cfg.xml
+nbproject/ant-deploy.xml
+nbproject/project.properties
+src/java/hibernate.cfg.xml
+/nbproject/
+<<<<<<< HEAD
+src/java/hibernate.cfg.xml
+.gitignore
+web/shop/Categories.jsp.orig
+.gitignore
+src/java/hibernate.cfg.xml
+=======
+.gitignore
+nbproject/project.properties
+>>>>>>> c18c2ff22618ed75319b86ea45df0f45daebfe21
