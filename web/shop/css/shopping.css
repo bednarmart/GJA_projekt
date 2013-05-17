@@ -71,9 +71,30 @@ body
     position: relative;
     float: left;
     border: 1px solid black;
-    height: 200;
     border-radius: 5;
+    width: 640;
     
+}
+
+#detailImage
+{
+    width: 300;
+    position: relative;
+    float: left;
+    
+}
+
+#detailProperties{
+    width: 340;
+    position: relative;
+    float: left;
+}
+
+
+#addToCartButton{
+    position: relative;
+    float: left;
+    padding-left: 40;
 }
 
 #product
