@@ -19,7 +19,6 @@
                 </span>
             </div>
             <s:actionerror/>
-            
             <s:form action="createUser" >
               <s:textfield name="user.name" label="Jméno" value="" />
               <s:textfield name="user.surname" label="Příjmení" value="" />
@@ -28,6 +27,7 @@
               <s:password name="pass2" type="password" label="Heslo znovu" value=""  />
               <s:submit value="Registrace" align="center" />
             </s:form>
+            <a href="<%= request.getContextPath()%>/user/showLogin.action">Zpět na login</a>
     
      <%-- Pata --%>
             <div id="footer">
