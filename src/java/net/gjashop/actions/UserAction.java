@@ -76,6 +76,51 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
     }
     
+    public String createUser () throws Exception
+    {
+        boolean errIn = false;
+        if (isInvalid(user.getSurname())) {
+            addActionError("Chybí příjmení");
+            errIn = true;
+        }
+        if (isInvalid(user.getName())) {
+            addActionError("Chybí jméno");
+            errIn = true;
+        }
+        if (isInvalid(user.getLogin())) {
+            addActionError("Chybí login");
+            errIn = true;
+        }
+        if (isInvalid(user.getPass())) {
+            addActionError("Chybí heslo");
+            errIn = true;
+        }
+        if (errIn) return INPUT;
+        
+        try{
+            dbProvider.getSession().clear();
+            dbProvider.getSession().beginTransaction();
+            
+            dbProvider.createUser(user.getName(),
+                                  user.getSurname(),
+                                  user.getLogin(),
+                                  user.getPass(),
+                                  0);
+            dbProvider.getSession().getTransaction().commit();
+        }
+        
+        catch(Exception e){
+           System.out.println(e);    
+           addActionError("Problem s databazi");
+           return INPUT;
+        }
+        
+        this.login = user.getLogin();
+        this.pass = user.getPass();
+        
+        return this.doLogin();
+    }
+    
     private boolean isInvalid(String value) {
         return (value == null || value.length() == 0);
     }
