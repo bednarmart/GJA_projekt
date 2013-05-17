@@ -11,8 +11,5 @@ nbproject/ant-deploy.xml
 nbproject/project.properties
 src/java/hibernate.cfg.xml
 /nbproject/
-src/java/hibernate.cfg.xml
-.gitignore
-web/shop/Categories.jsp.orig
 .gitignore
 src/java/hibernate.cfg.xml
