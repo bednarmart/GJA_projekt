@@ -79,9 +79,14 @@ body
 #detailImage
 {
     width: 300;
+    
     position: relative;
     float: left;
-    
+    padding-bottom: 10;
+}
+
+#detailImage img{
+    width: 300;
 }
 
 #detailProperties{
@@ -94,7 +99,7 @@ body
 #addToCartButton{
     position: relative;
     float: left;
-    padding-left: 40;
+    padding-left: 0;
 }
 
 #product
