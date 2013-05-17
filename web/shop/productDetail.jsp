@@ -50,10 +50,12 @@
            <td>  </td>
            <td>     
                <div id="addToCartButton">
+                  <s:if test="%{bLogedIn}">
                     <s:form action="addToCart" method="POST">
                         <s:hidden name="iProduct" value="%{selectedProduct}"  />
                         <s:submit id="submit" value="Přidat do košíku"/>
                     </s:form>
+                  </s:if>  
                </div>
            </td>
        </tr>       
