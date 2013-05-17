@@ -10,7 +10,9 @@ import net.gjashop.custom.OperationProvider;
 import net.gjashop.entities.Category;
 import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
+import net.gjashop.entities.Rating;
 import net.gjashop.entities.Segment;
+import net.gjashop.entities.User;
 
 /**
  * <code>Správa akcí při nakupování</code>
@@ -28,12 +30,14 @@ public class ShoppingAction extends ActionSupport {
 //    private String categoriList;
     private Long cat;
     private Long subcat;
-    private Long selectedProduct;
+    private int selectedProduct;
     
     private Product product;
     private List<CartItem> cart = null;
     private int iProduct;
     private int productCount;
+    
+    private int newEvaluation;
     
     private String image;
     
@@ -65,9 +69,9 @@ public class ShoppingAction extends ActionSupport {
 
     
     public String productDetail (){
-        this.selectedProduct = Long.valueOf(1);
+        this.selectedProduct = 4;
         
-        product = dbProvider.getProduct(this.selectedProduct.intValue());
+        product = dbProvider.getProduct(this.selectedProduct);
         System.out.println("productDetail called" + product.getName() );
         //System.out.println("productDetail called");
         
@@ -79,8 +83,98 @@ public class ShoppingAction extends ActionSupport {
         System.out.println("productDetail called cesta: " + this.image );
         return SUCCESS;
     }
+    
+    public String evaluateProduct (){
+        dbProvider.getSession().clear();
+        
+        Map session = ActionContext.getContext().getSession();
+        product = dbProvider.getProduct(this.iProduct);
+        Boolean founded = false;
+        
+        List<Rating> usersRating = dbProvider.getRatingsByUser((User) session.get("user"));
+        Rating updateRating = null;
+        for (Rating item : usersRating) {
+            if (item.getProduct().getId() == iProduct) {
+                founded = true;
+                updateRating = item;
+                break;
+            }
+        }
+        dbProvider.getSession().clear();
+        // update
+        if (founded == true){
+            System.out.println("evaluateProduct called: update");
+            dbProvider.getSession().beginTransaction();   
+            updateRating.setValue(newEvaluation);
+            dbProvider.update(updateRating);
+            dbProvider.getSession().beginTransaction().commit();                
+        }
+        // vkladani
+        else {
+        System.out.println("evaluateProduct called: " + newEvaluation);
+            dbProvider.getSession().beginTransaction();   
+            dbProvider.createRating((User) session.get("user"), product, newEvaluation);
+            dbProvider.getSession().beginTransaction().commit();                
+        }
+        
+        return SUCCESS;
+    }
 
-    public Long getSelectedProduct() {
+    public String getSign (){
+        product = dbProvider.getProduct(this.selectedProduct);
+        return product.getSign().getName();
+    }
+    
+    public String getBLogedIn (){
+        Map session = ActionContext.getContext().getSession();
+        if (session.get("login").toString().equals("true") ){
+            return "true";
+        }
+        else
+            return "false";
+    }
+    
+    public String getEvaluation (){
+        product = dbProvider.getProduct(this.selectedProduct);
+        List <Rating> ratings = dbProvider.getRatingsByProduct(product);
+        
+        int ratingSum = 0;
+        for (Rating item : ratings) {
+            ratingSum += item.getValue();
+        }
+
+        if (ratingSum == 0){
+            return "Nehodnoceno";
+        }
+        
+        Double result = (double)Math.round((double)ratingSum/ratings.size()*10)/10;
+        
+        return (result.toString());
+    }
+    
+    public String getProductSex (){
+        product = dbProvider.getProduct(this.selectedProduct);
+        
+        if (product.getSex() == 1){
+            return "Muže";
+        }
+        else if (product.getSex() == 2){
+            return "Ženy";
+        }
+        else {
+            return "-";
+        }
+    }
+    
+    public int getNewEvaluation() {
+        return newEvaluation;
+    }
+
+    public void setNewEvaluation(int newEvaluation) {
+        this.newEvaluation = newEvaluation;
+    }
+
+    public int getSelectedProduct() {
         return selectedProduct;
     }
 
