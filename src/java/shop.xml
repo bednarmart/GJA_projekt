@@ -49,6 +49,24 @@
         <action name="product" class="net.gjashop.actions.ShoppingAction">
             <result name="success">/shop/Shopping.jsp</result>
         </action>
+        <action name="loadCardData" class="net.gjashop.actions.ShoppingAction" method="loadCreditCardData">
+            <result name="success">/shop/ThankForPaiment.jsp</result>
+        </action>
+        <action name="cardPaiment" class="net.gjashop.actions.ShoppingAction">
+            <result name="success">/shop/CardPaiment.jsp</result>
+        </action>
+        <action name="header" class="net.gjashop.actions.ShoppingAction" method="loadCreditCardData">
+            <result> /shop/Header.jsp</result>
+        </action>
+        <action name="footer" class="net.gjashop.actions.ShoppingAction" method="loadCreditCardData">
+            <result> /shop/Footer.jsp</result>
+        </action>
+        <action name="index" class="net.gjashop.actions.ShoppingAction">
+            <result>/shop/Shopping.jsp</result>
+        </action>
+        <action name="showBill" class="net.gjashop.actions.ShoppingAction">
+            <result>/shop/Bill.jsp</result>
+        </action>
         
         <action name="showCreateOrder" class="net.gjashop.actions.ShoppingAction">
             <result name="success">/shop/Order.jsp</result>
