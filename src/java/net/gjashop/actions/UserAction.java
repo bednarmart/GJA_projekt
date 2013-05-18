@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
+import net.gjashop.entities.Address;
 import net.gjashop.entities.User;
 
 /**
@@ -17,6 +18,9 @@ public class UserAction extends ActionSupport {
     private String login;
     private String pass;
     private User user;
+    private Address address;
+    private List<Address> addressList;
+    private Integer addressIdToDelete;
     private OperationProvider dbProvider  = new OperationProvider(HibernateUtil.getSessionFactory().openSession());
     
     @Override
@@ -121,6 +125,15 @@ public class UserAction extends ActionSupport {
         return this.doLogin();
     }
     
+    public String deleteUserAddress()
+    {
+      return SUCCESS;
+    }
+    public String addUserAdress()
+    {
+      return SUCCESS;
+    }
+    
     private boolean isInvalid(String value) {
         return (value == null || value.length() == 0);
     }
@@ -150,6 +163,30 @@ public class UserAction extends ActionSupport {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
+    }
+
+    public Integer getAddressIdToDelete() {
+        return addressIdToDelete;
+    }
+
+    public void setAddressIdToDelete(Integer addressIdToDelete) {
+        this.addressIdToDelete = addressIdToDelete;
+    }
+        
 }
 
