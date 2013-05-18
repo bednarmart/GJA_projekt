@@ -69,13 +69,12 @@
         <br /> Ohodnoťte produkt: 
         <table>
         <tr><td>Nelíbí</td><td>
-
                      <s:form action="evaluateProduct" method="POST">
-                          <input type="radio" name="newEvaluation" value="1">
-                          <input type="radio" name="newEvaluation" value="2">
-                          <input type="radio" name="newEvaluation" value="3">
-                          <input type="radio" name="newEvaluation" value="4">
-                          <input type="radio" name="newEvaluation" value="5" checked="checked">
+                          <input type="radio" name="newEvaluation" value="1" <s:if test="evaluated == 0"> checked="checked" </s:if>>
+                          <input type="radio" name="newEvaluation" value="2" <s:if test="evaluated == 1"> checked="checked" </s:if>>
+                          <input type="radio" name="newEvaluation" value="3" <s:if test="evaluated == 2"> checked="checked" </s:if>>
+                          <input type="radio" name="newEvaluation" value="4" <s:if test="evaluated == 3"> checked="checked" </s:if>>
+                          <input type="radio" name="newEvaluation" value="5" <s:if test="evaluated == 4"> checked="checked" </s:if> >
                           <s:hidden name="iProduct" value="%{iProduct}"  />
                           <s:submit id="submit" value="Ohodnotit produkt"/>
                      </s:form>

@@ -59,6 +59,9 @@ public class Product {
 	@Column(name="price")
 	private double price;
 	
+	@Column(name="deliverytime")
+	private java.lang.String deliveryTime;
+	
 	@Column(name="count")
 	private int count;
 	
@@ -72,12 +75,13 @@ public class Product {
 	/**
 	 * Constructor using all read-only and all non-nullable properties.
 	 */
-	public Product(java.lang.String name, Segment segment, Sign sign, double price, int count) {
+	public Product(java.lang.String name, Segment segment, Sign sign, double price, java.lang.String deliveryTime, int count) {
 		super();
 		this.name = name;
 		this.segment = segment;
 		this.sign = sign;
 		this.price = price;
+		this.deliveryTime = deliveryTime;
 		this.count = count;
 	}
 	
@@ -194,6 +198,20 @@ public class Product {
 	 */
 	public void setPrice(double newValue) {
 		this.price = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'deliveryTime'.
+	 */
+	public java.lang.String getDeliveryTime() {
+		return deliveryTime;
+	}
+	
+	/**
+	 * Sets the value of property 'deliveryTime'.
+	 */
+	public void setDeliveryTime(java.lang.String newValue) {
+		this.deliveryTime = newValue;
 	}
 	
 	/**

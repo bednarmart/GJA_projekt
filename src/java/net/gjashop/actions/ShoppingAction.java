@@ -54,6 +54,8 @@ public class ShoppingAction extends ActionSupport {
     private ClientOrder       order;
     private List<Delivery>    deliveryList;
     private List<PaymentType> paymentTypeList;
+    private String[] cartProductCount;
+    
     private List<String>      deliveryStringList;
     private List<String>      paymentStringTypeList;
     private String            delivery;
@@ -145,11 +147,9 @@ public class ShoppingAction extends ActionSupport {
     
     public String getDeliveryTime (){
         product = dbProvider.getProduct(this.iProduct);
-        if (product.getCount() == 0){
+        if (product.getCount() <= 0){
             
-            Random generator = new Random( );
-            Integer randomIndex = generator.nextInt( 20 )+2;
-            return randomIndex.toString() + " dnu";
+            return product.getDeliveryTime().toString() + " dnu";
         }
         else {
             return "2 dny";
@@ -173,6 +173,30 @@ public class ShoppingAction extends ActionSupport {
         
         return (result.toString());
     }
+    
+    public String getEvaluated (){
+        Map session = ActionContext.getContext().getSession();
+        
+        User user;
+        user = (User) session.get("user");
+
+        List <Rating> ratings = dbProvider.getRatingsByUser(user);
+        int rated = -1;
+        for (Rating item : ratings) {
+            if (item.getProduct().getId() == iProduct){
+                rated = item.getValue();
+                break;
+            }
+        }
+
+        if (rated > -1){
+            return Integer.toString(rated-1);
+        }
+        else{
+            return "4";
+        }
+    }
+            
     
     public String getProductSex (){
         product = dbProvider.getProduct(this.iProduct);
@@ -242,7 +266,7 @@ public class ShoppingAction extends ActionSupport {
         System.out.println(this.cat );
         System.out.println(this.subcat );
     }
-    
+        
     public String getProducts(){
         List<Picture> pic  = dbProvider.getPicturesByProduct(this.product);
         if(pic != null && pic.size()>0)
@@ -266,14 +290,34 @@ public class ShoppingAction extends ActionSupport {
         }
     }
 
+    public List<CartItem> getCart() {
+        System.out.println("/////getCart called");
+        
+        if (cart != null) {
+            return cart;
+        } else {
+            Map session = ActionContext.getContext().getSession();
+            List<CartItem> sesCart = (List<CartItem>) session.get("cart");
+            return sesCart;
+        }
+    }
+
     public int getCartTotalPrice() {
         return cartTotalPrice;
     }
     
-    public String cartDetail() {
-        System.out.println("/////////////cartDetail called");
+    public String getCartItemsCount() {
         Map session = ActionContext.getContext().getSession();
         cart = (List<CartItem>) session.get("cart");
+        return String.valueOf(cart.size());
+    }
+    
+    public String cartDetail() {
+        System.out.println("/////////////cartDetail called");
+        if (cart == null) {
+            Map session = ActionContext.getContext().getSession();
+            cart = (List<CartItem>) session.get("cart");
+        }
         
         cartTotalPrice = 0;
         if (cart != null) {
@@ -318,36 +362,90 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public String removeFromCart() {
-        System.out.println("removeFromCart called");  
+        System.out.println("removeFromCart called");
         Map session = ActionContext.getContext().getSession();
         cart = (List<CartItem>) session.get("cart");
+        List<CartItem> newCart = new ArrayList<CartItem>();
 
         if (cart != null) {
             for (CartItem item : cart) {
-                if (item.getProduct().getId() == iProduct) {
-                    cart.remove(item);
-                }
+                if (item.getProduct().getId() != iProduct) {
+                    newCart.add(item);
+                } 
             }
         }
         
         session.remove("cart");
+        if (newCart != null) {
+            session.put("cart", newCart);
+        }
+        cartActive = true;
         return SUCCESS;
     }     
     
     public String updateInCart(){
-        System.out.println("updateInCart called");  
+
+        System.out.println("updateInCart called - start");
+
         Map session = ActionContext.getContext().getSession();
+
         cart = (List<CartItem>) session.get("cart");
         
         if (cart != null) {
             for (CartItem item : cart) {
-                if (item.getProduct().getId() == iProduct) {
-                    item.setCount(productCount);
-                }
+                System.out.println("item - prodname:" + item.getProduct().getName());
+                System.out.println("item - count:" + item.getCount());
             }
         }
+        System.out.println("updateInCart called - end");
+        /*
+        session.remove("cart");
+        if (cart != null) {
+            session.put("cart", cart);
+        }
+        */
+        cartActive = true;
 
         return SUCCESS;
+    }
+
+    public void setCart(List<CartItem> cart) {
+        System.out.println("setCart called");
+       
+        /* pokus  - start */
+        Map session = ActionContext.getContext().getSession();
+        List<CartItem> sesCart = (List<CartItem>) session.get("cart");
+        session.remove("cart");
+        if (cart != null) {
+            System.out.println("setCart - nastavuji!!!!!!!!!!!!!");
+            for (CartItem item : cart) {
+                System.out.println("item - prodname:" + item.getProduct().getName());
+                System.out.println("item - count:" + item.getCount());
+            }
+            session.put("cart", cart);
+        } else {
+            session.put("cart", sesCart);
+            cart = sesCart;
+        }
+        /* pokus  - end */
+        
+        if (cart != null) {
+            for (CartItem item : cart) {
+                System.out.println("item - prodname:" + item.getProduct().getName());
+                System.out.println("item - count:" + item.getCount());
+            }
+        }
+        System.out.println("setCart called - end");
+
+        
+        this.cart = cart;
+    }
+    
+    
+    
+    public void setCartProductCount(String[] cartProductCount) {
+        System.out.println("setCartProductCount called");  
+        this.cartProductCount = cartProductCount;
     }
 
     public String eraseCart(){
@@ -419,11 +517,12 @@ public class ShoppingAction extends ActionSupport {
         List<Sign> tempSignList= dbProvider.getAllSigns();
         
         //signList = new ArrayList();
-        
+        String signName = null;
         // nacteni filtru značky
         for (Sign item : tempSignList){
             if (item.getName().equals(signFilter)){
-                signFilterId = item.getId();   
+                signFilterId = item.getId();  
+                signName = item.getName();
             }
         }
         
@@ -440,11 +539,12 @@ public class ShoppingAction extends ActionSupport {
             }
         }
         
-        // nacteni filtru skladu
-
+        Map session = ActionContext.getContext().getSession();
+        session.put("signFilterId", signFilterId);
+        session.put("signFilterName", signName);
+        session.put("sexFilterId", sexFilterId);
+        session.put("werhauseFilter", werhauseFilter);
         
-                
-                
         System.out.println("doFilter called !!!!!!!!!!!!!!!" + signFilterId);
         System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilterId);
         System.out.println("doFilter called !!!!!!!!!!!!!!!" + werhauseFilter);
@@ -452,7 +552,6 @@ public class ShoppingAction extends ActionSupport {
     }
 
     private String sexFilter;
-    private List<String> sexList;
     private String signFilter;
     private int signFilterId;
     private int sexFilterId;
@@ -467,14 +566,6 @@ public class ShoppingAction extends ActionSupport {
         this.werhauseFilter = werhauseFilter;
     }
     
-    
-    public List<String> getSexList() {
-        sexList = new ArrayList();
-        sexList.add("Pánské");
-        sexList.add("Dámské");
-        return sexList;
-    }
-
     public String getSexFilter() {
         return sexFilter;
     }
@@ -513,6 +604,8 @@ public class ShoppingAction extends ActionSupport {
         if(this.subcat ==null && this.cat == null )
         {
             this.productList = dbProvider.getAllProducts();
+            doProductFiltering ();
+            
             this.productInTableList = new ArrayList<ProductInTable>();
             for(Product prod : productList){
                ProductInTable pt = new ProductInTable();
@@ -541,6 +634,7 @@ public class ShoppingAction extends ActionSupport {
                     }
                 }
             }
+            doProductFiltering ();
             this.productInTableList = new ArrayList<ProductInTable>();
             for(Product prod : productList){
                ProductInTable pt = new ProductInTable();
@@ -553,6 +647,7 @@ public class ShoppingAction extends ActionSupport {
          
         // subcategory set
         this.productList = dbProvider.getProductsBySegment(dbProvider.getSegment(this.subcat.intValue()));
+        doProductFiltering ();
         this.productInTableList = new ArrayList<ProductInTable>();
             for(Product prod : productList){
                ProductInTable pt = new ProductInTable();
@@ -562,6 +657,49 @@ public class ShoppingAction extends ActionSupport {
             }
         return SUCCESS;
     }
+    
+/*    
+    private int signFilterId;
+    private int sexFilterId;
+    private int werhauseFilter;
+ */   
+    
+    private void doProductFiltering (){
+        System.out.println("doProductFiltering called !!!!!!!!!!!!!!!" + signFilterId);
+        System.out.println("doProductFiltering called !!!!!!!!!!!!!!!" + sexFilterId);
+        System.out.println("doProductFiltering called !!!!!!!!!!!!!!!" + werhauseFilter); 
+        Map session = ActionContext.getContext().getSession();
+        
+        
+        
+       List<Product> itemToRemove = new ArrayList<Product>();
+       for(Product prod : this.productList){
+           //filtrování podle pohlaví
+          if (session.get("sexFilterId") != null) {
+                 if (Integer.parseInt(session.get("sexFilterId").toString()) != 0 && prod.getSex() != 0){
+                     System.out.println("!!!!!!!!!!!!!!!" + prod.getSex() + ":::" + Integer.parseInt(session.get("sexFilterId").toString())); 
+                     if (Integer.parseInt(session.get("sexFilterId").toString()) != prod.getSex()){
+                          itemToRemove.add(prod);
+                     }
+                 }
+           }
+           // filtrování podle značky
+           if (session.get("signFilterId") != null) {
+               if (prod.getSign().getId() != Integer.parseInt(session.get("signFilterId").toString()) && Integer.parseInt(session.get("signFilterId").toString()) != 0){
+                   itemToRemove.add(prod);
+               }
+           }
+           
+           // filtrování podle skladu
+           if (session.get("werhauseFilter") != null) {
+                if (Integer.parseInt(session.get("werhauseFilter").toString()) == 2 && prod.getCount() == 0){
+                    itemToRemove.add(prod);
+                }
+           }
+       }
+       this.productList.removeAll(itemToRemove);
+    }
+    
 
      public List<ProductInTable> getProductInTableList() {
         return productInTableList;
@@ -652,7 +790,24 @@ public class ShoppingAction extends ActionSupport {
     }
     
 
+
+    public int getSignFilterId() {
+        return signFilterId;
+    }
+
+    public void setSignFilterId(int signFilterId) {
+        this.signFilterId = signFilterId;
+    }
+
+    public int getSexFilterId() {
+        return sexFilterId;
+    }
+
+    public void setSexFilterId(int sexFilterId) {
+        this.sexFilterId = sexFilterId;
+    }
   
+    
     
 }
 

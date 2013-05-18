@@ -23,6 +23,7 @@ public class UserDAO {
 	public final static String FIELD__SURNAME = getField(User.class, "surname");
 	public final static String FIELD__LOGIN = getField(User.class, "login");
 	public final static String FIELD__PASS = getField(User.class, "pass");
+	public final static String FIELD__EMAIL = getField(User.class, "email");
 	public final static String FIELD__PRIVILEGY = getField(User.class, "privilegy");
 	
 	/**
@@ -62,6 +63,7 @@ public class UserDAO {
 		disjunction.add(Restrictions.like(FIELD__SURNAME, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__LOGIN, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__PASS, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__EMAIL, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")

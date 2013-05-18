@@ -54,6 +54,15 @@ public class ClientOrder {
 	@Column(name="date")
 	private java.util.Date date;
 	
+	@Column(name="deliverycity")
+	private java.lang.String deliveryCity;
+	
+	@Column(name="deliverystreet")
+	private java.lang.String deliveryStreet;
+	
+	@Column(name="deliveryzip")
+	private java.lang.String deliveryZip;
+	
 	/**
 	 * Default constructor. Only used by Hibernate.
 	 */
@@ -64,12 +73,15 @@ public class ClientOrder {
 	/**
 	 * Constructor using all read-only and all non-nullable properties.
 	 */
-	public ClientOrder(Delivery delivery, PaymentType paymentType, User user, java.util.Date date) {
+	public ClientOrder(Delivery delivery, PaymentType paymentType, User user, java.util.Date date, java.lang.String deliveryCity, java.lang.String deliveryStreet, java.lang.String deliveryZip) {
 		super();
 		this.delivery = delivery;
 		this.paymentType = paymentType;
 		this.user = user;
 		this.date = date;
+		this.deliveryCity = deliveryCity;
+		this.deliveryStreet = deliveryStreet;
+		this.deliveryZip = deliveryZip;
 	}
 	
 	/**
@@ -143,6 +155,48 @@ public class ClientOrder {
 	 */
 	public void setDate(java.util.Date newValue) {
 		this.date = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'deliveryCity'.
+	 */
+	public java.lang.String getDeliveryCity() {
+		return deliveryCity;
+	}
+	
+	/**
+	 * Sets the value of property 'deliveryCity'.
+	 */
+	public void setDeliveryCity(java.lang.String newValue) {
+		this.deliveryCity = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'deliveryStreet'.
+	 */
+	public java.lang.String getDeliveryStreet() {
+		return deliveryStreet;
+	}
+	
+	/**
+	 * Sets the value of property 'deliveryStreet'.
+	 */
+	public void setDeliveryStreet(java.lang.String newValue) {
+		this.deliveryStreet = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'deliveryZip'.
+	 */
+	public java.lang.String getDeliveryZip() {
+		return deliveryZip;
+	}
+	
+	/**
+	 * Sets the value of property 'deliveryZip'.
+	 */
+	public void setDeliveryZip(java.lang.String newValue) {
+		this.deliveryZip = newValue;
 	}
 	
 }

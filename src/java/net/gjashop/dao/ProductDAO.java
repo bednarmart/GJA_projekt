@@ -28,13 +28,14 @@ public class ProductDAO {
 	public final static String FIELD__SIZE = getField(Product.class, "size");
 	public final static String FIELD__COLOR = getField(Product.class, "color");
 	public final static String FIELD__PRICE = getField(Product.class, "price");
+	public final static String FIELD__DELIVERYTIME = getField(Product.class, "deliveryTime");
 	public final static String FIELD__COUNT = getField(Product.class, "count");
 	
 	/**
 	 * Creates a Product using all read-only and all non-null properties.
 	 */
-	public Product create(Session session, java.lang.String name, Segment segment, Sign sign, double price, int count) {
-		Product newEntity = new Product(name, segment, sign, price, count);
+	public Product create(Session session, java.lang.String name, Segment segment, Sign sign, double price, java.lang.String deliveryTime, int count) {
+		Product newEntity = new Product(name, segment, sign, price, deliveryTime, count);
 		session.save(newEntity);
 		return newEntity;
 	}
@@ -88,6 +89,7 @@ public class ProductDAO {
 		disjunction.add(Restrictions.like(FIELD__NAME, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__SIZE, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__COLOR, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYTIME, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")
@@ -106,6 +108,7 @@ public class ProductDAO {
 		disjunction.add(Restrictions.like(FIELD__NAME, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__SIZE, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__COLOR, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYTIME, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")
@@ -124,6 +127,7 @@ public class ProductDAO {
 		disjunction.add(Restrictions.like(FIELD__NAME, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__SIZE, _searchString.trim(), MatchMode.ANYWHERE));
 		disjunction.add(Restrictions.like(FIELD__COLOR, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYTIME, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")

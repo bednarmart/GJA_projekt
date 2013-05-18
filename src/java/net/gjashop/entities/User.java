@@ -45,6 +45,9 @@ public class User {
 	@Column(name="pass")
 	private java.lang.String pass;
 	
+	@Column(name="email")
+	private java.lang.String email;
+	
 	@Column(name="privilegy")
 	private int privilegy;
 	
@@ -138,6 +141,20 @@ public class User {
 	 */
 	public void setPass(java.lang.String newValue) {
 		this.pass = newValue;
+	}
+	
+	/**
+	 * Returns the value of property 'email'.
+	 */
+	public java.lang.String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * Sets the value of property 'email'.
+	 */
+	public void setEmail(java.lang.String newValue) {
+		this.email = newValue;
 	}
 	
 	/**

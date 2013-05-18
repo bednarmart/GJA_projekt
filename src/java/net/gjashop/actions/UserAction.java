@@ -17,6 +17,7 @@ public class UserAction extends ActionSupport {
 
     private String login;
     private String pass;
+    private String pass2;
     private User user;
     private Address address;
     private List<Address> addressList;
@@ -99,6 +100,11 @@ public class UserAction extends ActionSupport {
             addActionError("Chybí heslo");
             errIn = true;
         }
+        if (! user.getPass().equals(pass2)) {
+            addActionError("Hesla se neshodují");
+            errIn = true;
+        }
+        
         if (errIn) return INPUT;
         
         try{
@@ -162,6 +168,13 @@ public class UserAction extends ActionSupport {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPass2() {
+        return pass2;
+    }
+    public void setPass2(String pass2) {
+        this.pass2 = pass2;
     }
 
     public Address getAddress() {

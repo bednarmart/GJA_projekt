@@ -208,8 +208,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** 
 	 * Creates an instance of type ClientOrder using all read-only and all non-null properties.
 	 */
-	public ClientOrder createClientOrder(Delivery delivery, PaymentType paymentType, User user, java.util.Date date) {
-		return clientOrderDAO.create(session, delivery, paymentType, user, date);
+	public ClientOrder createClientOrder(Delivery delivery, PaymentType paymentType, User user, java.util.Date date, java.lang.String deliveryCity, java.lang.String deliveryStreet, java.lang.String deliveryZip) {
+		return clientOrderDAO.create(session, delivery, paymentType, user, date, deliveryCity, deliveryStreet, deliveryZip);
 	}
 	
 	/**
@@ -414,8 +414,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** 
 	 * Creates an instance of type Product using all read-only and all non-null properties.
 	 */
-	public Product createProduct(java.lang.String name, Segment segment, Sign sign, double price, int count) {
-		return productDAO.create(session, name, segment, sign, price, count);
+	public Product createProduct(java.lang.String name, Segment segment, Sign sign, double price, java.lang.String deliveryTime, int count) {
+		return productDAO.create(session, name, segment, sign, price, deliveryTime, count);
 	}
 	
 	/**
