@@ -11,9 +11,13 @@ nbproject/ant-deploy.xml
 nbproject/project.properties
 src/java/hibernate.cfg.xml
 /nbproject/
-.gitignore
 <<<<<<< HEAD
-nbproject/project.properties
-=======
 src/java/hibernate.cfg.xml
->>>>>>> d20bf4628d683a42231b75ceb810be0068e45c50
+.gitignore
+web/shop/Categories.jsp.orig
+.gitignore
+src/java/hibernate.cfg.xml
+=======
+.gitignore
+nbproject/project.properties
+>>>>>>> c18c2ff22618ed75319b86ea45df0f45daebfe21

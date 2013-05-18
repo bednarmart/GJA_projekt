@@ -24,7 +24,11 @@
             <result>/user/LostPassword.jsp</result>
         </action>
         <action name="showRegistration" class="net.gjashop.actions.UserAction">
-            <result>/user/LostRegistration.jsp</result>
+            <result>/user/Registration.jsp</result>
+        </action>
+        <action name="createUser" class="net.gjashop.actions.UserAction" method="createUser">
+            <result name="success">/shop/Shopping.jsp</result>
+            <result name="input">/user/Registration.jsp</result>
         </action>       
     </package>
 </struts>

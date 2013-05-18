@@ -26,7 +26,7 @@
                     </s:else>
                 </span>
                 <span class="head_menu">
-                    <a href="<%= request.getContextPath()%>/shop/showCart.action">Košík</a>
+                    <a href="<%= request.getContextPath()%>/shop/showCart.action">Košík <s:if test="%{cartItemsCount > 0}">(${cartItemsCount})</s:if></a>
                 </span>
             </div>
 
@@ -47,13 +47,18 @@
                 <span id="content">
                     <%-- AJAX: onload, onclick podkategorie --%>
 
-    <s:action name="productFilter" namespace="/shop" executeResult="true" />
+                    <s:action name="productFilter" namespace="/shop" executeResult="true" />
     
-                    <s:if test="%{#iProduct}>= 0">
-                        <s:action name="productDetail" namespace="/shop" executeResult="true" />
+                    <s:if test="%{cartActive == 'true'}">
+                        <s:action name="cartDetail" namespace="/shop" executeResult="true" />
                     </s:if>
-                    <s:else>   
-                        <s:action name="loadProductsTable" namespace="/shop" executeResult="true" />
+                    <s:else>
+                        <s:if test="%{iProduct}">
+                            <s:action name="productDetail" executeResult="true" />
+                        </s:if>
+                        <s:else>   
+                            <s:action name="loadProductsTable" namespace="/shop" executeResult="true" />
+                        </s:else>
                     </s:else>
 
                 </span>
