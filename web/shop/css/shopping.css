@@ -21,10 +21,9 @@ body
 #head
 { 
     display: inline-block;
-    width: 900;
+    width: 100%;
     margin: 10 auto;
-    position: relative;
-    
+    float: left;
 }
 
 
@@ -32,14 +31,13 @@ body
 
 
 #footer {
- display: inline-block;
-	width: 900px;
+        width: 100%;
 	text-align: center;	
 	background: #222;
 	border: 1px solid #3a3a3a;
         padding-top: 10;
-        margin: 10 auto;
         padding-bottom: 10;
+        margin-top: 10;
         color: #aaa;
 }
 
@@ -47,7 +45,7 @@ body
 #body
 {
     display: inline-block;
-	width: 900;
+	width: 100%;
         margin: 0 auto;
         position: relative;
 }
@@ -64,8 +62,6 @@ body
 
 #breadcrumb select
 {
-    padding-left: 10;
-    padding-right: 10;
     margin-left: 10;
     margin-right: 10;
     margin-top: -2;
@@ -82,11 +78,9 @@ body
     width: 100;
     padding-left: 10;
     padding-right: 10;
-    margin-left: 10;
+    margin-left: 50;
     margin-right: 20;
-    margin-top: -23;
-    float: right;
-    position: relative;
+   
 }
 
 #ProductDetail
@@ -170,8 +164,9 @@ body
 #product img{
     margin-top: 10;
     margin-bottom: 10;
-    max-height: 110;
+    height: 110;
     max-width:188;
+    display:block;
 }
 
 #productName{
@@ -184,15 +179,71 @@ body
 
 }
 
+.registrationForm{
+    width: 900;
+
+    position: relative;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+}
+
+#registration{
+        width: 900;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    position: relative;
+}
+
+#registBlackLine {
+    background: url(../img/breadcrum.jpg);
+    position: relative;
+    padding-left: 10;
+    padding-right: 10;
+    float: left;
+    width: 100%;
+    color: #fff;
+}
+
 #removeFromCart {
     margin-right: 10;
-    margin-left: 10;
+    margin-left: 5;
     float: left;
     color: #f00;
     font-weight: normal; 
     text-decoration: none; 
+    width: 20;
+    height: 60;
 }
 
+#cartTable{
+    width: 100% ;
+    text-align: center;
+    font-size: 15;
+}
+
+#cartTable td{
+    padding-left: 10;
+    padding-right: 10;
+    
+}
+
+#cartTable input[type="text"]
+{
+    text-align: center;
+    width: 70;
+    margin-bottom: 5;
+}
+
+#cartTable input[type="submit"]{
+    width: 70;
+}
+
+#clearCart{
+    font-size: 15;
+    margin-left: 10;
+}
 
 #content {
    width: 660px;
@@ -208,6 +259,7 @@ body
 }
 
 .head_menu a{ 
+        font-size: 14;
 	float: right;
         padding: 0px 20px;
         margin-top: 50;
@@ -339,6 +391,7 @@ h6 {
 
 
 a{ 
+    font-size: 14;
 	color: #08aee3;
 	font-weight: normal; 
 	text-decoration: none; 

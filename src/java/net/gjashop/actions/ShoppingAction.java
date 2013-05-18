@@ -137,11 +137,9 @@ public class ShoppingAction extends ActionSupport {
     
     public String getDeliveryTime (){
         product = dbProvider.getProduct(this.iProduct);
-        if (product.getCount() == 0){
+        if (product.getCount() <= 0){
             
-            Random generator = new Random( );
-            Integer randomIndex = generator.nextInt( 20 )+2;
-            return randomIndex.toString() + " dnu";
+            return product.getDeliveryTime().toString() + " dnu";
         }
         else {
             return "2 dny";
@@ -165,6 +163,30 @@ public class ShoppingAction extends ActionSupport {
         
         return (result.toString());
     }
+    
+    public String getEvaluated (){
+        Map session = ActionContext.getContext().getSession();
+        
+        User user;
+        user = (User) session.get("user");
+
+        List <Rating> ratings = dbProvider.getRatingsByUser(user);
+        int rated = -1;
+        for (Rating item : ratings) {
+            if (item.getProduct().getId() == iProduct){
+                rated = item.getValue();
+                break;
+            }
+        }
+
+        if (rated > -1){
+            return Integer.toString(rated-1);
+        }
+        else{
+            return "4";
+        }
+    }
+            
     
     public String getProductSex (){
         product = dbProvider.getProduct(this.iProduct);

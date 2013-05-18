@@ -11,7 +11,7 @@ cartProductCount[${cartRow.product.id}]
 <span id="productDetail">
     <s:if test="%{cart != null && cart.size}">
         <s:form action="updateInCart" method="POST" theme="simple" >
-        <table border="1">
+        <table id="cartTable" border="1">
             <tr style="background-color: black; color: white"><th>Produkt</th><th>Cena</th><th>Množství</th><th>Cena celkem</th>
 
             <s:iterator value="cart" var="cartRow" >
@@ -26,7 +26,7 @@ cartProductCount[${cartRow.product.id}]
             <tr><th colspan="3">Celková cena za nákup</th><th>${cartTotalPrice}</th></tr>
         </table>
         </s:form>
-        <a href="<%= request.getContextPath()%>/shop/eraseCart?cat=${catCot.id}&subcat=${subCatCot.id}">Vymazat košík</a>
+        <a href="<%= request.getContextPath()%>/shop/eraseCart?cat=${catCot.id}&subcat=${subCatCot.id}" id="clearCart">Vymazat košík</a>
     </s:if>
     <s:else>
         <b>Košík je prázdný</b>

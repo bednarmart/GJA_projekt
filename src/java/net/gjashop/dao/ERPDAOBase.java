@@ -61,7 +61,7 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 
 	private Configuration getConfiguration() {
 		Configuration configuration = new Configuration();
-		/*configuration = configuration.addAnnotatedClass(Category.class);
+/*		configuration = configuration.addAnnotatedClass(Category.class);
 		configuration = configuration.addAnnotatedClass(Segment.class);
 		configuration = configuration.addAnnotatedClass(Sign.class);
 		configuration = configuration.addAnnotatedClass(ClientOrder.class);
@@ -79,7 +79,7 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 		if (contextClass != null) {
 			Properties properties = new Properties();
 			try {
-	 			properties.load(contextClass.getResourceAsStream("hibernate.properties"));
+				properties.load(contextClass.getResourceAsStream("hibernate.properties"));
 			} catch(IOException ioe) {
 				throw new RuntimeException("Can't find hibernate.properties next to context class.");
 			}
@@ -453,12 +453,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Creates a new ClientOrder using all read-only and all non-null properties.
 	 */
-	public ClientOrder createClientOrder(final Delivery delivery, final PaymentType paymentType, final User user, final java.util.Date date) {
+	public ClientOrder createClientOrder(final Delivery delivery, final PaymentType paymentType, final User user, final java.util.Date date, final java.lang.String deliveryCity, final java.lang.String deliveryStreet, final java.lang.String deliveryZip) {
 		final ClientOrder[] entity = new ClientOrder[1];
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entity[0] = operations.createClientOrder(delivery, paymentType, user, date);
+				entity[0] = operations.createClientOrder(delivery, paymentType, user, date, deliveryCity, deliveryStreet, deliveryZip);
 			}
 		});
 		return entity[0];
@@ -837,12 +837,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Creates a new Product using all read-only and all non-null properties.
 	 */
-	public Product createProduct(final java.lang.String name, final Segment segment, final Sign sign, final double price, final int count) {
+	public Product createProduct(final java.lang.String name, final Segment segment, final Sign sign, final double price, final java.lang.String deliveryTime, final int count) {
 		final Product[] entity = new Product[1];
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entity[0] = operations.createProduct(name, segment, sign, price, count);
+				entity[0] = operations.createProduct(name, segment, sign, price, deliveryTime, count);
 			}
 		});
 		return entity[0];

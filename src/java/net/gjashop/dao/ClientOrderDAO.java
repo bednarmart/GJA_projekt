@@ -10,6 +10,7 @@ import net.gjashop.entities.User;
 import org.hibernate.Criteria;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -25,12 +26,15 @@ public class ClientOrderDAO {
 	public final static String FIELD__PAYMENTTYPE = getField(ClientOrder.class, "paymentType");
 	public final static String FIELD__USER = getField(ClientOrder.class, "user");
 	public final static String FIELD__DATE = getField(ClientOrder.class, "date");
+	public final static String FIELD__DELIVERYCITY = getField(ClientOrder.class, "deliveryCity");
+	public final static String FIELD__DELIVERYSTREET = getField(ClientOrder.class, "deliveryStreet");
+	public final static String FIELD__DELIVERYZIP = getField(ClientOrder.class, "deliveryZip");
 	
 	/**
 	 * Creates a ClientOrder using all read-only and all non-null properties.
 	 */
-	public ClientOrder create(Session session, Delivery delivery, PaymentType paymentType, User user, java.util.Date date) {
-		ClientOrder newEntity = new ClientOrder(delivery, paymentType, user, date);
+	public ClientOrder create(Session session, Delivery delivery, PaymentType paymentType, User user, java.util.Date date, java.lang.String deliveryCity, java.lang.String deliveryStreet, java.lang.String deliveryZip) {
+		ClientOrder newEntity = new ClientOrder(delivery, paymentType, user, date, deliveryCity, deliveryStreet, deliveryZip);
 		session.save(newEntity);
 		return newEntity;
 	}
@@ -116,6 +120,9 @@ public class ClientOrderDAO {
 	public List<ClientOrder> search(Session _session, String _searchString, int _maxResults) {
 		Criteria criteria = _session.createCriteria(ClientOrder.class);
 		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__DELIVERYCITY, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYSTREET, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYZIP, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")
@@ -131,6 +138,9 @@ public class ClientOrderDAO {
 		// restrict by the value of the unique property
 		criteria = criteria.add(Restrictions.eq(FIELD__DELIVERY, delivery));
 		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__DELIVERYCITY, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYSTREET, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYZIP, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")
@@ -146,6 +156,9 @@ public class ClientOrderDAO {
 		// restrict by the value of the unique property
 		criteria = criteria.add(Restrictions.eq(FIELD__PAYMENTTYPE, paymentType));
 		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__DELIVERYCITY, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYSTREET, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYZIP, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")
@@ -161,6 +174,9 @@ public class ClientOrderDAO {
 		// restrict by the value of the unique property
 		criteria = criteria.add(Restrictions.eq(FIELD__USER, user));
 		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add(Restrictions.like(FIELD__DELIVERYCITY, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYSTREET, _searchString.trim(), MatchMode.ANYWHERE));
+		disjunction.add(Restrictions.like(FIELD__DELIVERYZIP, _searchString.trim(), MatchMode.ANYWHERE));
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
 		@SuppressWarnings("unchecked")

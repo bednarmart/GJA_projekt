@@ -124,7 +124,7 @@ public interface IDBOperationsBase {
 	/**
 	 * Creates a new ClientOrder using all read-only and all non-null properties.
 	 */
-	public ClientOrder createClientOrder(Delivery delivery, PaymentType paymentType, User user, java.util.Date date);
+	public ClientOrder createClientOrder(Delivery delivery, PaymentType paymentType, User user, java.util.Date date, java.lang.String deliveryCity, java.lang.String deliveryStreet, java.lang.String deliveryZip);
 	
 	/**
 	 * Returns the ClientOrder with the given id.
@@ -264,7 +264,7 @@ public interface IDBOperationsBase {
 	/**
 	 * Creates a new Product using all read-only and all non-null properties.
 	 */
-	public Product createProduct(java.lang.String name, Segment segment, Sign sign, double price, int count);
+	public Product createProduct(java.lang.String name, Segment segment, Sign sign, double price, java.lang.String deliveryTime, int count);
 	
 	/**
 	 * Returns the Product with the given id.

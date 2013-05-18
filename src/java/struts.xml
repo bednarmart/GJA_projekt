@@ -9,7 +9,7 @@
     <include file="SignManager.xml"/>
     <!-- Configuration for the default package. -->
     <package name="default" namespace="/" extends="struts-default">
-        <action name="ajax" class="net.gjashop.actions.AShoppingAction">
+        <action name="ajax" class="net.gjashop.actions.ShoppingAction">
             <result>/shop/Categories.jsp</result>
         </action>
     </package>

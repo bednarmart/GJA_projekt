@@ -11,24 +11,27 @@
     <body onload="init('<%= request.getContextPath()%>');">
         <div id="page">
             <%-- Hlava --%>
-            <div id="head">
-                <span><h2>Registrace</h2></span>
-         
-                <span class="head_menu">
-                    
-                </span>
+            <div id="head">.
+                <span><h2>Oblečení</h2></span>
             </div>
-            <s:actionerror/>
-            <s:form action="createUser" >
-              <s:textfield name="user.name" label="Jméno" value="" />
-              <s:textfield name="user.surname" label="Příjmení" value="" />
-              <s:textfield name="user.login" label="Login" value="" />
-              <s:password name="user.pass" type="password" label="Heslo" value=""  />
-              <s:password name="pass2" type="password" label="Heslo znovu" value=""  />
-              <s:submit value="Registrace" align="center" />
-            </s:form>
-            <a href="<%= request.getContextPath()%>/user/showLogin.action">Zpět na login</a>
-    
+            <div id="registBlackLine">
+                .
+            </div>
+            <div id="body">
+                <div id="registration">
+                <h2>Registrace</h2>
+                <s:actionerror/>
+                <s:form action="createUser" portletMode="true" cssClass="registrationForm">
+                  <s:textfield name="user.name" label="Jméno" value="" />
+                  <s:textfield name="user.surname" label="Příjmení" value="" />
+                  <s:textfield name="user.login" label="Login" value="" />
+                  <s:password name="user.pass" type="password" label="Heslo" value=""  />
+                  <s:password name="pass2" type="password" label="Heslo znovu" value=""  />
+                  <s:submit value="Registrace" align="center" />
+                </s:form>
+                <a href="<%= request.getContextPath()%>/user/showLogin.action">Zpět na login</a>
+                </div>
+            </div>
      <%-- Pata --%>
             <div id="footer">
                 Autoři: Radim Reš, Vojtěch Škorvaga, Martin Bednář

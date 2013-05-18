@@ -26,7 +26,7 @@
            <div>${productInTable.product.price} Kč vč DPH</div>
           </div>
              
-            <a href="<%= request.getContextPath()%>/shop/product?cat=${catCot.id}&subcat=${subCatCot.id}&iProduct=${productInTable.product.id}">detail</a> 
+            <a href="<%= request.getContextPath()%>/shop/product?cat=${cat}&subcat=${subcat}&iProduct=${productInTable.product.id}">detail</a> 
           
                
            
