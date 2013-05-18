@@ -538,7 +538,10 @@ public class ShoppingAction extends ActionSupport {
         }
         session.remove("cart");
         dbProvider.getSession().getTransaction().commit();
-        session.put("lastOrder",newOrder );
+        
+        session.put("lastOrder",     newOrder );
+        session.put("lastOrderItems",dbProvider.getOrderBindingsByOrder(newOrder));
+        
         if(orderPayment.getName().equals("Kartou")) return "cardPayment";
         
         return SUCCESS;

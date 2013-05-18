@@ -105,6 +105,13 @@ public class UserAction extends ActionSupport {
             errIn = true;
         }
         
+        for(User tmpUser: dbProvider.getAllUsers()){
+            if(tmpUser.getLogin().equals(user.getLogin())){
+                addActionError("Uživatel s loginem "+ user.getLogin() +".");
+                errIn = true;
+            }
+        }
+        
         if (errIn) return INPUT;
         
         try{
