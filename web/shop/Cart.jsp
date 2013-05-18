@@ -19,7 +19,7 @@ cartProductCount[${cartRow.product.id}]
                         <a href="<%= request.getContextPath()%>/shop/removeFromCart?cat=${catCot.id}&subcat=${subCatCot.id}&iProduct=${cartRow.product.id}">X </a>
                         <a href="<%= request.getContextPath()%>/shop/product?cat=${catCot.id}&subcat=${subCatCot.id}&iProduct=${cartRow.product.id}">${cartRow.product.name}</a></td>
                     <td>${cartRow.product.price}</td>
-                    <td><input class="cart_product_count" name="cartRow.count" type="text" value="${cartRow.count}"><%--<s:submit value="Změnit"/>--%></td>
+                    <td><s:textfield class="cart_product_count" name="cartRow.count" value="%{#cartRow.count}"/><s:submit value="Změnit"/></td>
                     <td>${cartRow.price}</td>
             </s:iterator>
             <tr/>

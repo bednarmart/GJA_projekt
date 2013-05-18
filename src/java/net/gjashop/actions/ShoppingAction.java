@@ -259,7 +259,15 @@ public class ShoppingAction extends ActionSupport {
     }
 
     public List<CartItem> getCart() {
-        return cart;
+        System.out.println("/////getCart called");
+        
+        if (cart != null) {
+            return cart;
+        } else {
+            Map session = ActionContext.getContext().getSession();
+            List<CartItem> sesCart = (List<CartItem>) session.get("cart");
+            return sesCart;
+        }
     }
 
     public int getCartTotalPrice() {
@@ -344,19 +352,19 @@ public class ShoppingAction extends ActionSupport {
     
     public String updateInCart(){
 
-        System.out.println("updateInCart called");
+        System.out.println("updateInCart called - start");
 
         Map session = ActionContext.getContext().getSession();
-        /*
+
         cart = (List<CartItem>) session.get("cart");
-        
         
         if (cart != null) {
             for (CartItem item : cart) {
-                item.setCount(Integer.valueOf(cartProductCount[item.getProduct().getId()]));
+                System.out.println("item - prodname:" + item.getProduct().getName());
+                System.out.println("item - count:" + item.getCount());
             }
         }
-        */
+        System.out.println("updateInCart called - end");
         /*
         session.remove("cart");
         if (cart != null) {
@@ -371,6 +379,23 @@ public class ShoppingAction extends ActionSupport {
     public void setCart(List<CartItem> cart) {
         System.out.println("setCart called");
        
+        /* pokus  - start */
+        Map session = ActionContext.getContext().getSession();
+        List<CartItem> sesCart = (List<CartItem>) session.get("cart");
+        session.remove("cart");
+        if (cart != null) {
+            System.out.println("setCart - nastavuji!!!!!!!!!!!!!");
+            for (CartItem item : cart) {
+                System.out.println("item - prodname:" + item.getProduct().getName());
+                System.out.println("item - count:" + item.getCount());
+            }
+            session.put("cart", cart);
+        } else {
+            session.put("cart", sesCart);
+            cart = sesCart;
+        }
+        /* pokus  - end */
+        
         if (cart != null) {
             for (CartItem item : cart) {
                 System.out.println("item - prodname:" + item.getProduct().getName());
@@ -378,18 +403,7 @@ public class ShoppingAction extends ActionSupport {
             }
         }
         System.out.println("setCart called - end");
-        
-        /* pokus  - start */
-        Map session = ActionContext.getContext().getSession();
-        List<CartItem> sesCart = (List<CartItem>) session.get("cart");
-        session.remove("cart");
-        if (cart != null) {
-            session.put("cart", cart);
-        } else {
-            session.put("cart", sesCart);
-            cart = sesCart;
-        }
-        /* pokus  - end */
+
         
         this.cart = cart;
     }
