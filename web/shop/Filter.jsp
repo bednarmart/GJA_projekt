@@ -30,8 +30,7 @@
 		name="signFilter" 
                 theme="simple"/>
 --%><select name="signFilter" id="doFilter_signFilter">
-        <option value="Značka" <s:if test="#session.signFilterId == 0"> selected="selected" </s:if> > Značka
-</option>
+        <option value="Značka" <s:if test="#session.signFilterId == 0"> selected="selected" </s:if> > Značka </option>
         <s:iterator value="signList" var="signListItem">
             <option value="${signListItem}" <s:if test="#session.signFilterName == #signListItem"> selected="selected" </s:if> > ${signListItem} </option>
         </s:iterator>     

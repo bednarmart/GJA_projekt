@@ -700,6 +700,59 @@ public class ShoppingAction extends ActionSupport {
         this.sexFilterId = sexFilterId;
     }
   
+    private String creditCartData;
+    private String creditCartDataName;
+    private String creditCartDataSurname;
+
+    public void setCreditCartData(String creditCartData) {
+        this.creditCartData = creditCartData;
+    }
+
+    public void setCreditCartDataName(String creditCartDataName) {
+        this.creditCartDataName = creditCartDataName;
+    }
+
+    public void setCreditCartDataSurname(String creditCartDataSurname) {
+        this.creditCartDataSurname = creditCartDataSurname;
+    }
+
+    public String getCreditCartData() {
+        return creditCartData;
+    }
+
+    public String getCreditCartDataName() {
+        Map session = ActionContext.getContext().getSession();
+        User user = (User) session.get("user");
+        return user.getName();
+    }
+
+    public String getCreditCartDataSurname() {
+        Map session = ActionContext.getContext().getSession();
+        User user = (User) session.get("user");
+        return user.getSurname();
+    }
+
+    
+    
+    public String loadCreditCardData (){
+        
+        
+        return SUCCESS;
+    }
+    
+    private int billId;
+
+    public int getBillId() {
+        billId = 50;
+        System.out.println("getBillId called !!!!!!!!!!!!!!!");        
+        return billId;
+    }
+
+    public void setBillId(int billId) {
+        System.out.println("setBillId called !!!!!!!!!!!!!!!" + billId);        
+        this.billId = billId;
+    }
+    
     
     
 }

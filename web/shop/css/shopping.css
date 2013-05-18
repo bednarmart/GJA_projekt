@@ -180,8 +180,7 @@ body
 }
 
 .registrationForm{
-    width: 900;
-
+    
     position: relative;
     margin: 0 auto;
     position: relative;
@@ -189,21 +188,19 @@ body
 }
 
 #registration{
-        width: 900;
+    width: 100%;
     text-align: center;
     position: relative;
     margin: 0 auto;
-    position: relative;
 }
 
 #registBlackLine {
     background: url(../img/breadcrum.jpg);
     position: relative;
-    padding-left: 10;
-    padding-right: 10;
     float: left;
     width: 100%;
     color: #fff;
+    height: 30;
 }
 
 #removeFromCart {
