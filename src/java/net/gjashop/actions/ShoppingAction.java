@@ -230,7 +230,7 @@ public class ShoppingAction extends ActionSupport {
         System.out.println(this.cat );
         System.out.println(this.subcat );
     }
-    
+        
     public String getProducts(){
         List<Picture> pic  = dbProvider.getPicturesByProduct(this.product);
         if(pic != null && pic.size()>0)
@@ -357,11 +357,12 @@ public class ShoppingAction extends ActionSupport {
         List<Sign> tempSignList= dbProvider.getAllSigns();
         
         //signList = new ArrayList();
-        
+        String signName = null;
         // nacteni filtru značky
         for (Sign item : tempSignList){
             if (item.getName().equals(signFilter)){
-                signFilterId = item.getId();   
+                signFilterId = item.getId();  
+                signName = item.getName();
             }
         }
         
@@ -378,11 +379,12 @@ public class ShoppingAction extends ActionSupport {
             }
         }
         
-        // nacteni filtru skladu
-
+        Map session = ActionContext.getContext().getSession();
+        session.put("signFilterId", signFilterId);
+        session.put("signFilterName", signName);
+        session.put("sexFilterId", sexFilterId);
+        session.put("werhauseFilter", werhauseFilter);
         
-                
-                
         System.out.println("doFilter called !!!!!!!!!!!!!!!" + signFilterId);
         System.out.println("doFilter called !!!!!!!!!!!!!!!" + sexFilterId);
         System.out.println("doFilter called !!!!!!!!!!!!!!!" + werhauseFilter);
@@ -390,7 +392,6 @@ public class ShoppingAction extends ActionSupport {
     }
 
     private String sexFilter;
-    private List<String> sexList;
     private String signFilter;
     private int signFilterId;
     private int sexFilterId;
@@ -405,14 +406,6 @@ public class ShoppingAction extends ActionSupport {
         this.werhauseFilter = werhauseFilter;
     }
     
-    
-    public List<String> getSexList() {
-        sexList = new ArrayList();
-        sexList.add("Pánské");
-        sexList.add("Dámské");
-        return sexList;
-    }
-
     public String getSexFilter() {
         return sexFilter;
     }
@@ -451,6 +444,8 @@ public class ShoppingAction extends ActionSupport {
         if(this.subcat ==null && this.cat == null )
         {
             this.productList = dbProvider.getAllProducts();
+            doProductFiltering ();
+            
             this.productInTableList = new ArrayList<ProductInTable>();
             for(Product prod : productList){
                ProductInTable pt = new ProductInTable();
@@ -479,6 +474,7 @@ public class ShoppingAction extends ActionSupport {
                     }
                 }
             }
+            doProductFiltering ();
             this.productInTableList = new ArrayList<ProductInTable>();
             for(Product prod : productList){
                ProductInTable pt = new ProductInTable();
@@ -491,6 +487,7 @@ public class ShoppingAction extends ActionSupport {
          
         // subcategory set
         this.productList = dbProvider.getProductsBySegment(dbProvider.getSegment(this.subcat.intValue()));
+        doProductFiltering ();
         this.productInTableList = new ArrayList<ProductInTable>();
             for(Product prod : productList){
                ProductInTable pt = new ProductInTable();
@@ -500,6 +497,49 @@ public class ShoppingAction extends ActionSupport {
             }
         return SUCCESS;
     }
+    
+/*    
+    private int signFilterId;
+    private int sexFilterId;
+    private int werhauseFilter;
+ */   
+    
+    private void doProductFiltering (){
+        System.out.println("doProductFiltering called !!!!!!!!!!!!!!!" + signFilterId);
+        System.out.println("doProductFiltering called !!!!!!!!!!!!!!!" + sexFilterId);
+        System.out.println("doProductFiltering called !!!!!!!!!!!!!!!" + werhauseFilter); 
+        Map session = ActionContext.getContext().getSession();
+        
+        
+        
+       List<Product> itemToRemove = new ArrayList<Product>();
+       for(Product prod : this.productList){
+           //filtrování podle pohlaví
+          if (session.get("sexFilterId") != null) {
+                 if (Integer.parseInt(session.get("sexFilterId").toString()) != 0 && prod.getSex() != 0){
+                     System.out.println("!!!!!!!!!!!!!!!" + prod.getSex() + ":::" + Integer.parseInt(session.get("sexFilterId").toString())); 
+                     if (Integer.parseInt(session.get("sexFilterId").toString()) != prod.getSex()){
+                          itemToRemove.add(prod);
+                     }
+                 }
+           }
+           // filtrování podle značky
+           if (session.get("signFilterId") != null) {
+               if (prod.getSign().getId() != Integer.parseInt(session.get("signFilterId").toString()) && Integer.parseInt(session.get("signFilterId").toString()) != 0){
+                   itemToRemove.add(prod);
+               }
+           }
+           
+           // filtrování podle skladu
+           if (session.get("werhauseFilter") != null) {
+                if (Integer.parseInt(session.get("werhauseFilter").toString()) == 2 && prod.getCount() == 0){
+                    itemToRemove.add(prod);
+                }
+           }
+       }
+       this.productList.removeAll(itemToRemove);
+    }
+    
 
      public List<ProductInTable> getProductInTableList() {
         return productInTableList;
@@ -516,7 +556,24 @@ public class ShoppingAction extends ActionSupport {
     public void setProductInTableList(List<ProductInTable> productInTableList) {
         this.productInTableList = productInTableList;
     }
+
+    public int getSignFilterId() {
+        return signFilterId;
+    }
+
+    public void setSignFilterId(int signFilterId) {
+        this.signFilterId = signFilterId;
+    }
+
+    public int getSexFilterId() {
+        return sexFilterId;
+    }
+
+    public void setSexFilterId(int sexFilterId) {
+        this.sexFilterId = sexFilterId;
+    }
   
+    
     
 }
 
