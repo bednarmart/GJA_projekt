@@ -42,6 +42,6 @@
         
          <s:hidden name="cat" value="%{cat}"  />                 
          <s:hidden name="subcat" value="%{subcat}"  />                 
-         <s:submit id="submit" value="Vyfiltruj" theme="simple"/>
+         <s:submit id="submit" value="Vyfiltruj" theme="simple" class="button"/>
     </s:form>            
 </div>        

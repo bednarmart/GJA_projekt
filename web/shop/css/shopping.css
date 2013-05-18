@@ -61,18 +61,48 @@ body
     color: #fff;
 }
 
+
+#breadcrumb select
+{
+    padding-left: 10;
+    padding-right: 10;
+    margin-left: 10;
+    margin-right: 10;
+    margin-top: -2;
+}
+
+#breadcrumb input[type="radio"]
+{
+    margin-left: 20;
+    
+}
+
+#breadcrumb #submit
+{
+    width: 100;
+    padding-left: 10;
+    padding-right: 10;
+    margin-left: 10;
+    margin-right: 20;
+    margin-top: -23;
+    float: right;
+    position: relative;
+}
+
 #ProductDetail
 {
     padding-left: 10;
     padding-top: 10;
     margin-left: 10;
     margin-top: 10;
+    padding-bottom: 10;
+    padding-right: 10;
     background: #fff;
     position: relative;
     float: left;
     border: 1px solid black;
     border-radius: 5;
-    width: 640;
+    width: 628;
     
 }
 
@@ -82,7 +112,6 @@ body
     
     position: relative;
     float: left;
-    padding-bottom: 10;
 }
 
 #detailImage img{
@@ -90,11 +119,19 @@ body
 }
 
 #detailProperties{
-    width: 340;
+    padding-left: 10;
+    padding-right: 10;
+    width: 308;
     position: relative;
     float: left;
+    font-size: 16;
 }
 
+#detailProperties input[type="radio"]
+{
+    margin-top: 20;
+    margin-left: 9;
+}
 
 #addToCartButton{
     position: relative;
@@ -104,11 +141,12 @@ body
 
 #product
 {
-    width: 198;
+    width: 188;
     padding-left: 10;
     padding-top: 10;
     margin-left: 10;
     margin-top: 10;
+    padding-right: 10;
     background: #fff;
     position: relative;
     float: left;
@@ -117,10 +155,44 @@ body
     border-radius: 5;
 }
 
+#product a {
+    margin-top: -17;
+    margin-right: 10;
+    float: right;
+    color: #08aee3;
+    font-weight: normal; 
+    text-decoration: none; 
+}
+#product a:hover {
+    text-decoration: underline; 
+}
+
+#product img{
+    margin-top: 10;
+    margin-bottom: 10;
+    max-height: 110;
+    max-width:188;
+}
+
+#productName{
+    height: 41;
+    
+}
+
 #products_row {
    width: 100%; 
 
 }
+
+#removeFromCart {
+    margin-right: 10;
+    margin-left: 10;
+    float: left;
+    color: #f00;
+    font-weight: normal; 
+    text-decoration: none; 
+}
+
 
 #content {
    width: 660px;
