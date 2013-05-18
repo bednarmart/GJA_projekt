@@ -1,5 +1,6 @@
 package net.gjashop.actions;
 
+import static com.opensymphony.xwork2.Action.INPUT;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Date;
 import net.gjashop.custom.CartItem;
 import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
@@ -135,8 +137,7 @@ public class ShoppingAction extends ActionSupport {
             dbProvider.getSession().beginTransaction();   
             dbProvider.createRating((User) session.get("user"), product, newEvaluation);
             dbProvider.getSession().beginTransaction().commit();                
-        }
-        
+        }        
         return SUCCESS;
     }
 
@@ -456,29 +457,90 @@ public class ShoppingAction extends ActionSupport {
          return SUCCESS;
     }
     public String createOrder(){
+        boolean inputError = false;
                 System.out.println("createOrder called");  
         Map session = ActionContext.getContext().getSession();        
         cart = (List<CartItem>) session.get("cart");
         
-        if (cart == null) return SUCCESS;
+        if (cart == null) return "emptyCart";
+        
+        Delivery orderDelivery = null;
+        for(Delivery del : this.getDeliveryList() )
+        {
+           if(del.getName().equals(this.delivery))
+           {
+               orderDelivery = del;
+           }
+        }
+        if(orderDelivery == null ) {
+            addActionError("Typ dodání neni vybrán.");
+            inputError = true;
+        }
+        
+        PaymentType orderPayment = null;
+        for(PaymentType pay : this.getPaymentTypeList())
+        {
+           if(pay.getName().equals(this.payment))
+           {
+               orderPayment = pay;
+           }
+        }
+        if(orderPayment == null ) {
+            addActionError("Typ platby neni vybrán.");
+            inputError = true;
+        }
+       
         
         List<OrderBinding> orderItems = ArrayList();
         
         dbProvider.getSession().beginTransaction();
-        //     delivery paymenttype   USER DATE
+        //     delivery paymenttype   USER DATE delivery city delivery street deliveryzip 
+        Date date ;
+        User user = (User) session.get("user");
         
-        Order newOrder = dbProvider.createClientOrder(newOrder, newOrder, newOrder, newOrder)
-        for(CartItem item : cart)
+        if(this.order.getDeliveryCity() == null ||
+           this.order.getDeliveryCity().length() < 2)
         {
-           
-            item.getProduct();
-            
-            //dbProvider.creO               order  product      user  price count
-            dbProvider.createOrderBinding(order, item.getProduct(), null, cat, iProduct)
+            addActionError("Město dodání není zadáno.");
+            inputError = true;
         }
+        if(this.order.getDeliveryStreet() == null ||
+           this.order.getDeliveryStreet().length() < 2)
+        {
+            addActionError("Ulice dodání neni zadáno.");
+            inputError = true;
+        }
+        if(this.order.getDeliveryZip()== null ||
+           this.order.getDeliveryZip().length() < 2)
+        {
+            addActionError("P.S.Č dodání neni zadáno.");
+            inputError = true;
+        }
+        if(inputError) return INPUT;    
         
+        ClientOrder newOrder = dbProvider.createClientOrder(
+                 orderDelivery,
+                 orderPayment,
+                 user,
+                 new Date(),
+                 order.getDeliveryCity(),
+                 order.getDeliveryStreet(),
+                 order.getDeliveryZip());
         
+        for(CartItem item : cart)
+        { 
+            item.getProduct();        
+            //dbProvider.creO               order  product      user  price count
+            Product product = dbProvider.getProduct(item.getProduct().getId());
+            product.setCount( product.getCount() - item.getCount());
+            dbProvider.createOrderBinding(newOrder, item.getProduct(), 
+                    user, product.getPrice(), item.getCount());
+        }
+        session.remove("cart");
         dbProvider.getSession().getTransaction().commit();
+        session.put("lastOrder",newOrder );
+        if(orderPayment.getName().equals("Kartou")) return "cardPayment";
+        
         return SUCCESS;
     }
     public String showPaymentType(){
@@ -749,9 +811,9 @@ public class ShoppingAction extends ActionSupport {
 
     public List<String> getDeliveryStringList() {
         this.deliveryStringList = new ArrayList();
-        for(Delivery delivery: this.getDeliveryList())
+        for(Delivery deli: this.getDeliveryList())
         {
-            this.deliveryStringList.add(delivery.getName());
+            this.deliveryStringList.add(deli.getName());
         }
         return deliveryStringList;
     }

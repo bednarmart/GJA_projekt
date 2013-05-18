@@ -30,6 +30,17 @@
             <result name="success">/shop/Shopping.jsp</result>
             <result name="input">/user/Registration.jsp</result>
         </action>       
+        
+     <!--   <action name="addUserAdress"
+                class="net.gjashop.actions.UserAction"
+                method="addUserAddress">
+            
+        </action>
+        <action name="deleteUserAddress" 
+                class="net.gjashop.actions.UserAction"
+                method="deleteUserAddress">>
+            
+        </action> -->
     </package>
 </struts>
 

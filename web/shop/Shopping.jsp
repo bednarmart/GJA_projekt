@@ -27,6 +27,7 @@
                 </span>
                 <span class="head_menu">
                     <a href="<%= request.getContextPath()%>/shop/showCart.action">Košík <s:if test="%{cartItemsCount > 0}">(${cartItemsCount})</s:if></a>
+                    
                 </span>
             </div>
 

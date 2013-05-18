@@ -26,6 +26,10 @@ cartProductCount[${cartRow.product.id}]
             <tr><th colspan="3">Celková cena za nákup</th><th>${cartTotalPrice}</th></tr>
         </table>
         </s:form>
+        <br>
+        <s:form action="showCreateOrder" them="simple">
+            <s:submit value="Objednej"/>
+        </s:form>
         <a href="<%= request.getContextPath()%>/shop/eraseCart?cat=${catCot.id}&subcat=${subCatCot.id}" id="clearCart">Vymazat košík</a>
     </s:if>
     <s:else>

@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html>
+
 <html>
     <head>
         <title>Prodej oblečení</title>
@@ -20,21 +20,27 @@
             </div>
             <s:actionerror/>
             
-            <s:form action="createOrder" >
-              <s:select label="Způsob dodání" 
-                headerKey="-1" headerValue="---"
-                list="deliveryList"
-                name="delivery" 
-                theme="simple"/>  
+            <s:form action="createOrder" >    
+              <s:label>Způsob platby: </s:label>     
               <s:select label="Způsob platby" 
                 headerKey="-1" headerValue="---"
-                list="paymentTypeList"
+                list="paymentStringTypeList"
                 name="payment" 
                 theme="simple"/>
+              <br>
               
-              <s:textfield name="order.city" label="Město:" value="" />
-              <s:textfield name="order.street" label="Ulice:" value="" />
-              <s:textfield name="order.zip" label="P.S.Č.:" value="" />
+              <s:label>Způsob dodání: </s:label>
+              <s:select label="Způsob dodání" 
+                headerKey="-1" headerValue="---"
+                list="deliveryStringList"
+                name="delivery" 
+                theme="simple"/>
+              <br>
+              <br>
+              <s:label>Adresa dodání:</s:label>
+              <s:textfield name="order.deliveryCity" label="Město" value="" />
+              <s:textfield name="order.deliveryStreet" label="Ulice" value="" />
+              <s:textfield name="order.deliveryZip" label="P.S.Č." value="" />
               
               <s:submit value="Dokonči objednávku" align="center" />
             </s:form>
