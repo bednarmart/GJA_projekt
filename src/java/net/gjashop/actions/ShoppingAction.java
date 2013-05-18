@@ -12,6 +12,10 @@ import net.gjashop.custom.HibernateUtil;
 import net.gjashop.custom.OperationProvider;
 import net.gjashop.custom.ProductInTable;
 import net.gjashop.entities.Category;
+import net.gjashop.entities.ClientOrder;
+import net.gjashop.entities.Delivery;
+import net.gjashop.entities.OrderBinding;
+import net.gjashop.entities.PaymentType;
 import net.gjashop.entities.Picture;
 import net.gjashop.entities.Product;
 import net.gjashop.entities.Rating;
@@ -46,10 +50,16 @@ public class ShoppingAction extends ActionSupport {
     private int newEvaluation;
     private int cartTotalPrice;
     
-    private String image;
-    
+    private String            image;
+    private ClientOrder       order;
+    private List<Delivery>    deliveryList;
+    private List<PaymentType> paymentTypeList;
     private String[] cartProductCount;
     
+    private List<String>      deliveryStringList;
+    private List<String>      paymentStringTypeList;
+    private String            delivery;
+    private String            payment;
     
     @Override
     public String execute() throws Exception {
@@ -364,6 +374,7 @@ public class ShoppingAction extends ActionSupport {
                 } 
             }
         }
+        
         session.remove("cart");
         if (newCart != null) {
             session.put("cart", newCart);
@@ -446,6 +457,28 @@ public class ShoppingAction extends ActionSupport {
     }
     public String createOrder(){
                 System.out.println("createOrder called");  
+        Map session = ActionContext.getContext().getSession();        
+        cart = (List<CartItem>) session.get("cart");
+        
+        if (cart == null) return SUCCESS;
+        
+        List<OrderBinding> orderItems = ArrayList();
+        
+        dbProvider.getSession().beginTransaction();
+        //     delivery paymenttype   USER DATE
+        
+        Order newOrder = dbProvider.createClientOrder(newOrder, newOrder, newOrder, newOrder)
+        for(CartItem item : cart)
+        {
+           
+            item.getProduct();
+            
+            //dbProvider.creO               order  product      user  price count
+            dbProvider.createOrderBinding(order, item.getProduct(), null, cat, iProduct)
+        }
+        
+        
+        dbProvider.getSession().getTransaction().commit();
         return SUCCESS;
     }
     public String showPaymentType(){
@@ -683,6 +716,80 @@ public class ShoppingAction extends ActionSupport {
     public void setProductInTableList(List<ProductInTable> productInTableList) {
         this.productInTableList = productInTableList;
     }
+
+    private List<OrderBinding> ArrayList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ClientOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(ClientOrder order) {
+        this.order = order;
+    }
+
+    public List<Delivery> getDeliveryList() {
+        this.deliveryList = dbProvider.getAllDeliverys();
+        return deliveryList;
+    }
+
+    public void setDeliveryList(List<Delivery> deliveryList) {
+        this.deliveryList = deliveryList;
+    }
+
+    public List<PaymentType> getPaymentTypeList() {
+        this.paymentTypeList = dbProvider.getAllPaymentTypes();
+        return paymentTypeList;
+    }
+
+    public void setPaymentTypeList(List<PaymentType> paymentTypeList) {
+        this.paymentTypeList = paymentTypeList;
+    }
+
+    public List<String> getDeliveryStringList() {
+        this.deliveryStringList = new ArrayList();
+        for(Delivery delivery: this.getDeliveryList())
+        {
+            this.deliveryStringList.add(delivery.getName());
+        }
+        return deliveryStringList;
+    }
+
+    public void setDeliveryStringList(List<String> deliveryStringList) {
+        this.deliveryStringList = deliveryStringList;
+    }
+
+    public List<String> getPaymentStringTypeList() {
+        this.paymentStringTypeList = new ArrayList();
+        for(PaymentType pay : this.getPaymentTypeList())
+        {
+            this.paymentStringTypeList.add(pay.getName());
+        }
+        return paymentStringTypeList;
+    }
+
+    public void setPaymentStringTypeList(List<String> paymentStringTypeList) {
+        this.paymentStringTypeList = paymentStringTypeList;
+    }
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+    
+
 
     public int getSignFilterId() {
         return signFilterId;
