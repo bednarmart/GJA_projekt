@@ -493,7 +493,7 @@ public class ShoppingAction extends ActionSupport {
         
         List<OrderBinding> orderItems = ArrayList();
         
-        dbProvider.getSession().beginTransaction();
+       
         //     delivery paymenttype   USER DATE delivery city delivery street deliveryzip 
         Date date ;
         User user = (User) session.get("user");
@@ -518,6 +518,7 @@ public class ShoppingAction extends ActionSupport {
         }
         if(inputError) return INPUT;    
         
+        dbProvider.getSession().beginTransaction();
         ClientOrder newOrder = dbProvider.createClientOrder(
                  orderDelivery,
                  orderPayment,
