@@ -545,7 +545,16 @@ public class ShoppingAction extends ActionSupport {
         }
         dbProvider.getSession().clear();
         session.remove("cart");
-                
+
+                /*newOrder.getDelivery().getName()
+                newOrder.getPaymentType().getName()
+                newOrder.getDate()        
+                OrderBinding neco;
+                neco.getClientOrder()
+                neco.getPrice() // cena celkem
+                neco.getProduct().getName()   
+                neco.getProduct().getPrice()
+                neco.getCount();        */
         session.put("lastOrder",newOrder );
         session.put("lastOrderItems",dbProvider.getOrderBindingsByClientOrder(newOrder));
         if(orderPayment.getName().equals("Kartou")) return "cardPayment";
@@ -931,7 +940,15 @@ public class ShoppingAction extends ActionSupport {
         this.billId = billId;
     }
     
-    
-    
+    public double getBillTotalPrice() {
+        double result = 0;
+        Map session = ActionContext.getContext().getSession();
+        List<OrderBinding> itemlist= (List)session.get("lastOrderItems");
+        for(OrderBinding item : itemlist)
+        {                 
+             result += item.getPrice()*item.getCount();
+        }    
+        return result;
+    }
 }
 
