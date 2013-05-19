@@ -494,6 +494,7 @@ public class ShoppingAction extends ActionSupport {
         List<OrderBinding> orderItems = new ArrayList();
         
         
+       
         //     delivery paymenttype   USER DATE delivery city delivery street deliveryzip 
         Date date ;
         User user = (User) session.get("user");
@@ -557,6 +558,7 @@ public class ShoppingAction extends ActionSupport {
                 neco.getCount();        */
         session.put("lastOrder",newOrder );
         session.put("lastOrderItems",dbProvider.getOrderBindingsByClientOrder(newOrder));
+        
         if(orderPayment.getName().equals("Kartou")) return "cardPayment";
         
         return SUCCESS;

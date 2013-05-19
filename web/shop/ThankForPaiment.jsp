@@ -14,8 +14,9 @@
                 </div>
                 <div id="registration">
                 <h2>Děkujeme za Váš nákup</h2>
+                    <a href="<%= request.getContextPath()%>/shop/showBill.action"   target="_blank">Faktura</a>
                     <a href="<%= request.getContextPath()%>/shop/index.action">Pokračovat</a>
                 </div>
             </div>
-
+            
 <s:action name="footer" namespace="/shop" executeResult="true" />
