@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/shop/css/bill.css" />
         <title>Faktura</title>
     </head>
     <body>
@@ -33,11 +34,12 @@
             Fax: NIKDY<br>
             e-mail: obereme.vas@nakost.cz<br>
         </div>
-
+        <div id="platbaadodani">
         Způsob dodání: ${session.lastOrder.delivery.name}<br>            
         Způsob platby: ${session.lastOrder.paymentType.name}<br>
         
         Datum: ${session.lastOrder.date}<br>
+        </div>
         <div id="items">
         
         <table id="itemsTable" border="1">
