@@ -204,7 +204,7 @@ public interface IDBOperationsBase {
 	/**
 	 * Creates a new OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding createOrderBinding(ClientOrder order, Product product, User user, double price, int count);
+	public OrderBinding createOrderBinding(ClientOrder clientOrder, Product product, User user, double price, int count);
 	
 	/**
 	 * Returns the OrderBinding with the given id.
@@ -212,9 +212,9 @@ public interface IDBOperationsBase {
 	public OrderBinding getOrderBinding(int id);
 		
 	/**
-	 * Returns the OrderBindings with the given order.
+	 * Returns the OrderBindings with the given clientOrder.
 	 */
-	public List<OrderBinding> getOrderBindingsByOrder(ClientOrder order);
+	public List<OrderBinding> getOrderBindingsByClientOrder(ClientOrder clientOrder);
 	
 	/**
 	 * Returns the OrderBindings with the given product.
@@ -239,7 +239,7 @@ public interface IDBOperationsBase {
 	/**
 	 * Searches for entities of type OrderBinding.
 	 */
-	public List<OrderBinding> searchOrderBindingWithOrder(final ClientOrder order, String _searchString, int _maxResults);
+	public List<OrderBinding> searchOrderBindingWithClientOrder(final ClientOrder clientOrder, String _searchString, int _maxResults);
 	
 	/**
 	 * Searches for entities of type OrderBinding.

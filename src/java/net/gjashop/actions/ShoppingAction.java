@@ -491,9 +491,9 @@ public class ShoppingAction extends ActionSupport {
         }
        
         
-        List<OrderBinding> orderItems = ArrayList();
+        List<OrderBinding> orderItems = new ArrayList();
         
-        dbProvider.getSession().beginTransaction();
+        
         //     delivery paymenttype   USER DATE delivery city delivery street deliveryzip 
         Date date ;
         User user = (User) session.get("user");
@@ -518,6 +518,7 @@ public class ShoppingAction extends ActionSupport {
         }
         if(inputError) return INPUT;    
         
+        dbProvider.getSession().beginTransaction();
         ClientOrder newOrder = dbProvider.createClientOrder(
                  orderDelivery,
                  orderPayment,
@@ -526,19 +527,27 @@ public class ShoppingAction extends ActionSupport {
                  order.getDeliveryCity(),
                  order.getDeliveryStreet(),
                  order.getDeliveryZip());
-        
+        dbProvider.getSession().getTransaction().commit();
+        dbProvider.getSession().clear();
         for(CartItem item : cart)
         { 
+            
+            
             item.getProduct();        
             //dbProvider.creO               order  product      user  price count
             Product product = dbProvider.getProduct(item.getProduct().getId());
             product.setCount( product.getCount() - item.getCount());
-            dbProvider.createOrderBinding(newOrder, item.getProduct(), 
-                    user, product.getPrice(), item.getCount());
+            dbProvider.getSession().clear();
+            dbProvider.getSession().beginTransaction();
+            dbProvider.createOrderBinding(newOrder, product, user, product.getPrice(), item.getCount());
+            dbProvider.update(product);
+            dbProvider.getSession().getTransaction().commit();
         }
+        dbProvider.getSession().clear();
         session.remove("cart");
-        dbProvider.getSession().getTransaction().commit();
+                
         session.put("lastOrder",newOrder );
+        session.put("lastOrderItems",dbProvider.getOrderBindingsByClientOrder(newOrder));
         if(orderPayment.getName().equals("Kartou")) return "cardPayment";
         
         return SUCCESS;

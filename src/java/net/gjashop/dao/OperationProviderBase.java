@@ -331,8 +331,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/** 
 	 * Creates an instance of type OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding createOrderBinding(ClientOrder order, Product product, User user, double price, int count) {
-		return orderBindingDAO.create(session, order, product, user, price, count);
+	public OrderBinding createOrderBinding(ClientOrder clientOrder, Product product, User user, double price, int count) {
+		return orderBindingDAO.create(session, clientOrder, product, user, price, count);
 	}
 	
 	/**
@@ -343,9 +343,9 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 		return entity;
 	}
 	
-	/** Returns the OrderBindings with the given order. */
-	public List<OrderBinding> getOrderBindingsByOrder(ClientOrder order) {
-		List<OrderBinding> entities = orderBindingDAO.getByOrder(session, order);
+	/** Returns the OrderBindings with the given clientOrder. */
+	public List<OrderBinding> getOrderBindingsByClientOrder(ClientOrder clientOrder) {
+		List<OrderBinding> entities = orderBindingDAO.getByClientOrder(session, clientOrder);
 		return entities;
 	}
 		
@@ -379,8 +379,8 @@ public abstract class OperationProviderBase implements IDBOperationsBase {
 	/**
 	 * Searches for entities of type OrderBinding.
 	 */
-	public List<OrderBinding> searchOrderBindingWithOrder(ClientOrder order, String _searchString, int _maxResults) {
-		return orderBindingDAO.searchWithOrder(session, order, _searchString, _maxResults);
+	public List<OrderBinding> searchOrderBindingWithClientOrder(ClientOrder clientOrder, String _searchString, int _maxResults) {
+		return orderBindingDAO.searchWithClientOrder(session, clientOrder, _searchString, _maxResults);
 	}
 	
 	/**
