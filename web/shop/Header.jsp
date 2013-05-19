@@ -33,7 +33,7 @@
 <%-- SMAZAT !!!!!!!!!!!!!!!!!!!!!!!!!!!! --%>
                 <span class="head_menu">
                     <a href="<%= request.getContextPath()%>/shop/cardPaiment.action">Karta</a>
-                    <a href="<%= request.getContextPath()%>/shop/showBill.action?billId=${billId}"   target="_blank">Faktura</a>
+                    
                 </span>
                 
 <%-- KONEC SMAZAT !!!!!!!!!!!!!!!!!!!!!!!!!!!! --%>                

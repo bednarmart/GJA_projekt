@@ -74,7 +74,7 @@
         <action name="createOrder"
                 class="net.gjashop.actions.ShoppingAction"
                 method="createOrder">
-            <result name="success">/shop/Shopping.jsp</result>
+            <result name="success">/shop/ThankForPaiment.jsp</result>
             <result name="input">/shop/Order.jsp</result>
             <result name="cardPayment">/shop/CardPaiment.jsp</result>
             <result name="emptyCart">/shop/Shopping.jsp</result>
