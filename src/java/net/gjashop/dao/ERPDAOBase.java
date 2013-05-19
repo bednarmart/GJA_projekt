@@ -671,12 +671,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Creates a new OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding createOrderBinding(final ClientOrder order, final Product product, final User user, final double price, final int count) {
+	public OrderBinding createOrderBinding(final ClientOrder clientOrder, final Product product, final User user, final double price, final int count) {
 		final OrderBinding[] entity = new OrderBinding[1];
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entity[0] = operations.createOrderBinding(order, product, user, price, count);
+				entity[0] = operations.createOrderBinding(clientOrder, product, user, price, count);
 			}
 		});
 		return entity[0];
@@ -697,14 +697,14 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	}
 	
 	/**
-	 * Returns the OrderBindings with the given order.
+	 * Returns the OrderBindings with the given clientOrder.
 	 */
-	public List<OrderBinding> getOrderBindingsByOrder(final ClientOrder order) {
+	public List<OrderBinding> getOrderBindingsByClientOrder(final ClientOrder clientOrder) {
 		final List<OrderBinding> entities = new ArrayList<OrderBinding>();
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entities.addAll(operations.getOrderBindingsByOrder(order));
+				entities.addAll(operations.getOrderBindingsByClientOrder(clientOrder));
 			}
 		});
 		return entities;
@@ -769,12 +769,12 @@ public abstract class ERPDAOBase implements IDBOperationsBase {
 	/**
 	 * Searches for entities of type OrderBinding.
 	 */
-	public List<OrderBinding> searchOrderBindingWithOrder(final ClientOrder order, final String _searchString, final int _maxResults) {
+	public List<OrderBinding> searchOrderBindingWithClientOrder(final ClientOrder clientOrder, final String _searchString, final int _maxResults) {
 		final List<OrderBinding> entities = new ArrayList<OrderBinding>();
 		executeInTransaction(new ICommand() {
 			
 			public void execute(IDBOperations operations) {
-				entities.addAll(operations.searchOrderBindingWithOrder(order, _searchString, _maxResults));
+				entities.addAll(operations.searchOrderBindingWithClientOrder(clientOrder, _searchString, _maxResults));
 			}
 		});
 		return entities;

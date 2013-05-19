@@ -33,6 +33,7 @@
     <mapping class="net.gjashop.entities.Address"></mapping>
     <mapping class="net.gjashop.entities.User"></mapping>
     <mapping class="net.gjashop.entities.Picture"></mapping>
+    <mapping class="net.gjashop.entities.OrderBinding"></mapping>
     <mapping class="net.gjashop.entities.ContactBinding"></mapping>
     <mapping class="net.gjashop.entities.AddressBinding"></mapping>
     <mapping class="net.gjashop.entities.Rating"></mapping>    

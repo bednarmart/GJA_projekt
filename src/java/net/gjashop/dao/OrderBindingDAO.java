@@ -21,7 +21,7 @@ import org.hibernate.criterion.Restrictions;
 public class OrderBindingDAO {
 	
 	public final static String FIELD__ID = getField(OrderBinding.class, "id");
-	public final static String FIELD__ORDER = getField(OrderBinding.class, "order");
+	public final static String FIELD__CLIENTORDER = getField(OrderBinding.class, "clientOrder");
 	public final static String FIELD__PRODUCT = getField(OrderBinding.class, "product");
 	public final static String FIELD__USER = getField(OrderBinding.class, "user");
 	public final static String FIELD__PRICE = getField(OrderBinding.class, "price");
@@ -30,8 +30,8 @@ public class OrderBindingDAO {
 	/**
 	 * Creates a OrderBinding using all read-only and all non-null properties.
 	 */
-	public OrderBinding create(Session session, ClientOrder order, Product product, User user, double price, int count) {
-		OrderBinding newEntity = new OrderBinding(order, product, user, price, count);
+	public OrderBinding create(Session session, ClientOrder clientOrder, Product product, User user, double price, int count) {
+		OrderBinding newEntity = new OrderBinding(clientOrder, product, user, price, count);
 		session.save(newEntity);
 		return newEntity;
 	}
@@ -45,11 +45,11 @@ public class OrderBindingDAO {
 	}
 	
 	/**
-	 * Returns the OrderBindings with the given order.
+	 * Returns the OrderBindings with the given clientOrder.
 	 */
-	public List<OrderBinding> getByOrder(Session session, ClientOrder order) {
+	public List<OrderBinding> getByClientOrder(Session session, ClientOrder clientOrder) {
 		Criteria criteria = session.createCriteria(OrderBinding.class);
-		criteria = criteria.add(Restrictions.eq(FIELD__ORDER, order));
+		criteria = criteria.add(Restrictions.eq(FIELD__CLIENTORDER, clientOrder));
 		@SuppressWarnings("unchecked")
 		List<OrderBinding> list = (List<OrderBinding>) criteria.list();
 		return list;
@@ -103,10 +103,10 @@ public class OrderBindingDAO {
 	/**
 	 * Searches for entities of type OrderBinding.
 	 */
-	public List<OrderBinding> searchWithOrder(Session _session, ClientOrder order, String _searchString, int _maxResults) {
+	public List<OrderBinding> searchWithClientOrder(Session _session, ClientOrder clientOrder, String _searchString, int _maxResults) {
 		Criteria criteria = _session.createCriteria(OrderBinding.class);
 		// restrict by the value of the unique property
-		criteria = criteria.add(Restrictions.eq(FIELD__ORDER, order));
+		criteria = criteria.add(Restrictions.eq(FIELD__CLIENTORDER, clientOrder));
 		Disjunction disjunction = Restrictions.disjunction();
 		criteria = criteria.add(disjunction);
 		criteria = criteria.setMaxResults(_maxResults);
