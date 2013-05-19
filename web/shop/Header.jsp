@@ -30,12 +30,6 @@
                 </span>
 
 
-<%-- SMAZAT !!!!!!!!!!!!!!!!!!!!!!!!!!!! --%>
-                <span class="head_menu">
-                    <a href="<%= request.getContextPath()%>/shop/cardPaiment.action">Karta</a>
-                    
-                </span>
-                
-<%-- KONEC SMAZAT !!!!!!!!!!!!!!!!!!!!!!!!!!!! --%>                
+           
                 
             </div>
