@@ -57,8 +57,8 @@
                   <s:if test="#session.login == 'true'">
                     <s:form action="addToCart" method="POST">
                         <s:hidden name="iProduct" value="%{iProduct}"  />
-                        <s:hidden name="iProduct" value="%{cat}"  />
-                        <s:hidden name="iProduct" value="%{subcat}"  />
+                        <s:hidden name="cat" value="%{cat}"  />
+                        <s:hidden name="subcat" value="%{subcat}"  />
                         <s:submit id="submit" value="Přidat do košíku"/>
                     </s:form>
                   </s:if>  
@@ -78,8 +78,8 @@
                           <input type="radio" name="newEvaluation" value="4" <s:if test="evaluated == 3"> checked="checked" </s:if>>
                           <input type="radio" name="newEvaluation" value="5" <s:if test="evaluated == 4"> checked="checked" </s:if> >
                           <s:hidden name="iProduct" value="%{iProduct}"  />
-                          <s:hidden name="iProduct" value="%{cat}"  />
-                          <s:hidden name="iProduct" value="%{subcat}"  />
+                          <s:hidden name="cat" value="%{cat}"  />
+                          <s:hidden name="subcat" value="%{subcat}"  />
                           <s:submit id="submit" value="Ohodnotit produkt"/>
                      </s:form>
                 </td><td>
