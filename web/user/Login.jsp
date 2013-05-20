@@ -5,11 +5,11 @@
 <html>
     <head>
         <title>Prodej oblečení</title>
-        <link rel="stylesheet" type="text/css" href="css/login.css" />
+        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/user/css/login.css" />
     </head>
 
     <body>
-        <s:form id="login" action="doLogin" method="POST" theme="simple" >
+        <form id="login" action="<%= request.getContextPath()%>/user/doLogin" method="POST" theme="simple" >
             <h1>Přihlášení</h1>
             <fieldset id="inputs">
                 <input id="username" name="login" type="text" placeholder="Login" autofocus required>   
@@ -20,7 +20,7 @@
                 <a href="<%= request.getContextPath()%>/user/showLostPassword.action">Zapomenuté heslo</a><a href="<%= request.getContextPath()%>/user/showRegistration.action">Registrace</a>
             </fieldset>
             <s:actionerror /><s:fielderror />
-        </s:form>
+        </form>
     </body>
 </html>
 

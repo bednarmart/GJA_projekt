@@ -68,8 +68,9 @@
             <result>/shop/Bill.jsp</result>
         </action>
         
-        <action name="showCreateOrder" class="net.gjashop.actions.ShoppingAction">
+        <action name="showCreateOrder" class="net.gjashop.actions.ShoppingAction" method="showCreateOrder">
             <result name="success">/shop/Order.jsp</result>
+            <result name="needLogin">/user/Login.jsp</result>
         </action>
         <action name="createOrder"
                 class="net.gjashop.actions.ShoppingAction"

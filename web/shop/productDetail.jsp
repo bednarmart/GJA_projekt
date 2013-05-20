@@ -54,14 +54,14 @@
            <td>  </td>
            <td>     
                <div id="addToCartButton">
-                  <s:if test="#session.login == 'true'">
+                   <%--<s:if test="#session.login == 'true'">--%>
                     <s:form action="addToCart" method="POST">
                         <s:hidden name="iProduct" value="%{iProduct}"  />
                         <s:hidden name="cat" value="%{cat}"  />
                         <s:hidden name="subcat" value="%{subcat}"  />
                         <s:submit id="submit" value="Přidat do košíku"/>
                     </s:form>
-                  </s:if>  
+                  <%--</s:if>  --%>
                </div>
            </td>
        </tr>       

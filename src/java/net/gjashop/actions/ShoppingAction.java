@@ -56,7 +56,6 @@ public class ShoppingAction extends ActionSupport {
     private ClientOrder       order;
     private List<Delivery>    deliveryList;
     private List<PaymentType> paymentTypeList;
-    private String[] cartProductCount;
     
     private List<String>      deliveryStringList;
     private List<String>      paymentStringTypeList;
@@ -66,6 +65,19 @@ public class ShoppingAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         return SUCCESS;
+    }
+    
+    public String showCreateOrder() {
+        System.out.println("showCreateOrder called" );
+        Map session = ActionContext.getContext().getSession();
+
+        if (session.containsKey("login")  && Boolean.valueOf(session.get("login").toString())) {
+            System.out.println("->succes" );
+            return SUCCESS;
+        } else {
+            System.out.println("->needLogin" );
+            return "needLogin";
+        }
     }
     
     public String showCategory() {
@@ -444,11 +456,6 @@ public class ShoppingAction extends ActionSupport {
     
     
     
-    public void setCartProductCount(String[] cartProductCount) {
-        System.out.println("setCartProductCount called");  
-        this.cartProductCount = cartProductCount;
-    }
-
     public String eraseCart(){
          System.out.println("emptyCart called");  
          Map session = ActionContext.getContext().getSession();
