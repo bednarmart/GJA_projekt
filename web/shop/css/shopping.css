@@ -99,6 +99,20 @@ body
     width: 628;
     
 }
+.vybiratka_odrazedlo{
+    
+    float: left;
+    position: relative;
+    width: 350;
+    height: 100;
+}
+.vybiratka{
+    
+    float: left;
+    position: relative;
+    width: 550;
+    height: 100;
+}
 
 #detailImage
 {

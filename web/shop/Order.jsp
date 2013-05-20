@@ -43,17 +43,21 @@
                 <h2>Volba dodáni</h2>
 
             <s:actionerror/>
-            
+             <div class="vybiratka_odrazedlo">
+                 
+             </div>
             <s:form action="createOrder" cssClass="registrationForm">
-                    <s:label>Způsob platby: </s:label>     
+                <div class="vybiratka">
+                    <label cssClass="vybiratka">Způsob platby: <label>     
                     <s:select label="Způsob platby" 
                       headerKey="-1" headerValue="---"
                       list="paymentStringTypeList"
                       name="payment" 
-                      theme="simple"/>
+                      theme="simple"
+                      />
                     <br>
 
-                    <s:label>Způsob dodání: </s:label>
+                    <label cssClass="vybiratka">Způsob dodání: <label>
                     <s:select label="Způsob dodání" 
                       headerKey="-1" headerValue="---"
                       list="deliveryStringList"
@@ -61,7 +65,8 @@
                       theme="simple"/>
                     <br>
                     <br>
-                    <s:label>Adresa dodání:</s:label>
+                    <label cssClass="vybiratka">Adresa dodání:<label>
+                </div>
               <s:textfield name="order.deliveryCity" label="Město" value="" />
               <s:textfield name="order.deliveryStreet" label="Ulice" value="" />
               <s:textfield name="order.deliveryZip" label="P.S.Č." value="" />
