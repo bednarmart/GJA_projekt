@@ -774,7 +774,7 @@ public class ShoppingAction extends ActionSupport {
            
            // filtrování podle skladu
            if (session.get("werhauseFilter") != null) {
-                if (Integer.parseInt(session.get("werhauseFilter").toString()) == 2 && prod.getCount() == 0){
+                if (Integer.parseInt(session.get("werhauseFilter").toString()) == 2 && prod.getCount() <= 0){
                     itemToRemove.add(prod);
                 }
            }
