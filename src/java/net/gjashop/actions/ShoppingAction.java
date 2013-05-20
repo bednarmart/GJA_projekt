@@ -399,12 +399,12 @@ public class ShoppingAction extends ActionSupport {
             }
         }
         System.out.println("updateInCart called - end");
-        /*
+        
         session.remove("cart");
         if (cart != null) {
             session.put("cart", cart);
         }
-        */
+        
         cartActive = true;
 
         return SUCCESS;
@@ -413,7 +413,7 @@ public class ShoppingAction extends ActionSupport {
     public void setCart(List<CartItem> cart) {
         System.out.println("setCart called");
        
-        /* pokus  - start */
+        /* pokus  - start 
         Map session = ActionContext.getContext().getSession();
         List<CartItem> sesCart = (List<CartItem>) session.get("cart");
         session.remove("cart");
@@ -545,7 +545,11 @@ public class ShoppingAction extends ActionSupport {
             dbProvider.getSession().getTransaction().commit();
         }
         dbProvider.getSession().clear();
+        this.setCart(null);
         session.remove("cart");
+        this.cart = null;
+        
+        
 
                 /*newOrder.getDelivery().getName()
                 newOrder.getPaymentType().getName()

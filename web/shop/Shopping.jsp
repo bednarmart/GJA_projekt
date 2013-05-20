@@ -2,7 +2,8 @@
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<s:action name="header" namespace="/shop" executeResult="true" />
+<jsp:include page="Header.jsp" />
+
                     
 
 
@@ -39,5 +40,4 @@
                 </span>
             </div>
 
-<s:action name="footer" namespace="/shop" executeResult="true" />
-
+<jsp:include page="Footer.jsp" />

@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<s:action name="header" namespace="/shop" executeResult="true" />
+<jsp:include page="Header.jsp" />
 
             <div id="body">
                 <div id="registBlackLine">
@@ -19,4 +19,4 @@
                 </div>
             </div>
             
-<s:action name="footer" namespace="/shop" executeResult="true" />
+<jsp:include page="Footer.jsp" />

@@ -1,7 +1,13 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<s:action name="header" namespace="/shop" executeResult="true" />
+<jsp:include page="../shop/Header.jsp" />
+
+
+           
+                
+            </div>
 
             <div id="body">
                 <div id="registBlackLine">
@@ -21,5 +27,4 @@
                 </div>
             </div>
 
-<s:action name="footer" namespace="/shop" executeResult="true" />                
-
+<jsp:include page="../shop/Footer.jsp" />
